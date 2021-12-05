@@ -1,0 +1,171 @@
+.TH SC64ASSEMBLER 1 "2021 Jun 17"
+.SH NAME
+sc64assembler \- assembler for the spiderchip64
+.SH SYNOPSIS
+.br
+.B sc64assembler
+outputfile [options]
+.br
+.B sc64assembler
+\- [options]
+.SH DESCRIPTION
+.B Sc64assembler
+is an assembler that can assemble spiderchip64 plain text assembly programs to
+a binary.
+.SH OPTIONS
+The options may be given in any order, before or after outputfile.
+Options without an argument can be combined after a single dash.
+.TP
+\fB\-\fR
+output the file to stdout instead of outputfile.
+.TP
+\fB\-\-\fR
+end the options parsing.
+.TP
+\fB\-w\fR, \fB\-\-address\-width\fR {width}
+precise the size of the addresses in a number of bits 
+(default is 24 bits, can be between 8 and 64)
+.TP
+\fB\-l\fR, \fB\-\-listing\-file\fR {width}
+specify a file to list the instructions with their corresponding binaries and
+addresses.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+display this help and exit
+.TP
+\fB\-\-version\fR
+output version information and exit
+.SH DIRECTIVES
+.TP
+\fBDD\fR
+data double-word : insert one or more double words.
+.TP
+\fBDW\fR
+data word : insert one or more words.
+.TP
+\fBDH\fR
+data half-word : insert one or more half-words.
+.TP
+\fBDB\fR
+data byte : insert one or more bytes.
+.TP
+\fBASCII\fR
+insert one or more strings between quotes
+.TP
+\fBASCIZ\fR
+insert one or more strings between quotes terminated with the NULL
+character.
+.TP
+\fBALIGN\fR
+align the PC on a power of two
+.TP
+\fBAD\fR
+align the PC on double-words
+.TP
+\fBAW\fR
+align the PC on words
+.TP
+\fBAH\fR
+align the PC on half-words
+.TP
+\fBPC\fR
+set the PC to the following address
+.TP
+\fBNPC\fR
+attach the following code to the next PC directive rather than the previous one
+.TP
+\fBIMPORT\fR
+import a file that contains label and constant definitions. The second field
+can be used to specify an offset to add to the labels. The offset can be a
+numeric, a label, or the PC.
+.TP
+\fBEXPORT\fR
+export global labels or constants to a file that can be imported. The last
+field contains the file name.
+.RS
+.PP
+The file is a plain-text file with the following format for each line :
+.nf
+.PP
+<\fBl\fR|\fBc\fR> \fIHexadecimal symbol\fR [ \fIcomments \fR]
+.fi
+.PP
+If the symbol field is preceeded by a 'l' then it's a label and is affected by
+the offset when imported.
+.RE
+.TP
+\fBBIN\fR
+Insert a raw binary file
+.TP
+\fB{\fR
+opens a scope for local labels. The scopes can be nested
+.TP
+\fB}\fR
+closes a scope
+.TP
+\fIlabel\fB:\fR
+defines a label. If a '+' is in front of the label, then the label is global.
+If a '&' is in front of the label, then the label is visible in the parent
+scope. Two label with the same name can't be visible in the same scope.
+.TP
+\fBDEF\fR
+defines a numeric constant. By default, a constant is visible only in the scope where it is defined. 
+.TP
+\fBRPN(\fIexpression\fB)\fR
+evaluate an expression written with the reverse polish notation (or postfix notation) to a numeric
+argument. Supported operations are : 
+.TS
+allbox;
+lbw19 lb
+l l.
+Symbol	Operation
++	Add
+-	Substract
+*	Multiply
+/	Divide
+<	Right\ shift
+>	Left\ shift
+%	Modulus
+&	Bitwise\ and
+|	Bitwise\ or
+^	Bitwise\ xor
+~	First\ complement
+!	Negative
+.TE
+
+.PP
+Example :
+.nf
+.PP
+RPN(foo $0f & 3 4 + <)
+.fi
+.PP
+has to be understood as :
+.nf
+.PP
+(foo & $0f) < (3 + 4)    Where '<' is the right shift
+.fi
+A warning will occure if the stack still contains numbers after the final pull.
+An error will occure if an operation can't be performed. E.g.:
+.PP
+This will cause an error:
+.nf
+.PP
+RPN(3 4 5 + - +)
+.fi
+.PP
+This will cause a warning:
+.nf
+.PP
+RPN(3 4 5 +)
+.fi
+.SH AUTHOR
+Written by Aurélien Casteilla.
+.SH COPYRIGHT
+Copyright (c) 2021 Aurélien Casteilla.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it. 
+There is NO WARRANTY, to the extent permitted by law.
+.SH "SEE ALSO"
+sc64disassembler(1), sc64debugger(1)
