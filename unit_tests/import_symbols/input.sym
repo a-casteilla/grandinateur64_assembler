@@ -1,0 +1,6 @@
+l 0000000000000000 label_1
+l 0000000000123409 label_2
+c 00000000feedbeef const_1
+l 0000ffff44230000 label_3
+c 00000000deadbeef const_2
+c 123456789abcdef0 const_3

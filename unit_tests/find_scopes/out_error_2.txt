@@ -1,0 +1,1 @@
+Opened scope not closed (detected at the end of the file)

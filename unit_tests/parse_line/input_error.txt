@@ -1,0 +1,32 @@
+PC 0
+start:
+    BAL $000010
+    BAL R5, $2468
+le_label:     ; This is a label
+    BCC, $000040
+o: ,BCS $008054
+p:  BCS LR        ; avec un label en plus
+q:  BCS, R5, $2468 ; avec un autre label
+    LDW R4, $003dec
+    LDW R4, $ffcdec
+:   LDW R20, R21
+    LDWS R20, R21, $128
+    LDW R20, PC, $0002bc
+    LDW R20, PC, $ffffc0
+    LDW R20, R12, R21
+l:  LDW R20, R12, R21 << 23 ; chouette
+    LDW R20, R12, R21+
+    LDW R20, R12, R21-
+    LDW R20, R12, +R21
+    LDW R20, R12, -R21
+    MI.LDW R20, R21
+ok:,MI.LDWS R20, R21, $128
+    LWS R4, $003dec
+   ,LWS R4, $ffcdec
+    LWS R20, R21
+    LWSS R20, R21, $128
+hello:
+    ascii "Hello \"Someone\"
+    ascii "Hello; world ?\            ; well yes, actually no
+    ascii "Hello , there", " Hello\
+h:  ascii "Hello three dwarfs\, yes ; no

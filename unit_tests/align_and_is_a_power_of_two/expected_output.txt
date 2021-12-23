@@ -1,0 +1,10 @@
+124
+1238
+beef0
+124
+122
+200
+5800
+8000
+123 is not a power of two
+456 is not a power of two

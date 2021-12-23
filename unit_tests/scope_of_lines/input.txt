@@ -1,0 +1,132 @@
+
+    LDW R4, $003dec
+    AL.LDW R4, $003dec
+    BR.LDW R4, $003dec
+    EQ.LDW R4, $003dec
+    NE.LDW R4, $003dec
+    MI.LDW R4, $003dec
+    PL.LDW R4, $003dec
+    VS.LDW R4, $003dec
+    {
+        VC.LDW R4, $003dec
+        CS.LDW R4, $003dec
+        CC.LDW R4, $003dec
+        HI.LDW R4, $003dec
+        {
+            LQ.LDW R4, $003dec
+            GT.LDW R4, $003dec
+            LE.LDW R4, $003dec
+            GE.LDW R4, $003dec
+            LT.LDW R4, $003dec
+            HQ.LDW R4, $003dec
+        }
+        LO.LDW R4, $003dec
+PC $1234
+        LWS R20, PC, $0002f4
+        LWU R4, $003dec
+        LHS R4, $003dec
+        {
+            LHU R20, R21, $128
+            LBS R20, R21, $128
+            LBU R20, R21, $128
+            {
+                STD R20, R21, $128
+                STW R20, R21, $128
+AD
+                DD $101
+                {
+                    DB $DE
+AW
+                    STH R20, R21, $128
+                    STB R20, R21, $128
+                }
+                LLD R20, R21, $128
+                SCD R20, R21, $128
+                ADD R27, R19, #$017 ; 23 in decimal
+NPC
+AW
+                SUB R27, R19, #$017 ; 23 in decimal
+            }
+            AND R27, R19, #$017 ; 23 in decimal
+            ORR R27, R19, #$017 ; 23 in decimal
+            {
+                eor r27, r19, #$017 ; 23 in decimal
+                asl r27, r19, #$017 ; 23 in decimal
+                lsr r27, r19, #$017 ; 23 in decimal
+                asr r27, r19, #$017 ; 23 in decimal
+                rol r27, r19, #$017 ; 23 in decimal
+            }
+            ASCII "Hi!"
+AD
+            DD $FEEDADEADBEEF
+        }
+AW
+        ROR R27, R19, #$017 ; 23 in decimal
+        MUL R27, R19, #$017 ; 23 in decimal
+        ADC R27, R19, #$017 ; 23 in decimal
+        SBC R27, R19, #$017 ; 23 in decimal
+        RLC R27, R19, #$017 ; 23 in decimal
+        RRC R27, R19, #$017 ; 23 in decimal
+        ADDD R27, R19, #$017 ; 23 in decimal
+    }
+    ADDW R27, R19, #$017 ; 23 in decimal
+    ADDH R27, R19, #$017 ; 23 in decimal
+PC $8000
+    ADDB R27, R19, #$017 ; 23 in decimal
+    SUBD R27, R19, #$017 ; 23 in decimal
+    SUBW R27, R19, #$017 ; 23 in decimal
+    SUBH R27, R19, #$017 ; 23 in decimal
+    SUBB R27, R19, #$017 ; 23 in decimal
+    ASLD R27, R19, #$017 ; 23 in decimal
+    ASLW R27, R19, #$017 ; 23 in decimal
+    BLQ $000010
+    BGT $000010
+    BLE $000010
+    BGE $000010
+    BLT $000010
+    BHQ $000010
+    BLO $000010
+    BLK $000010
+    {
+        AL.BLK $000010
+        BR.BLK $000010
+        EQ.BLK $000010
+        NE.BLK $000010
+        MI.BLK $000010
+        PL.BLK $000010
+        VS.BLK $000010
+        VC.BLK $000010
+        CS.BLK $000010
+        CC.BLK $000010
+        HI.BLK $000010
+        LQ.BLK $000010
+        GT.BLK $000010
+        LE.BLK $000010
+        GE.BLK $000010
+        LT.BLK $000010
+        HQ.BLK $000010
+        LO.BLK $000010
+    }
+ALIGN 128
+    TCR R3
+    TRC R4
+    TSR R5
+    TRS R6
+    RTI
+    SYS #42
+    ILG
+AD
+    DD $0123456789abcdef, $fedcba9876543210
+AW
+    DW $01234567
+AH
+    DH $1234
+    DB $48, $49, $20, $21, $00
+AD
+    ASCII "Hi there ! ", "It's me ! "
+    ASCIZ "Hello \"world\" ! "
+    BIN "Something"
+    DEF foo 74
+PC $4000
+    DD $1324
+

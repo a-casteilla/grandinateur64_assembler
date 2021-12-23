@@ -1,0 +1,193 @@
+Line no.1
+No label
+Mnemonic : "PC"
+Argument no.0 : "0"
+No comment 
+Line no.2
+Label : "start"
+No mnemonic
+No argument
+No comment 
+Line no.3
+No label
+Mnemonic : "BAL"
+Argument no.0 : "$000010"
+No comment 
+Line no.4
+No label
+Mnemonic : "BAL"
+Argument no.0 : "R5"
+Argument no.1 : "$2468"
+No comment 
+Line no.5
+Label : "le_label"
+No mnemonic
+No argument
+Comment : " This is a label"
+Line no.6
+No label
+Mnemonic : "BCC"
+Argument no.0 : "$000040"
+No comment 
+Line no.7
+Label : "o"
+Mnemonic : "BCS"
+Argument no.0 : "$008054"
+No comment 
+Line no.8
+Label : "p"
+Mnemonic : "BCS"
+Argument no.0 : "LR"
+Comment : " avec un label en plus"
+Line no.9
+Label : "q"
+Mnemonic : "BCS"
+Argument no.0 : "R5"
+Argument no.1 : "$2468"
+Comment : " avec un autre label"
+Line no.10
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R4"
+Argument no.1 : "$003dec"
+No comment 
+Line no.11
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R4"
+Argument no.1 : "$ffcdec"
+No comment 
+Line no.12
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+No comment 
+Line no.13
+No label
+Mnemonic : "LDWS"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+Argument no.2 : "$128"
+No comment 
+Line no.14
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "PC"
+Argument no.2 : "$0002bc"
+No comment 
+Line no.15
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "PC"
+Argument no.2 : "$ffffc0"
+No comment 
+Line no.16
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "R21"
+No comment 
+Line no.17
+Label : "l"
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "R21 << 23"
+Comment : " chouette"
+Line no.18
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "R21+"
+No comment 
+Line no.19
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "R21-"
+No comment 
+Line no.20
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "+R21"
+No comment 
+Line no.21
+No label
+Mnemonic : "LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R12"
+Argument no.2 : "-R21"
+No comment 
+Line no.22
+No label
+Mnemonic : "MI.LDW"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+No comment 
+Line no.23
+Label : "ok"
+Mnemonic : "MI.LDWS"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+Argument no.2 : "$128"
+No comment 
+Line no.24
+No label
+Mnemonic : "LWS"
+Argument no.0 : "R4"
+Argument no.1 : "$003dec"
+No comment 
+Line no.25
+No label
+Mnemonic : "LWS"
+Argument no.0 : "R4"
+Argument no.1 : "$ffcdec"
+No comment 
+Line no.26
+No label
+Mnemonic : "LWS"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+No comment 
+Line no.27
+No label
+Mnemonic : "LWSS"
+Argument no.0 : "R20"
+Argument no.1 : "R21"
+Argument no.2 : "$128"
+No comment 
+Line no.28
+Label : "hello"
+No mnemonic
+No argument
+No comment 
+Line no.29
+No label
+Mnemonic : "ascii"
+Argument no.0 : ""Hello \"Someone\"""
+No comment 
+Line no.30
+No label
+Mnemonic : "ascii"
+Argument no.0 : ""Hello; world ?""
+Comment : " well yes, actually no"
+Line no.31
+No label
+Mnemonic : "ascii"
+Argument no.0 : ""Hello , there""
+Argument no.1 : "" Hello""
+No comment 
+Line no.32
+Label : "h"
+Mnemonic : "ascii"
+Argument no.0 : ""Hello three dwarfs\"""
+Argument no.1 : "yes"
+Comment : " no"

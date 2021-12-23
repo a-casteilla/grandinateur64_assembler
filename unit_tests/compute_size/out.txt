@@ -1,0 +1,582 @@
+Line no.1
+No mnemonic
+Size of line : 0
+Line no.2
+Mnemonic : "LDW"
+Size of line : 4
+Line no.3
+Mnemonic : "AL.LDW"
+Size of line : 4
+Line no.4
+Mnemonic : "BR.LDW"
+Size of line : 4
+Line no.5
+Mnemonic : "EQ.LDW"
+Size of line : 4
+Line no.6
+Mnemonic : "NE.LDW"
+Size of line : 4
+Line no.7
+Mnemonic : "MI.LDW"
+Size of line : 4
+Line no.8
+Mnemonic : "PL.LDW"
+Size of line : 4
+Line no.9
+Mnemonic : "VS.LDW"
+Size of line : 4
+Line no.10
+Mnemonic : "VC.LDW"
+Size of line : 4
+Line no.11
+Mnemonic : "CS.LDW"
+Size of line : 4
+Line no.12
+Mnemonic : "CC.LDW"
+Size of line : 4
+Line no.13
+Mnemonic : "HI.LDW"
+Size of line : 4
+Line no.14
+Mnemonic : "LQ.LDW"
+Size of line : 4
+Line no.15
+Mnemonic : "GT.LDW"
+Size of line : 4
+Line no.16
+Mnemonic : "LE.LDW"
+Size of line : 4
+Line no.17
+Mnemonic : "GE.LDW"
+Size of line : 4
+Line no.18
+Mnemonic : "LT.LDW"
+Size of line : 4
+Line no.19
+Mnemonic : "HQ.LDW"
+Size of line : 4
+Line no.20
+Mnemonic : "LO.LDW"
+Size of line : 4
+Line no.21
+Mnemonic : "LWS"
+Size of line : 4
+Line no.22
+Mnemonic : "LWU"
+Size of line : 4
+Line no.23
+Mnemonic : "LHS"
+Size of line : 4
+Line no.24
+Mnemonic : "LHU"
+Size of line : 4
+Line no.25
+Mnemonic : "LBS"
+Size of line : 4
+Line no.26
+Mnemonic : "LBU"
+Size of line : 4
+Line no.27
+Mnemonic : "STD"
+Size of line : 4
+Line no.28
+Mnemonic : "STW"
+Size of line : 4
+Line no.29
+Mnemonic : "STH"
+Size of line : 4
+Line no.30
+Mnemonic : "STB"
+Size of line : 4
+Line no.31
+Mnemonic : "LLD"
+Size of line : 4
+Line no.32
+Mnemonic : "SCD"
+Size of line : 4
+Line no.33
+Mnemonic : "ADD"
+Size of line : 4
+Line no.34
+Mnemonic : "SUB"
+Size of line : 4
+Line no.35
+Mnemonic : "AND"
+Size of line : 4
+Line no.36
+Mnemonic : "ORR"
+Size of line : 4
+Line no.37
+Mnemonic : "eor"
+Size of line : 4
+Line no.38
+Mnemonic : "asl"
+Size of line : 4
+Line no.39
+Mnemonic : "lsr"
+Size of line : 4
+Line no.40
+Mnemonic : "asr"
+Size of line : 4
+Line no.41
+Mnemonic : "rol"
+Size of line : 4
+Line no.42
+Mnemonic : "ROR"
+Size of line : 4
+Line no.43
+Mnemonic : "MUL"
+Size of line : 4
+Line no.44
+Mnemonic : "ADC"
+Size of line : 4
+Line no.45
+Mnemonic : "SBC"
+Size of line : 4
+Line no.46
+Mnemonic : "RLC"
+Size of line : 4
+Line no.47
+Mnemonic : "RRC"
+Size of line : 4
+Line no.48
+Mnemonic : "ADDD"
+Size of line : 4
+Line no.49
+Mnemonic : "ADDW"
+Size of line : 4
+Line no.50
+Mnemonic : "ADDH"
+Size of line : 4
+Line no.51
+Mnemonic : "ADDB"
+Size of line : 4
+Line no.52
+Mnemonic : "SUBD"
+Size of line : 4
+Line no.53
+Mnemonic : "SUBW"
+Size of line : 4
+Line no.54
+Mnemonic : "SUBH"
+Size of line : 4
+Line no.55
+Mnemonic : "SUBB"
+Size of line : 4
+Line no.56
+Mnemonic : "ASLD"
+Size of line : 4
+Line no.57
+Mnemonic : "ASLW"
+Size of line : 4
+Line no.58
+Mnemonic : "ASLH"
+Size of line : 4
+Line no.59
+Mnemonic : "ASLB"
+Size of line : 4
+Line no.60
+Mnemonic : "ASRD"
+Size of line : 4
+Line no.61
+Mnemonic : "ASRW"
+Size of line : 4
+Line no.62
+Mnemonic : "ASRH"
+Size of line : 4
+Line no.63
+Mnemonic : "ASRB"
+Size of line : 4
+Line no.64
+Mnemonic : "LSRD"
+Size of line : 4
+Line no.65
+Mnemonic : "LSRW"
+Size of line : 4
+Line no.66
+Mnemonic : "LSRH"
+Size of line : 4
+Line no.67
+Mnemonic : "LSRB"
+Size of line : 4
+Line no.68
+Mnemonic : "ROLD"
+Size of line : 4
+Line no.69
+Mnemonic : "ROLW"
+Size of line : 4
+Line no.70
+Mnemonic : "ROLH"
+Size of line : 4
+Line no.71
+Mnemonic : "ROLB"
+Size of line : 4
+Line no.72
+Mnemonic : "RORD"
+Size of line : 4
+Line no.73
+Mnemonic : "RORW"
+Size of line : 4
+Line no.74
+Mnemonic : "RORH"
+Size of line : 4
+Line no.75
+Mnemonic : "RORB"
+Size of line : 4
+Line no.76
+Mnemonic : "SUMW"
+Size of line : 4
+Line no.77
+Mnemonic : "SUMH"
+Size of line : 4
+Line no.78
+Mnemonic : "SUMB"
+Size of line : 4
+Line no.79
+Mnemonic : "BAL"
+Size of line : 4
+Line no.80
+Mnemonic : "BEQ"
+Size of line : 4
+Line no.81
+Mnemonic : "BNE"
+Size of line : 4
+Line no.82
+Mnemonic : "BMI"
+Size of line : 4
+Line no.83
+Mnemonic : "BPL"
+Size of line : 4
+Line no.84
+Mnemonic : "BVS"
+Size of line : 4
+Line no.85
+Mnemonic : "BVC"
+Size of line : 4
+Line no.86
+Mnemonic : "BCS"
+Size of line : 4
+Line no.87
+Mnemonic : "BCC"
+Size of line : 4
+Line no.88
+Mnemonic : "BHI"
+Size of line : 4
+Line no.89
+Mnemonic : "BLQ"
+Size of line : 4
+Line no.90
+Mnemonic : "BGT"
+Size of line : 4
+Line no.91
+Mnemonic : "BLE"
+Size of line : 4
+Line no.92
+Mnemonic : "BGE"
+Size of line : 4
+Line no.93
+Mnemonic : "BLT"
+Size of line : 4
+Line no.94
+Mnemonic : "BHQ"
+Size of line : 4
+Line no.95
+Mnemonic : "BLO"
+Size of line : 4
+Line no.96
+Mnemonic : "BLK"
+Size of line : 4
+Line no.97
+Mnemonic : "AL.BLK"
+Size of line : 4
+Line no.98
+Mnemonic : "BR.BLK"
+Size of line : 4
+Line no.99
+Mnemonic : "EQ.BLK"
+Size of line : 4
+Line no.100
+Mnemonic : "NE.BLK"
+Size of line : 4
+Line no.101
+Mnemonic : "MI.BLK"
+Size of line : 4
+Line no.102
+Mnemonic : "PL.BLK"
+Size of line : 4
+Line no.103
+Mnemonic : "VS.BLK"
+Size of line : 4
+Line no.104
+Mnemonic : "VC.BLK"
+Size of line : 4
+Line no.105
+Mnemonic : "CS.BLK"
+Size of line : 4
+Line no.106
+Mnemonic : "CC.BLK"
+Size of line : 4
+Line no.107
+Mnemonic : "HI.BLK"
+Size of line : 4
+Line no.108
+Mnemonic : "LQ.BLK"
+Size of line : 4
+Line no.109
+Mnemonic : "GT.BLK"
+Size of line : 4
+Line no.110
+Mnemonic : "LE.BLK"
+Size of line : 4
+Line no.111
+Mnemonic : "GE.BLK"
+Size of line : 4
+Line no.112
+Mnemonic : "LT.BLK"
+Size of line : 4
+Line no.113
+Mnemonic : "HQ.BLK"
+Size of line : 4
+Line no.114
+Mnemonic : "LO.BLK"
+Size of line : 4
+Line no.115
+Mnemonic : "TCR"
+Size of line : 4
+Line no.116
+Mnemonic : "TRC"
+Size of line : 4
+Line no.117
+Mnemonic : "TSR"
+Size of line : 4
+Line no.118
+Mnemonic : "TRS"
+Size of line : 4
+Line no.119
+Mnemonic : "RTI"
+Size of line : 4
+Line no.120
+Mnemonic : "SYS"
+Size of line : 4
+Line no.121
+Mnemonic : "ILG"
+Size of line : 4
+Line no.122
+Mnemonic : "LDWS"
+Size of line : 4
+Line no.123
+Mnemonic : "LWSS"
+Size of line : 4
+Line no.124
+Mnemonic : "LWUS"
+Size of line : 4
+Line no.125
+Mnemonic : "LHSS"
+Size of line : 4
+Line no.126
+Mnemonic : "LHUS"
+Size of line : 4
+Line no.127
+Mnemonic : "LBSS"
+Size of line : 4
+Line no.128
+Mnemonic : "LBUS"
+Size of line : 4
+Line no.129
+Mnemonic : "STDS"
+Size of line : 4
+Line no.130
+Mnemonic : "STWS"
+Size of line : 4
+Line no.131
+Mnemonic : "STHS"
+Size of line : 4
+Line no.132
+Mnemonic : "STBS"
+Size of line : 4
+Line no.133
+Mnemonic : "LLDS"
+Size of line : 4
+Line no.134
+Mnemonic : "SCDS"
+Size of line : 4
+Line no.135
+Mnemonic : "ADDS"
+Size of line : 4
+Line no.136
+Mnemonic : "SUBS"
+Size of line : 4
+Line no.137
+Mnemonic : "ANDS"
+Size of line : 4
+Line no.138
+Mnemonic : "ORRS"
+Size of line : 4
+Line no.139
+Mnemonic : "EORS"
+Size of line : 4
+Line no.140
+Mnemonic : "ASLS"
+Size of line : 4
+Line no.141
+Mnemonic : "LSRS"
+Size of line : 4
+Line no.142
+Mnemonic : "ASRS"
+Size of line : 4
+Line no.143
+Mnemonic : "ROLS"
+Size of line : 4
+Line no.144
+Mnemonic : "RORS"
+Size of line : 4
+Line no.145
+Mnemonic : "MULS"
+Size of line : 4
+Line no.146
+Mnemonic : "ADCS"
+Size of line : 4
+Line no.147
+Mnemonic : "SBCS"
+Size of line : 4
+Line no.148
+Mnemonic : "RLCS"
+Size of line : 4
+Line no.149
+Mnemonic : "RRCS"
+Size of line : 4
+Line no.150
+Mnemonic : "ADDDS"
+Size of line : 4
+Line no.151
+Mnemonic : "ADDWS"
+Size of line : 4
+Line no.152
+Mnemonic : "ADDHS"
+Size of line : 4
+Line no.153
+Mnemonic : "ADDBS"
+Size of line : 4
+Line no.154
+Mnemonic : "SUBDS"
+Size of line : 4
+Line no.155
+Mnemonic : "SUBWS"
+Size of line : 4
+Line no.156
+Mnemonic : "SUBHS"
+Size of line : 4
+Line no.157
+Mnemonic : "SUBBS"
+Size of line : 4
+Line no.158
+Mnemonic : "ASLDS"
+Size of line : 4
+Line no.159
+Mnemonic : "ASLWS"
+Size of line : 4
+Line no.160
+Mnemonic : "ASLHS"
+Size of line : 4
+Line no.161
+Mnemonic : "ASLBS"
+Size of line : 4
+Line no.162
+Mnemonic : "ASRDS"
+Size of line : 4
+Line no.163
+Mnemonic : "ASRWS"
+Size of line : 4
+Line no.164
+Mnemonic : "ASRHS"
+Size of line : 4
+Line no.165
+Mnemonic : "ASRBS"
+Size of line : 4
+Line no.166
+Mnemonic : "LSRDS"
+Size of line : 4
+Line no.167
+Mnemonic : "LSRWS"
+Size of line : 4
+Line no.168
+Mnemonic : "LSRHS"
+Size of line : 4
+Line no.169
+Mnemonic : "LSRBS"
+Size of line : 4
+Line no.170
+Mnemonic : "ROLDS"
+Size of line : 4
+Line no.171
+Mnemonic : "ROLWS"
+Size of line : 4
+Line no.172
+Mnemonic : "ROLHS"
+Size of line : 4
+Line no.173
+Mnemonic : "ROLBS"
+Size of line : 4
+Line no.174
+Mnemonic : "RORDS"
+Size of line : 4
+Line no.175
+Mnemonic : "RORWS"
+Size of line : 4
+Line no.176
+Mnemonic : "RORHS"
+Size of line : 4
+Line no.177
+Mnemonic : "RORBS"
+Size of line : 4
+Line no.178
+Mnemonic : "SUMWS"
+Size of line : 4
+Line no.179
+Mnemonic : "SUMHS"
+Size of line : 4
+Line no.180
+Mnemonic : "SUMBS"
+Size of line : 4
+Line no.181
+Mnemonic : "DD"
+Size of line : 16
+Line no.182
+Mnemonic : "DW"
+Size of line : 4
+Line no.183
+Mnemonic : "DH"
+Size of line : 2
+Line no.184
+Mnemonic : "DB"
+Size of line : 5
+Line no.185
+Mnemonic : "ASCII"
+Size of line : 21
+Line no.186
+Mnemonic : "ASCIZ"
+Size of line : 17
+Line no.187
+Mnemonic : "ALIGN"
+Size of line : 0
+Line no.188
+Mnemonic : "AD"
+Size of line : 0
+Line no.189
+Mnemonic : "AW"
+Size of line : 0
+Line no.190
+Mnemonic : "AH"
+Size of line : 0
+Line no.191
+Mnemonic : "PC"
+Size of line : 0
+Line no.192
+Mnemonic : "BIN"
+Size of line : 29
+Line no.193
+Mnemonic : "BIN"
+Size of line : 29
+Line no.194
+Mnemonic : "DEF"
+Size of line : 0

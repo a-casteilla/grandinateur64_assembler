@@ -1,0 +1,792 @@
+Line no.1
+No mnemonic
+Prefix number : 0
+Mnemonic number : 0
+Line no.2
+Mnemonic : "LDW"
+Prefix number : 0
+Mnemonic number : 1
+Line no.3
+Mnemonic : "AL.LDW"
+Prefix number : 0
+Mnemonic number : 1
+Line no.4
+Mnemonic : "BR.LDW"
+Prefix number : 1
+Mnemonic number : 1
+Line no.5
+Mnemonic : "EQ.LDW"
+Prefix number : 2
+Mnemonic number : 1
+Line no.6
+Mnemonic : "NE.LDW"
+Prefix number : 3
+Mnemonic number : 1
+Line no.7
+Mnemonic : "MI.LDW"
+Prefix number : 4
+Mnemonic number : 1
+Line no.8
+Mnemonic : "PL.LDW"
+Prefix number : 5
+Mnemonic number : 1
+Line no.9
+Mnemonic : "VS.LDW"
+Prefix number : 6
+Mnemonic number : 1
+Line no.10
+Mnemonic : "VC.LDW"
+Prefix number : 7
+Mnemonic number : 1
+Line no.11
+Mnemonic : "CS.LDW"
+Prefix number : 8
+Mnemonic number : 1
+Line no.12
+Mnemonic : "CC.LDW"
+Prefix number : 9
+Mnemonic number : 1
+Line no.13
+Mnemonic : "HI.LDW"
+Prefix number : 10
+Mnemonic number : 1
+Line no.14
+Mnemonic : "LQ.LDW"
+Prefix number : 11
+Mnemonic number : 1
+Line no.15
+Mnemonic : "GT.LDW"
+Prefix number : 12
+Mnemonic number : 1
+Line no.16
+Mnemonic : "LE.LDW"
+Prefix number : 13
+Mnemonic number : 1
+Line no.17
+Mnemonic : "GE.LDW"
+Prefix number : 14
+Mnemonic number : 1
+Line no.18
+Mnemonic : "LT.LDW"
+Prefix number : 15
+Mnemonic number : 1
+Line no.19
+Mnemonic : "HQ.LDW"
+Prefix number : 16
+Mnemonic number : 1
+Line no.20
+Mnemonic : "LO.LDW"
+Prefix number : 17
+Mnemonic number : 1
+Line no.21
+Mnemonic : "LWS"
+Prefix number : 0
+Mnemonic number : 2
+Line no.22
+Mnemonic : "LWU"
+Prefix number : 0
+Mnemonic number : 3
+Line no.23
+Mnemonic : "LHS"
+Prefix number : 0
+Mnemonic number : 4
+Line no.24
+Mnemonic : "LHU"
+Prefix number : 0
+Mnemonic number : 5
+Line no.25
+Mnemonic : "LBS"
+Prefix number : 0
+Mnemonic number : 6
+Line no.26
+Mnemonic : "LBU"
+Prefix number : 0
+Mnemonic number : 7
+Line no.27
+Mnemonic : "STD"
+Prefix number : 0
+Mnemonic number : 8
+Line no.28
+Mnemonic : "STW"
+Prefix number : 0
+Mnemonic number : 9
+Line no.29
+Mnemonic : "STH"
+Prefix number : 0
+Mnemonic number : 10
+Line no.30
+Mnemonic : "STB"
+Prefix number : 0
+Mnemonic number : 11
+Line no.31
+Mnemonic : "LLD"
+Prefix number : 0
+Mnemonic number : 15
+Line no.32
+Mnemonic : "SCD"
+Prefix number : 0
+Mnemonic number : 16
+Line no.33
+Mnemonic : "ADD"
+Prefix number : 0
+Mnemonic number : 17
+Line no.34
+Mnemonic : "SUB"
+Prefix number : 0
+Mnemonic number : 18
+Line no.35
+Mnemonic : "AND"
+Prefix number : 0
+Mnemonic number : 19
+Line no.36
+Mnemonic : "ORR"
+Prefix number : 0
+Mnemonic number : 20
+Line no.37
+Mnemonic : "eor"
+Prefix number : 0
+Mnemonic number : 21
+Line no.38
+Mnemonic : "asl"
+Prefix number : 0
+Mnemonic number : 22
+Line no.39
+Mnemonic : "lsr"
+Prefix number : 0
+Mnemonic number : 23
+Line no.40
+Mnemonic : "asr"
+Prefix number : 0
+Mnemonic number : 24
+Line no.41
+Mnemonic : "rol"
+Prefix number : 0
+Mnemonic number : 25
+Line no.42
+Mnemonic : "ROR"
+Prefix number : 0
+Mnemonic number : 26
+Line no.43
+Mnemonic : "MUL"
+Prefix number : 0
+Mnemonic number : 27
+Line no.44
+Mnemonic : "ADC"
+Prefix number : 0
+Mnemonic number : 28
+Line no.45
+Mnemonic : "SBC"
+Prefix number : 0
+Mnemonic number : 29
+Line no.46
+Mnemonic : "RLC"
+Prefix number : 0
+Mnemonic number : 30
+Line no.47
+Mnemonic : "RRC"
+Prefix number : 0
+Mnemonic number : 31
+Line no.48
+Mnemonic : "ADDD"
+Prefix number : 0
+Mnemonic number : 32
+Line no.49
+Mnemonic : "ADDW"
+Prefix number : 0
+Mnemonic number : 33
+Line no.50
+Mnemonic : "ADDH"
+Prefix number : 0
+Mnemonic number : 34
+Line no.51
+Mnemonic : "ADDB"
+Prefix number : 0
+Mnemonic number : 35
+Line no.52
+Mnemonic : "SUBD"
+Prefix number : 0
+Mnemonic number : 36
+Line no.53
+Mnemonic : "SUBW"
+Prefix number : 0
+Mnemonic number : 37
+Line no.54
+Mnemonic : "SUBH"
+Prefix number : 0
+Mnemonic number : 38
+Line no.55
+Mnemonic : "SUBB"
+Prefix number : 0
+Mnemonic number : 39
+Line no.56
+Mnemonic : "ASLD"
+Prefix number : 0
+Mnemonic number : 40
+Line no.57
+Mnemonic : "ASLW"
+Prefix number : 0
+Mnemonic number : 41
+Line no.58
+Mnemonic : "ASLH"
+Prefix number : 0
+Mnemonic number : 42
+Line no.59
+Mnemonic : "ASLB"
+Prefix number : 0
+Mnemonic number : 43
+Line no.60
+Mnemonic : "ASRD"
+Prefix number : 0
+Mnemonic number : 44
+Line no.61
+Mnemonic : "ASRW"
+Prefix number : 0
+Mnemonic number : 45
+Line no.62
+Mnemonic : "ASRH"
+Prefix number : 0
+Mnemonic number : 46
+Line no.63
+Mnemonic : "ASRB"
+Prefix number : 0
+Mnemonic number : 47
+Line no.64
+Mnemonic : "LSRD"
+Prefix number : 0
+Mnemonic number : 48
+Line no.65
+Mnemonic : "LSRW"
+Prefix number : 0
+Mnemonic number : 49
+Line no.66
+Mnemonic : "LSRH"
+Prefix number : 0
+Mnemonic number : 50
+Line no.67
+Mnemonic : "LSRB"
+Prefix number : 0
+Mnemonic number : 51
+Line no.68
+Mnemonic : "ROLD"
+Prefix number : 0
+Mnemonic number : 52
+Line no.69
+Mnemonic : "ROLW"
+Prefix number : 0
+Mnemonic number : 53
+Line no.70
+Mnemonic : "ROLH"
+Prefix number : 0
+Mnemonic number : 54
+Line no.71
+Mnemonic : "ROLB"
+Prefix number : 0
+Mnemonic number : 55
+Line no.72
+Mnemonic : "RORD"
+Prefix number : 0
+Mnemonic number : 56
+Line no.73
+Mnemonic : "RORW"
+Prefix number : 0
+Mnemonic number : 57
+Line no.74
+Mnemonic : "RORH"
+Prefix number : 0
+Mnemonic number : 58
+Line no.75
+Mnemonic : "RORB"
+Prefix number : 0
+Mnemonic number : 59
+Line no.76
+Mnemonic : "SUMW"
+Prefix number : 0
+Mnemonic number : 60
+Line no.77
+Mnemonic : "SUMH"
+Prefix number : 0
+Mnemonic number : 61
+Line no.78
+Mnemonic : "SUMB"
+Prefix number : 0
+Mnemonic number : 62
+Line no.79
+Mnemonic : "BAL"
+Prefix number : 0
+Mnemonic number : 63
+Line no.80
+Mnemonic : "BEQ"
+Prefix number : 0
+Mnemonic number : 64
+Line no.81
+Mnemonic : "BNE"
+Prefix number : 0
+Mnemonic number : 65
+Line no.82
+Mnemonic : "BMI"
+Prefix number : 0
+Mnemonic number : 66
+Line no.83
+Mnemonic : "BPL"
+Prefix number : 0
+Mnemonic number : 67
+Line no.84
+Mnemonic : "BVS"
+Prefix number : 0
+Mnemonic number : 68
+Line no.85
+Mnemonic : "BVC"
+Prefix number : 0
+Mnemonic number : 69
+Line no.86
+Mnemonic : "BCS"
+Prefix number : 0
+Mnemonic number : 70
+Line no.87
+Mnemonic : "BCC"
+Prefix number : 0
+Mnemonic number : 71
+Line no.88
+Mnemonic : "BHI"
+Prefix number : 0
+Mnemonic number : 72
+Line no.89
+Mnemonic : "BLQ"
+Prefix number : 0
+Mnemonic number : 73
+Line no.90
+Mnemonic : "BGT"
+Prefix number : 0
+Mnemonic number : 74
+Line no.91
+Mnemonic : "BLE"
+Prefix number : 0
+Mnemonic number : 75
+Line no.92
+Mnemonic : "BGE"
+Prefix number : 0
+Mnemonic number : 76
+Line no.93
+Mnemonic : "BLT"
+Prefix number : 0
+Mnemonic number : 77
+Line no.94
+Mnemonic : "BHQ"
+Prefix number : 0
+Mnemonic number : 78
+Line no.95
+Mnemonic : "BLO"
+Prefix number : 0
+Mnemonic number : 79
+Line no.96
+Mnemonic : "BLK"
+Prefix number : 0
+Mnemonic number : 80
+Line no.97
+Mnemonic : "AL.BLK"
+Prefix number : 0
+Mnemonic number : 80
+Line no.98
+Mnemonic : "BR.BLK"
+Prefix number : 1
+Mnemonic number : 80
+Line no.99
+Mnemonic : "EQ.BLK"
+Prefix number : 2
+Mnemonic number : 80
+Line no.100
+Mnemonic : "NE.BLK"
+Prefix number : 3
+Mnemonic number : 80
+Line no.101
+Mnemonic : "MI.BLK"
+Prefix number : 4
+Mnemonic number : 80
+Line no.102
+Mnemonic : "PL.BLK"
+Prefix number : 5
+Mnemonic number : 80
+Line no.103
+Mnemonic : "VS.BLK"
+Prefix number : 6
+Mnemonic number : 80
+Line no.104
+Mnemonic : "VC.BLK"
+Prefix number : 7
+Mnemonic number : 80
+Line no.105
+Mnemonic : "CS.BLK"
+Prefix number : 8
+Mnemonic number : 80
+Line no.106
+Mnemonic : "CC.BLK"
+Prefix number : 9
+Mnemonic number : 80
+Line no.107
+Mnemonic : "HI.BLK"
+Prefix number : 10
+Mnemonic number : 80
+Line no.108
+Mnemonic : "LQ.BLK"
+Prefix number : 11
+Mnemonic number : 80
+Line no.109
+Mnemonic : "GT.BLK"
+Prefix number : 12
+Mnemonic number : 80
+Line no.110
+Mnemonic : "LE.BLK"
+Prefix number : 13
+Mnemonic number : 80
+Line no.111
+Mnemonic : "GE.BLK"
+Prefix number : 14
+Mnemonic number : 80
+Line no.112
+Mnemonic : "LT.BLK"
+Prefix number : 15
+Mnemonic number : 80
+Line no.113
+Mnemonic : "HQ.BLK"
+Prefix number : 16
+Mnemonic number : 80
+Line no.114
+Mnemonic : "LO.BLK"
+Prefix number : 17
+Mnemonic number : 80
+Line no.115
+Mnemonic : "TCR"
+Prefix number : 0
+Mnemonic number : 81
+Line no.116
+Mnemonic : "TRC"
+Prefix number : 0
+Mnemonic number : 82
+Line no.117
+Mnemonic : "TSR"
+Prefix number : 0
+Mnemonic number : 83
+Line no.118
+Mnemonic : "TRS"
+Prefix number : 0
+Mnemonic number : 84
+Line no.119
+Mnemonic : "RTI"
+Prefix number : 0
+Mnemonic number : 85
+Line no.120
+Mnemonic : "SYS"
+Prefix number : 0
+Mnemonic number : 86
+Line no.121
+Mnemonic : "ILG"
+Prefix number : 0
+Mnemonic number : 87
+Line no.122
+Mnemonic : "LDWS"
+Prefix number : 0
+Mnemonic number : 88
+Line no.123
+Mnemonic : "LWSS"
+Prefix number : 0
+Mnemonic number : 89
+Line no.124
+Mnemonic : "LWUS"
+Prefix number : 0
+Mnemonic number : 90
+Line no.125
+Mnemonic : "LHSS"
+Prefix number : 0
+Mnemonic number : 91
+Line no.126
+Mnemonic : "LHUS"
+Prefix number : 0
+Mnemonic number : 92
+Line no.127
+Mnemonic : "LBSS"
+Prefix number : 0
+Mnemonic number : 93
+Line no.128
+Mnemonic : "LBUS"
+Prefix number : 0
+Mnemonic number : 94
+Line no.129
+Mnemonic : "STDS"
+Prefix number : 0
+Mnemonic number : 95
+Line no.130
+Mnemonic : "STWS"
+Prefix number : 0
+Mnemonic number : 96
+Line no.131
+Mnemonic : "STHS"
+Prefix number : 0
+Mnemonic number : 97
+Line no.132
+Mnemonic : "STBS"
+Prefix number : 0
+Mnemonic number : 98
+Line no.133
+Mnemonic : "LLDS"
+Prefix number : 0
+Mnemonic number : 102
+Line no.134
+Mnemonic : "SCDS"
+Prefix number : 0
+Mnemonic number : 103
+Line no.135
+Mnemonic : "ADDS"
+Prefix number : 0
+Mnemonic number : 104
+Line no.136
+Mnemonic : "SUBS"
+Prefix number : 0
+Mnemonic number : 105
+Line no.137
+Mnemonic : "ANDS"
+Prefix number : 0
+Mnemonic number : 106
+Line no.138
+Mnemonic : "ORRS"
+Prefix number : 0
+Mnemonic number : 107
+Line no.139
+Mnemonic : "EORS"
+Prefix number : 0
+Mnemonic number : 108
+Line no.140
+Mnemonic : "ASLS"
+Prefix number : 0
+Mnemonic number : 109
+Line no.141
+Mnemonic : "LSRS"
+Prefix number : 0
+Mnemonic number : 110
+Line no.142
+Mnemonic : "ASRS"
+Prefix number : 0
+Mnemonic number : 111
+Line no.143
+Mnemonic : "ROLS"
+Prefix number : 0
+Mnemonic number : 112
+Line no.144
+Mnemonic : "RORS"
+Prefix number : 0
+Mnemonic number : 113
+Line no.145
+Mnemonic : "MULS"
+Prefix number : 0
+Mnemonic number : 114
+Line no.146
+Mnemonic : "ADCS"
+Prefix number : 0
+Mnemonic number : 115
+Line no.147
+Mnemonic : "SBCS"
+Prefix number : 0
+Mnemonic number : 116
+Line no.148
+Mnemonic : "RLCS"
+Prefix number : 0
+Mnemonic number : 117
+Line no.149
+Mnemonic : "RRCS"
+Prefix number : 0
+Mnemonic number : 118
+Line no.150
+Mnemonic : "ADDDS"
+Prefix number : 0
+Mnemonic number : 119
+Line no.151
+Mnemonic : "ADDWS"
+Prefix number : 0
+Mnemonic number : 120
+Line no.152
+Mnemonic : "ADDHS"
+Prefix number : 0
+Mnemonic number : 121
+Line no.153
+Mnemonic : "ADDBS"
+Prefix number : 0
+Mnemonic number : 122
+Line no.154
+Mnemonic : "SUBDS"
+Prefix number : 0
+Mnemonic number : 123
+Line no.155
+Mnemonic : "SUBWS"
+Prefix number : 0
+Mnemonic number : 124
+Line no.156
+Mnemonic : "SUBHS"
+Prefix number : 0
+Mnemonic number : 125
+Line no.157
+Mnemonic : "SUBBS"
+Prefix number : 0
+Mnemonic number : 126
+Line no.158
+Mnemonic : "ASLDS"
+Prefix number : 0
+Mnemonic number : 127
+Line no.159
+Mnemonic : "ASLWS"
+Prefix number : 0
+Mnemonic number : 128
+Line no.160
+Mnemonic : "ASLHS"
+Prefix number : 0
+Mnemonic number : 129
+Line no.161
+Mnemonic : "ASLBS"
+Prefix number : 0
+Mnemonic number : 130
+Line no.162
+Mnemonic : "ASRDS"
+Prefix number : 0
+Mnemonic number : 131
+Line no.163
+Mnemonic : "ASRWS"
+Prefix number : 0
+Mnemonic number : 132
+Line no.164
+Mnemonic : "ASRHS"
+Prefix number : 0
+Mnemonic number : 133
+Line no.165
+Mnemonic : "ASRBS"
+Prefix number : 0
+Mnemonic number : 134
+Line no.166
+Mnemonic : "LSRDS"
+Prefix number : 0
+Mnemonic number : 135
+Line no.167
+Mnemonic : "LSRWS"
+Prefix number : 0
+Mnemonic number : 136
+Line no.168
+Mnemonic : "LSRHS"
+Prefix number : 0
+Mnemonic number : 137
+Line no.169
+Mnemonic : "LSRBS"
+Prefix number : 0
+Mnemonic number : 138
+Line no.170
+Mnemonic : "ROLDS"
+Prefix number : 0
+Mnemonic number : 139
+Line no.171
+Mnemonic : "ROLWS"
+Prefix number : 0
+Mnemonic number : 140
+Line no.172
+Mnemonic : "ROLHS"
+Prefix number : 0
+Mnemonic number : 141
+Line no.173
+Mnemonic : "ROLBS"
+Prefix number : 0
+Mnemonic number : 142
+Line no.174
+Mnemonic : "RORDS"
+Prefix number : 0
+Mnemonic number : 143
+Line no.175
+Mnemonic : "RORWS"
+Prefix number : 0
+Mnemonic number : 144
+Line no.176
+Mnemonic : "RORHS"
+Prefix number : 0
+Mnemonic number : 145
+Line no.177
+Mnemonic : "RORBS"
+Prefix number : 0
+Mnemonic number : 146
+Line no.178
+Mnemonic : "SUMWS"
+Prefix number : 0
+Mnemonic number : 147
+Line no.179
+Mnemonic : "SUMHS"
+Prefix number : 0
+Mnemonic number : 148
+Line no.180
+Mnemonic : "SUMBS"
+Prefix number : 0
+Mnemonic number : 149
+Line no.181
+Mnemonic : "DD"
+Prefix number : 0
+Mnemonic number : 150
+Line no.182
+Mnemonic : "DW"
+Prefix number : 0
+Mnemonic number : 151
+Line no.183
+Mnemonic : "DH"
+Prefix number : 0
+Mnemonic number : 152
+Line no.184
+Mnemonic : "DB"
+Prefix number : 0
+Mnemonic number : 153
+Line no.185
+Mnemonic : "ASCII"
+Prefix number : 0
+Mnemonic number : 154
+Line no.186
+Mnemonic : "ASCIZ"
+Prefix number : 0
+Mnemonic number : 155
+Line no.187
+Mnemonic : "ALIGN"
+Prefix number : 0
+Mnemonic number : 156
+Line no.188
+Mnemonic : "AD"
+Prefix number : 0
+Mnemonic number : 157
+Line no.189
+Mnemonic : "AW"
+Prefix number : 0
+Mnemonic number : 158
+Line no.190
+Mnemonic : "AH"
+Prefix number : 0
+Mnemonic number : 159
+Line no.191
+Mnemonic : "PC"
+Prefix number : 0
+Mnemonic number : 160
+Line no.192
+Mnemonic : "BIN"
+Prefix number : 0
+Mnemonic number : 161
+Line no.193
+Mnemonic : "DEF"
+Prefix number : 0
+Mnemonic number : 162
+Line no.194
+Mnemonic : "{"
+Prefix number : 0
+Mnemonic number : 163
+Line no.195
+Mnemonic : "}"
+Prefix number : 0
+Mnemonic number : 164
+Line no.196
+Mnemonic : "IMPORT"
+Prefix number : 0
+Mnemonic number : 165
+Line no.197
+Mnemonic : "EXPORT"
+Prefix number : 0
+Mnemonic number : 166
+Line no.198
+Mnemonic : "NPC"
+Prefix number : 0
+Mnemonic number : 167

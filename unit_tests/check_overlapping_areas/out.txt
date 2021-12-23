@@ -1,0 +1,110 @@
+Area no.1 : 
+first line : 2 
+last line  : 29 
+first address : $ 00000000000011e8 
+last address  : $ 0000000000001253 
+Area no.2 : 
+first line : 31 
+last line  : 32 
+first address : $ 0000000000001258 
+last address  : $ 0000000000001260 
+Area no.3 : 
+first line : 34 
+last line  : 38 
+first address : $ 0000000000001264 
+last address  : $ 0000000000001277 
+Area no.4 : 
+first line : 41 
+last line  : 49 
+first address : $ 0000000000007fac 
+last address  : $ 0000000000007fce 
+Area no.5 : 
+first line : 51 
+last line  : 51 
+first address : $ 0000000000007fd0 
+last address  : $ 0000000000007fd7 
+Area no.6 : 
+first line : 53 
+last line  : 96 
+first address : $ 0000000000007fdc 
+last address  : $ 0000000000008083 
+Area no.7 : 
+first line : 99 
+last line  : 105 
+first address : $ 0000000000008100 
+last address  : $ 000000000000811b 
+Area no.8 : 
+first line : 107 
+last line  : 112 
+first address : $ 0000000000008120 
+last address  : $ 000000000000813a 
+Area no.9 : 
+first line : 114 
+last line  : 116 
+first address : $ 0000000000008140 
+last address  : $ 0000000000008182 
+Area no.10 : 
+first line : 119 
+last line  : 119 
+first address : $ 0000000000004000 
+last address  : $ 0000000000004007 
+Area no.1 : 
+first line : 2 
+last line  : 29 
+first address : $ 00000000000011e8 
+last address  : $ 0000000000001253 
+Area no.2 : 
+first line : 31 
+last line  : 32 
+first address : $ 0000000000001258 
+last address  : $ 0000000000001260 
+Area no.3 : 
+first line : 34 
+last line  : 38 
+first address : $ 0000000000001264 
+last address  : $ 0000000000001277 
+Area no.4 : 
+first line : 119 
+last line  : 119 
+first address : $ 0000000000004000 
+last address  : $ 0000000000004007 
+Area no.5 : 
+first line : 41 
+last line  : 49 
+first address : $ 0000000000007fac 
+last address  : $ 0000000000007fce 
+Area no.6 : 
+first line : 51 
+last line  : 51 
+first address : $ 0000000000007fd0 
+last address  : $ 0000000000007fd7 
+Area no.7 : 
+first line : 53 
+last line  : 96 
+first address : $ 0000000000007fdc 
+last address  : $ 0000000000008083 
+Area no.8 : 
+first line : 99 
+last line  : 105 
+first address : $ 0000000000008100 
+last address  : $ 000000000000811b 
+Area no.9 : 
+first line : 107 
+last line  : 112 
+first address : $ 0000000000008120 
+last address  : $ 000000000000813a 
+Area no.10 : 
+first line : 114 
+last line  : 116 
+first address : $ 0000000000008140 
+last address  : $ 0000000000008182 
+Checking area 1 with area 2
+Checking area 2 with area 3
+Checking area 3 with area 4
+Checking area 4 with area 5
+Checking area 5 with area 6
+Checking area 6 with area 7
+Checking area 7 with area 8
+Checking area 8 with area 9
+Checking area 9 with area 10
+Done

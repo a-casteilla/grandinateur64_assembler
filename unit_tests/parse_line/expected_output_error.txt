@@ -1,0 +1,30 @@
+Invalid syntax at line 6 :
+    BCC, $000040
+
+Invalid syntax at line 7 :
+o: ,BCS $008054
+
+Invalid syntax at line 9 :
+q:  BCS, R5, $2468 ; avec un autre label
+
+Label name can't be void at line 12 :
+:   LDW R20, R21
+
+Invalid syntax at line 23 :
+ok:,MI.LDWS R20, R21, $128
+
+Invalid syntax at line 25 :
+   ,LWS R4, $ffcdec
+
+Invalid string at line 29
+    ascii "Hello \"Someone\"
+
+Invalid string at line 30
+    ascii "Hello; world ?\            ; well yes, actually no
+
+Invalid string at line 31
+    ascii "Hello , there", " Hello\
+
+Invalid string at line 32
+h:  ascii "Hello three dwarfs\, yes ; no
+

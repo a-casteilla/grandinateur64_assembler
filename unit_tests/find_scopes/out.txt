@@ -1,0 +1,32 @@
+Scope of level 2
+Start at line no.15
+Ends at line no.22
+
+Scope of level 4
+Start at line no.37
+Ends at line no.42
+
+Scope of level 3
+Start at line no.32
+Ends at line no.49
+
+Scope of level 3
+Start at line no.52
+Ends at line no.58
+
+Scope of level 2
+Start at line no.28
+Ends at line no.62
+
+Scope of level 1
+Start at line no.10
+Ends at line no.71
+
+Scope of level 1
+Start at line no.90
+Ends at line no.109
+
+Scope of level 0
+Start at line no.1
+Ends at line no.0
+
