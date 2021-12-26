@@ -1,3 +1,5 @@
+#include "common.h"
+#include "mnemonic.h"
 
 /* This fonction parses a line into separted tokens */
 /* Return an error code :
