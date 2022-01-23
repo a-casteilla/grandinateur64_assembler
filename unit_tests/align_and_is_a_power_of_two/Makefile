@@ -16,4 +16,4 @@ run: assembler
 	vimdiff out.txt expected_output.txt
 
 clean:
-	rm assembler out.txt out_error.txt
+	rm assembler out.txt
