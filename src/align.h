@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
+
 #ifndef ALIGN_H
 
 #define ALIGN_H
