@@ -10,4 +10,4 @@ CFLAGS = -Wall -pedantic -Wextra -std=c99
 
 # debugger options
 DB = gdb
-DBCFLAGS = -ggdb
+DBCFLAGS = -ggdb3 # Debug level can be change
