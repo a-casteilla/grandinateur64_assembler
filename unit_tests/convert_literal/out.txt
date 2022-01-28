@@ -1,7 +1,0 @@
-""Hello"
-"
-"Hello"
-""My name is \"aurelien\"\n"
-"
-"My name is "aurelien"
-"
