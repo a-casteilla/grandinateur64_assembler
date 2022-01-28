@@ -7,10 +7,7 @@ align.o:
 	make align.o
 	mv ../../src/align.o .
 
-align.h:
-	cp ../../src/align.h .
-
-test: align.o align.h
+test: align.o
 	$(CC) $(CFLAGS) $(DBCFLAGS) align.o test.c -o test
 
 run: test
@@ -18,4 +15,4 @@ run: test
 	vimdiff out.txt expected_output.txt
 
 clean:
-	rm test out.txt
+	rm test out.txt align.o
