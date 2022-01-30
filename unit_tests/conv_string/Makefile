@@ -3,6 +3,7 @@ include ../../config.mk
 default: run
 
 conv_string.o:
+	rm ../../src/conv_string.o
 	cd ../../src/ ; \
 		make conv_string.o
 	cp ../../src/conv_string.o .
