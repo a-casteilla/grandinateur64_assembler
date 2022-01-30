@@ -1,2 +1,12 @@
 "Hello"
+123
 "My name is \"aurelien\"\n"
+$fabc
+"Well, yes ! Actually, no ! '''"
+01234
+"6502 one of the best architecture"
+-4
+""
++17
+"\a\b\t\n\v\f\r\e\""
+%1111111011011100101110101001100001110110010101000011001000010000

@@ -1,19 +1,18 @@
+include ../../config.mk
+
 default: run
 
-assembler:
-	cd ../.. ;\
-	mv config.h config.h.bak ;\
-	sed "s/\/\/#define unit_test_of_convert_literal/#define \
-	unit_test_of_convert_literal/" < config.h.bak > config.h ;\
-	make clean ; \
-	make ; \
-	mv assembler tests/convert_literal/ ; \
-	make clean ; \
-	mv config.h.bak config.h
+conv_string.o:
+	cd ../../src/ ; \
+		make conv_string.o
+	cp ../../src/conv_string.o .
 
-run: assembler
-	./assembler < input.txt > out.txt
-	vim out.txt
+test: conv_string.o
+	$(CC) $(CFLAGS) $(DBCFLAGS) conv_string.o test.c -o test
+
+run: test
+	./test < input.txt > out.txt
+	vimdiff out.txt expected_output.txt
 
 clean:
-	rm assembler out.txt
+	rm test out.txt conv_string.o

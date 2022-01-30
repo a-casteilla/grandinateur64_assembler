@@ -1,0 +1,62 @@
+Original: 
+"Hello"
+
+Converted: 
+Hello
+Original: 
+123
+
+Numeric value: 
+7b
+Original: 
+"My name is \"aurelien\"\n"
+
+Converted: 
+My name is "aurelien"
+
+Original: 
+$fabc
+
+Numeric value: 
+fabc
+Original: 
+"Well, yes ! Actually, no ! '''"
+
+Converted: 
+Well, yes ! Actually, no ! '''
+Original: 
+01234
+
+Numeric value: 
+29c
+Original: 
+"6502 one of the best architecture"
+
+Converted: 
+6502 one of the best architecture
+Original: 
+-4
+
+Numeric value: 
+fffffffffffffffc
+Original: 
+""
+
+Converted: 
+
+Original: 
++17
+
+Numeric value: 
+11
+Original: 
+"\a\b\t\n\v\f\r\e\""
+
+Converted: 
+	
+"
+Original: 
+%1111111011011100101110101001100001110110010101000011001000010000
+
+Numeric value: 
+fedcba9876543210
