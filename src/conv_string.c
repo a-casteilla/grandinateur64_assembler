@@ -49,6 +49,11 @@ void convert_literal (char ** string_to_convert) {
                     p2++;
                     p1++;
                     break;
+                case 'b':
+                    *p2 = '\b';
+                    p2++;
+                    p1++;
+                    break;
                 case 'e':
                     *p2 = 0x1b;
                     p2++;
