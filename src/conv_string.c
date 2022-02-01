@@ -26,6 +26,7 @@ uint64_t convert_str_num (char * input) {
 /* Purpose: substitute the escape sequences to the raw characters and delete
  *          the quotes
  * Return:  void
+ * Modified input: string_to_convert
  *
  * string_to_convert: a pointer to the string to convert
  */

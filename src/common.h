@@ -2,6 +2,8 @@
 
 #define COMMON_H
 
+#include <stdio.h>
+
 #define display_error(t, l) \
     fprintf(stderr, t); \
     fprintf(stderr, " at line %u :\n", (l)->number); \
