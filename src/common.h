@@ -3,6 +3,8 @@
 #define COMMON_H
 
 #include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 #define display_error(t, l) \
     fprintf(stderr, t); \
