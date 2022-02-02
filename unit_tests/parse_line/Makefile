@@ -1,21 +1,20 @@
+include ../../config.mk
+
 default: run
 
-assembler:
-	cd ../.. ;\
-	mv config.h config.h.bak ;\
-	sed "s/\/\/#define unit_test_of_parse_line/#define \
-	unit_test_of_parse_line/" < config.h.bak > config.h ;\
-	make clean ; \
-	make ; \
-	mv assembler tests/parse_line/ ; \
-	make clean ; \
-	mv config.h.bak config.h
+parse_line.o:
+	cd ../../src/ ; \
+		make parse_line.o
+	mv ../../src/parse_line.o .
 
-run: assembler
-	./assembler < input.txt > out.txt
-	./assembler < input_error.txt 2> out_error.txt > /dev/null
+test: parse_line.o
+	$(CC) $(CFLAGS) $(DBCFLAGS) parse_line.o test.c -o test
+
+run: test
+	./test < input.txt > out.txt
+	./test < input_error.txt 2> out_error.txt
 	vimdiff out.txt expected_output.txt
 	vimdiff out_error.txt expected_output_error.txt
 
 clean:
-	rm assembler out.txt out_error.txt
+	rm test out.txt parse_line.o out_error.txt 

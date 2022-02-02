@@ -16,15 +16,15 @@ ok:,MI.LDWS R20, R21, $128
 Invalid syntax at line 25 :
    ,LWS R4, $ffcdec
 
-Invalid string at line 29
+Invalid string at line 29 :
     ascii "Hello \"Someone\"
 
-Invalid string at line 30
+Invalid string at line 30 :
     ascii "Hello; world ?\            ; well yes, actually no
 
-Invalid string at line 31
+Invalid string at line 31 :
     ascii "Hello , there", " Hello\
 
-Invalid string at line 32
+Invalid string at line 32 :
 h:  ascii "Hello three dwarfs\, yes ; no
 
