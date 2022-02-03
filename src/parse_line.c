@@ -8,12 +8,15 @@
  * Return:  error code (0 when everything is fine)
  * Modified input: current_line
  *
+ * May be malloced: current_line->alloc_space, current_line->args
+ *
  * current_line: a pointer to the last fetched line
  */
 int parse_line (struct line * current_line) {
-
-    size_t size_of_line = strlen(current_line->text); /* Size of the actual textual line */
+    size_t size_of_line = strlen(current_line->text);
+    /* Size of the actual textual line */
     char * next_token;
+
     /* Initialize the record */
     current_line->label = NULL;
     current_line->mnemo = NULL;
