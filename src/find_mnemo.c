@@ -1,19 +1,29 @@
+#include "common.h"
+#include "find_mnemo.h"
 
-/* This function associates the mnemonic of a line with its mnemonic number */
-/* Return an error code :
- * 0 means no error
- * 1 means an error occured
- * */
+/* Purpose: This function associates the mnemonic (or directive) of a line with
+ *          its mnemonic number
+ * Return:  error code (0 when everything is fine)
+ * Modified input: current_line
+ *
+ * current_line: a pointer to the last fetched line (the line where we hav to
+ *               find the mnemo
+ */
 int find_mnemo (struct line * current_line) {
-    char * mnemonic;
-    bool match;
-    size_t i;
+    char * mnemonic; /* */
+    bool match;      /* becomes true whenever a valid keyword is found */
+    size_t i;        /* loop counter, and index of the valid keyword */
+
     current_line->prefix_nb = 0;
+
     if (!current_line->mnemo) {
+        /* If there is no mnemonic in the line */
         current_line->mnemo_nb = 0;
         return 0;
     }
+
     if (strchr(current_line->mnemo, '.')) {
+        /* The purpose of strchr here is to test the presence of the '.' char */
         /* This block is executed if the instruction is prefixed */
         mnemonic = strchr(current_line->mnemo, '.') + 1;
         * strchr(current_line->mnemo, '.') = 0;
@@ -24,6 +34,9 @@ int find_mnemo (struct line * current_line) {
         if (match) {
             current_line->prefix_nb = i;
         } else {
+            /* when it doesn't match */
+            safe_free(current_line->alloc_space);
+            safe_free(current_line->args);
             display_error("Unknown prefix", current_line);
             return 1;
         }
@@ -37,6 +50,9 @@ int find_mnemo (struct line * current_line) {
     if (match) {
         current_line->mnemo_nb = i;
     } else {
+        /* when it doesn't match */
+        safe_free(current_line->alloc_space);
+        safe_free(current_line->args);
         display_error("Unknown mnemonic or directive", current_line);
         return 1;
     }
