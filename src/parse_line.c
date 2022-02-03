@@ -34,8 +34,7 @@ int parse_line (struct line * current_line) {
 
     /* If the line is blank, there is nothing to do */
     if (!*(current_line->label)) {
-        free(current_line->alloc_space);
-        current_line->alloc_space = NULL;
+        safe_free(current_line->alloc_space);
         return 0;
     }
 
@@ -51,8 +50,7 @@ int parse_line (struct line * current_line) {
     } else if (*next_token == ',') {
         /* Detects if there is a comma after the label or the mnemonic */
         display_error("Invalid syntax", current_line);
-        free(current_line->alloc_space);
-        current_line->alloc_space = NULL;
+        safe_free(current_line->alloc_space);
         return 1;
     } else if (*next_token == '\n') {
         /* Detects if there is a comma after the label or the mnemonic */
@@ -77,8 +75,7 @@ int parse_line (struct line * current_line) {
     } else if (strlen(current_line->label) == 1) {
         /* It's the case where the label field is ":" */
         display_error("Label name can't be void", current_line);
-        free(current_line->alloc_space);
-        current_line->alloc_space = NULL;
+        safe_free(current_line->alloc_space);
         return 1;
     } else if (next_token != NULL) {
         /* If the first field is a label and there is a second field */
@@ -95,8 +92,7 @@ int parse_line (struct line * current_line) {
         } else if (*next_token == ',') {
             /* Detects if there is a comma after the mnemonic which is incorrect */
             display_error("Invalid syntax", current_line);
-            free(current_line->alloc_space);
-            current_line->alloc_space = NULL;
+            safe_free(current_line->alloc_space);
             return 1;
         } else if (*next_token == '\n') {
             /* Detects if it's the end of the line */
@@ -162,10 +158,8 @@ int parse_line (struct line * current_line) {
                         /* Does not permit to have multiline strings */
                         if (*(next_token+1) == '\n') {
                             display_error("Invalid string", current_line);
-                            free(current_line->args);
-                            current_line->args = NULL;
-                            free(current_line->alloc_space);
-                            current_line->alloc_space = NULL;
+                            safe_free(current_line->args);
+                            safe_free(current_line->alloc_space);
                             return 1;
                         }
                         /* ignore the character after the backslash */
@@ -176,10 +170,8 @@ int parse_line (struct line * current_line) {
                     /* Does not permit to have multiline strings */
                     if (*next_token == '\n') {
                         display_error("Invalid string", current_line);
-                        free(current_line->args);
-                        current_line->args = NULL;
-                        free(current_line->alloc_space);
-                        current_line->alloc_space = NULL;
+                        safe_free(current_line->args);
+                        safe_free(current_line->alloc_space);
                         return 1;
                     }
                     next_token++;

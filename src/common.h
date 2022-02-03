@@ -11,6 +11,13 @@
     fprintf(stderr, " at line %u :\n", (l)->number); \
     fprintf(stderr, "%s\n", (l)->text);
 
+#define safe_free(p) \
+    if (p) { \
+        free(p); \
+        p = NULL; \
+    }
+
+
 struct line {
     /* The terminating line (after the last line fetched) */
     unsigned int number;    /* The line number */
