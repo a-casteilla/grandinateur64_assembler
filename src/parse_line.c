@@ -1,5 +1,4 @@
 #include "common.h"
-#include "mnemonic.h"
 #include "parse_line.h"
 
 /* Purpose: parse a line into separated tokens

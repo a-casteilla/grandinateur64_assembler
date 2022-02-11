@@ -1,4 +1,5 @@
 #include "common.h"
+#include "mnemonic.h"
 #include "find_mnemo.h"
 
 /* Purpose: This function associates the mnemonic (or directive) of a line with

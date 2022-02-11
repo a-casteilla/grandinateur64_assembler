@@ -1,6 +1,7 @@
 #ifndef PARSE_LINE_H
 #define PARSE_LINE_H
 
+#include <string.h>
 #include "common.h"
 
 #define remove_preceeding_whitespaces(str) \

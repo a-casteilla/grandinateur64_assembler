@@ -1,9 +1,9 @@
-Unknown prefix at line 115
+Unknown prefix at line 115 :
     KL.BLK $000010
 
-Unknown mnemonic or directive at line 195
+Unknown mnemonic or directive at line 195 :
     FOO
 
-Unknown mnemonic or directive at line 196
+Unknown mnemonic or directive at line 196 :
     BAR $123456
 

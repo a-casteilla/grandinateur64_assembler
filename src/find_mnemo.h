@@ -3,6 +3,7 @@
 #define FIND_MNEMO_H
 
 #include <string.h>
+#include <strings.h>
 #include "common.h"
 
 /* Purpose: This function associates the mnemonic (or directive) of a line with
