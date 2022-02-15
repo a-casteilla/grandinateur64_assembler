@@ -1,25 +1,31 @@
 include ../../config.mk
 
+C := parse_line.c find_mnemo.c
+H := parse_line.h find_mnemo.h common.h mnemonic.h
+O := $(C:%.c=%.o)
+
 default: run
 
-find_mnemo.o:
-	cd ../../src/ ; \
-		make find_mnemo.o
-	mv ../../src/find_mnemo.o .
+$H:
+	cp ../../src/$@ .
 
-parse_line.o:
-	cd ../../src/ ; \
-		make parse_line.o
-	mv ../../src/parse_line.o .
+$C:
+	cp ../../src/$@ .
 
-test: find_mnemo.o parse_line.o
-	$(CC) $(CFLAGS) $(DBCFLAGS) find_mnemo.o parse_line.o test.c -o test
+%.o: %.c $H
+	$(CC) $(CFLAGS) $(DBCFLAGS) -c $< -o $@
+
+test: $O test.c
+	$(CC) $(CFLAGS) $(DBCFLAGS) $^ -o $@
 
 run: test
 	./test < input.txt > out.txt
-	./test < input_error.txt 2> out_error.txt
+	./test < input_error.txt 2> out_error.txt > /dev/null
 	vimdiff out.txt expected_output.txt
 	vimdiff out_error.txt expected_output_error.txt
+	gcov $C
+	mkdir gcovr
+	python -m gcovr --output gcovr/gcovr.html --html-details
 
 clean:
-	rm test out.txt find_mnemo.o parse_line.o out_error.txt 
+	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/ out_error.txt

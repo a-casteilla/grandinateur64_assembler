@@ -50,13 +50,24 @@ Original:
 Numeric value: 
 11
 Original: 
-"\a\b\t\n\v\f\r\e\""
+"\a\b\t\n\v\f\r\e\"\\\i"
 
 Converted: 
 	
-"
+"\i
 Original: 
 %1111111011011100101110101001100001110110010101000011001000010000
 
 Numeric value: 
 fedcba9876543210
+Original: 
+hjkl
+
+Converted: 
+hjkl
+
+Original: 
+$123
+
+Numeric value: 
+123

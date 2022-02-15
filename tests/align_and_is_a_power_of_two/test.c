@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../src/align.h"
+#include "align.h"
 
 int main () {
     uint64_t address, boundary;

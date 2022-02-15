@@ -30,3 +30,6 @@ hello:
     ascii "Hello; world ?"            ; well yes, actually no
     ascii "Hello , there", " Hello"
 h:  ascii "Hello three dwarfs\"", yes ; no
+
+    ; End of the file
+    

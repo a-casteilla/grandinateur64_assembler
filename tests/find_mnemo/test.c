@@ -1,5 +1,5 @@
-#include "../../src/find_mnemo.h"
-#include "../../src/parse_line.h"
+#include "find_mnemo.h"
+#include "parse_line.h"
 
 /* This test suppose that parse_line works */
 int main () {

@@ -1,18 +1,29 @@
 include ../../config.mk
 
+C := conv_string.c
+H := conv_string.h
+O := $(C:%.c=%.o)
+
 default: run
 
-conv_string.o:
-	cd ../../src/ ; \
-		make conv_string.o
-	mv ../../src/conv_string.o .
+$H:
+	cp ../../src/$@ .
 
-test: conv_string.o
-	$(CC) $(CFLAGS) $(DBCFLAGS) conv_string.o test.c -o test
+$C:
+	cp ../../src/$@ .
+
+%.o: %.c $H
+	$(CC) $(CFLAGS) $(DBCFLAGS) -c $< -o $@
+
+test: $O test.c
+	$(CC) $(CFLAGS) $(DBCFLAGS) $^ -o $@
 
 run: test
 	./test < input.txt > out.txt
 	vimdiff out.txt expected_output.txt
+	gcov $C
+	mkdir gcovr
+	python -m gcovr --output gcovr/gcovr.html --html-details
 
 clean:
-	rm test out.txt conv_string.o
+	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/

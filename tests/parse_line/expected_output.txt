@@ -191,3 +191,18 @@ Mnemonic : "ascii"
 Argument no.0 : ""Hello three dwarfs\"""
 Argument no.1 : "yes"
 Comment : " no"
+Line no.33
+No label
+No mnemonic
+No argument
+No comment 
+Line no.34
+No label
+No mnemonic
+No argument
+Comment : " End of the file"
+Line no.35
+No label
+No mnemonic
+No argument
+No comment 

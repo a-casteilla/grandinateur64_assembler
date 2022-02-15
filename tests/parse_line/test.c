@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../src/parse_line.h"
-#include "../../src/common.h"
+#include "parse_line.h"
+#include "common.h"
 
 int main () {
     unsigned int number = 1;

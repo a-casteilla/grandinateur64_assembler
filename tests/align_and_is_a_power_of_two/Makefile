@@ -1,18 +1,29 @@
 include ../../config.mk
 
+C := align.c
+H := align.h
+O := $(C:%.c=%.o)
+
 default: run
 
-align.o:
-	cd ../../src ; \
-	make align.o
-	mv ../../src/align.o .
+$H:
+	cp ../../src/$@ .
 
-test: align.o
-	$(CC) $(CFLAGS) $(DBCFLAGS) align.o test.c -o test
+$C:
+	cp ../../src/$@ .
+
+%.o: %.c $H
+	$(CC) $(CFLAGS) $(DBCFLAGS) -c $< -o $@
+
+test: $O test.c
+	$(CC) $(CFLAGS) $(DBCFLAGS) $^ -o $@
 
 run: test
 	./test < input.txt > out.txt
 	vimdiff out.txt expected_output.txt
+	gcov $C
+	mkdir gcovr
+	python -m gcovr --output gcovr/gcovr.html --html-details
 
 clean:
-	rm test out.txt align.o
+	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/

@@ -33,6 +33,7 @@ int parse_line (struct line * current_line) {
 
     /* If the line is blank, there is nothing to do */
     if (!*(current_line->label)) {
+        current_line->label = NULL;
         safe_free(current_line->alloc_space);
         return 0;
     }
