@@ -193,3 +193,10 @@
     BIN Something
     BIN Something_else
     DEF foo 74
+    DD
+    DW
+    DH
+    DB
+    ASCII
+    ASCIZ
+    BIN

@@ -1,3 +1,24 @@
 File error at line 194 :
     BIN Something_else
 
+Ignored directive : missing arguments at line 196 :
+    DD
+
+Ignored directive : missing arguments at line 197 :
+    DW
+
+Ignored directive : missing arguments at line 198 :
+    DH
+
+Ignored directive : missing arguments at line 199 :
+    DB
+
+Ignored directive : missing arguments at line 200 :
+    ASCII
+
+Ignored directive : missing arguments at line 201 :
+    ASCIZ
+
+Ignored directive : missing arguments at line 202 :
+    BIN
+

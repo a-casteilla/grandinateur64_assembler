@@ -1,3 +1,8 @@
+#include <string.h>
+#include <sys/stat.h>
+#include "compute_size.h"
+#include "conv_string.h"
+#include "mnemonic.h"
 
 /* This function tells the size of the input line once assembled */
 /* Return an error code :
