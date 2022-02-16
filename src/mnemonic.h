@@ -32,7 +32,7 @@ enum {
     npc_directive
 };
 
-const struct {
+static const struct {
     uint32_t word;
     char mnemo[8];
     int family;
@@ -235,7 +235,7 @@ const struct {
     { 0, "NPC",    npc_directive }          /* attach the code to the next PC */
 };
 
-const struct {
+static const struct {
     uint32_t word;
     char prefix[4];
 } prefix[] = {
@@ -262,7 +262,7 @@ const struct {
 
 };
 
-const char * reg_name[] = { 
+static const char * reg_name[] = { 
     "R0",
     "R1",
     "R2",
