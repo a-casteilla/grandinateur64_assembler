@@ -1,37 +1,37 @@
 Line no.1
 
 Size of line : 0
-Address of line : $00000000000011e8
+Address of line : $00000000000011ec
 
 Line no.2
     LDW R4, $003dec
 Size of line : 4
-Address of line : $00000000000011e8
+Address of line : $00000000000011ec
 
 Line no.3
     AL.LDW R4, $003dec
 Size of line : 4
-Address of line : $00000000000011ec
+Address of line : $00000000000011f0
 
 Line no.4
     BR.LDW R4, $003dec
 Size of line : 4
-Address of line : $00000000000011f0
+Address of line : $00000000000011f4
 
 Line no.5
     EQ.LDW R4, $003dec
 Size of line : 4
-Address of line : $00000000000011f4
+Address of line : $00000000000011f8
 
 Line no.6
     NE.LDW R4, $003dec
 Size of line : 4
-Address of line : $00000000000011f8
+Address of line : $00000000000011fc
 
 Line no.7
-    MI.LDW R4, $003dec
-Size of line : 4
-Address of line : $00000000000011fc
+ALIGN 16
+Size of line : 0
+Address of line : $0000000000001200
 
 Line no.8
     PL.LDW R4, $003dec
@@ -64,9 +64,9 @@ Size of line : 4
 Address of line : $0000000000001214
 
 Line no.14
-    LQ.LDW R4, $003dec
-Size of line : 4
-Address of line : $0000000000001218
+AH
+Size of line : 0
+Address of line : $000000000000121c
 
 Line no.15
     GT.LDW R4, $003dec

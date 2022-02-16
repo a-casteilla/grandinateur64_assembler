@@ -1,3 +1,6 @@
+Alignement can only be done on a power of two at line 15 :
+ALIGN 2022
+
 Alignement can only be done on a power of two at line 98 :
 ALIGN 120
 

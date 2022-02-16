@@ -4,14 +4,14 @@
     BR.LDW R4, $003dec
     EQ.LDW R4, $003dec
     NE.LDW R4, $003dec
-    MI.LDW R4, $003dec
+ALIGN 16
     PL.LDW R4, $003dec
     VS.LDW R4, $003dec
     VC.LDW R4, $003dec
     CS.LDW R4, $003dec
     CC.LDW R4, $003dec
     HI.LDW R4, $003dec
-    LQ.LDW R4, $003dec
+AH
     GT.LDW R4, $003dec
     LE.LDW R4, $003dec
     GE.LDW R4, $003dec

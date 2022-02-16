@@ -12,7 +12,7 @@
     CC.LDW R4, $003dec
     HI.LDW R4, $003dec
     LQ.LDW R4, $003dec
-    GT.LDW R4, $003dec
+ALIGN 2022
     LE.LDW R4, $003dec
     GE.LDW R4, $003dec
     LT.LDW R4, $003dec
