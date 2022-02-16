@@ -1,4 +1,5 @@
-#include "common.h"
+#include <string.h>
+#include <strings.h>
 #include "mnemonic.h"
 #include "find_mnemo.h"
 
