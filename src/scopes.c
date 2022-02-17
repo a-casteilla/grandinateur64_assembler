@@ -1,12 +1,19 @@
+#include "scopes.h"
 
-/* This fonctions finds the different scopes of code */
-/* Returns a pointer to the list of the scopes :
- * If NULL is returned an error has occured
- * */
+/* Purpose: this function finds the different scopes of code (where a label is
+ *          defined in a program
+ * Return:  a pointer to the list of the scopes, NULL is returned if an error
+ *          has occured
+ *
+ * lines: a pointer to the array of lines of the input. The pointer itself
+ *        points to the first line of the input.
+ */
 struct scope * find_scopes (struct line * lines) {
     struct scope * scopes;
     size_t alloc_space_scopes = BUFSIZ;
-    struct scope * scope_stack_base = malloc(256 * sizeof(struct scope));
+    /* I won't resize the stack : 256 levels are more than enough */
+    /* That's why I do a static allocation */
+    struct scope scope_stack_base[256];
     struct scope * scope_stack_top = scope_stack_base + 256;
     struct scope * scope_stack_pointer = scope_stack_base + 256;
     struct scope * scopes_pointer;
@@ -30,7 +37,6 @@ struct scope * find_scopes (struct line * lines) {
                 /* I won't resize the stack : 256 levels are more than enough */
                 if (scope_stack_pointer <= scope_stack_base) {
                     display_error("Too many nested scopes (256 maximum)", l);
-                    free(scope_stack_base);
                     return NULL;
                 }
                 level++;
@@ -42,7 +48,6 @@ struct scope * find_scopes (struct line * lines) {
                 }
                 if (scope_stack_pointer >= scope_stack_top) {
                     display_error("Closing an inexistant scope", l);
-                    free(scope_stack_base);
                     return NULL;
                 }
                 /* Close the scope */
@@ -59,7 +64,6 @@ struct scope * find_scopes (struct line * lines) {
     /* Throw an error if the stack is non-void */
     if (scope_stack_pointer != scope_stack_top) {
         fprintf(stderr, "Opened scope not closed (detected at the end of the file)\n\n");
-        free(scope_stack_base);
         return NULL;
     }
 
@@ -69,13 +73,16 @@ struct scope * find_scopes (struct line * lines) {
     temp_scope.level = 0;
     *(scopes_pointer) = temp_scope;
 
-    free(scope_stack_base);
     return scopes;
 }
 
-/* This function finds the parent scope of a scope */
-/* Returns the address of the parent scope */
-/* Returns the scope itself if it's the scope of level 0 */
+/* Purpose: This function finds the parent scope of a scope, the scope that
+ *          contains the input scope
+ * Return:  the address of the parent scope or the address of the input scope
+ *          itself if it's the root
+ *          
+ * child: the address of the input scope for which we need to know the parents
+ */
 /* Note : the function here is simpler than what we could expect.
  * Let's suppose we have a child with the level n. The parent has a level of n-1.
  * The list of scopes are ordered with the first scope closed first. This way,
@@ -96,16 +103,27 @@ struct scope * parent_scope (struct scope * child) {
     }
 }
 
-/* This function finds the root scope of a scope or the root scope of list of
- * scopes */
+/* Purpose: This function finds the root scope of a scope or the root scope of
+ *          list of scopes
+ * Return:  the address of the root scope or the address of the input scope
+ *          itself if it's the root
+ *          
+ * child: the address of the input scope or of the list of scopes for which we
+ *        need to know the root
+ */
 struct scope * root_scope (struct scope * child) {
     struct scope * root = child;
     while (root->level) root++;
     return root;
 }
 
-/* This function finds in which scope is the line */
-/* Can probably be optimised */
+/* Purpose: This function finds in which scope is a line
+ * Return:  the address of the scope that contains the line (the one that is a
+ *          child)
+ *
+ * line: a pointer to the line for which we need to know the containing scope
+ * scopes: the list of the scopes
+ */
 struct scope * scope_of_line (struct line * line, struct scope * scopes) {
     /* This for loop is exited when a scope that contains the line is found */
     for (struct scope * s = scopes; ; s++) {
@@ -115,6 +133,14 @@ struct scope * scope_of_line (struct line * line, struct scope * scopes) {
     }
 }
 
+/* Purpose: This function finds in which scopes are all the lines
+ * Return:  void
+ * Modified input: lines
+ *
+ * lines: a pointer to the list of line for which we need to know the
+ *        containing scopes
+ * scopes: the list of the scopes
+ */
 void scope_of_lines (struct line * lines, struct scope * scopes) {
     for (struct line * l = lines; l->number; l++) {
         l->scope = scope_of_line(l, scopes);
