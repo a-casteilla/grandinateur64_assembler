@@ -1,15 +1,38 @@
+#include <stdlib.h>
+#include "check_overlapping_areas.h"
 
-int compare_first_address_of_area (const void * area1, const void * area2) {
+/* Area of code : used to detect intersecting regions */
+struct area {
+    /* There isn't a terminating area : the number of area has to be kept */
+    struct line * first_line; /* first line in the area */
+    struct line * last_line;  /* last one */
+    uint64_t first_address;   /* first address in the area */
+    uint64_t last_address;    /* last one */
+};
+
+/* Purpose: this function is used by the function from the standart library qsort
+ * Return:  An integer which indicate if the address of the first area is
+ *          greater than the last address of the second area.
+ *
+ * area1: a pointer to the first area to compare
+ * area2: a pointer to the sercond area to compare
+ */
+static int compare_first_address_of_area (const void * area1, const void * area2) {
     return (int)(((struct area *)area1)->first_address
             - ((struct area *)area2)->last_address);
 }
 
-/* This function tells if two non zero length statement are located at the same
- * address or not */
-/* Return an error code :
- * 0 means no error
- * non-zero means an error occured
- * */
+/* Purpose: this function verifies that there aren't two areas of code with
+ *          overlapping addresses.
+ *          For example this function will detect if there is an area that
+ *          goes from $1234 to $1300 and another that goes from $1280 and
+ *          $135c. Here, the common area is from $1280 and $1300.
+ * Return:  the number of overlapping areas detected (0 means everything is
+ *          fine)
+ *
+ * lines: a pointer to the array of lines of the input. The pointer itself
+ *        points to the first line of the input.
+ */
 int check_overlapping_areas (struct line * lines) {
     size_t alloc_space_areas = BUFSIZ;
     size_t alloc_space_overareas = BUFSIZ;
@@ -48,7 +71,7 @@ int check_overlapping_areas (struct line * lines) {
             }
         }
     }
-#ifdef unit_test_of_check_overlapping_areas
+#ifdef test
     for (unsigned int a = 0; a < areas_nb; a++) {
         printf("Area no.%d : \n", a + 1);
         printf("first line : %d \n", ((areas + a)->first_line)->number);
@@ -60,7 +83,7 @@ int check_overlapping_areas (struct line * lines) {
 
     qsort(areas, areas_nb, sizeof(struct area), compare_first_address_of_area);
     
-#ifdef unit_test_of_check_overlapping_areas
+#ifdef test
     for (unsigned int a = 0; a < areas_nb; a++) {
         printf("Area no.%d : \n", a + 1);
         printf("first line : %d \n", ((areas + a)->first_line)->number);
@@ -71,7 +94,7 @@ int check_overlapping_areas (struct line * lines) {
 #endif
 
     for (unsigned int a = 0; a < areas_nb - 1; a++) {
-#ifdef unit_test_of_check_overlapping_areas
+#ifdef test
         printf("Checking area %u with area %u\n", a + 1, a + 2);
 #endif
         if ((areas + a)->last_address >= (areas + a + 1)->first_address) {
@@ -88,6 +111,9 @@ int check_overlapping_areas (struct line * lines) {
                     < l->address + l->binsiz - 1;
                     l--) {
                 (overareas + overareas_nb)->first_line = l;
+            }
+            if ((overareas + overareas_nb)->first_line == NULL) {
+                 (overareas + overareas_nb)->first_line = (areas+a)->first_line;
             }
             /* Searches the last line of the first region that has an address
              * greater than the last address of the second region */
@@ -112,7 +138,7 @@ int check_overlapping_areas (struct line * lines) {
             (overareas + overareas_nb++)->last_address = (areas + a)->last_address;
         }
     }
-#ifdef unit_test_of_check_overlapping_areas
+#ifdef test
     printf("Done\n");
 #endif
 
@@ -130,13 +156,7 @@ int check_overlapping_areas (struct line * lines) {
         }
     }
 
-    if (overareas) {
-        free(overareas);
-        overareas = NULL;
-    }
-    if (areas) {
-        free(areas);
-        areas = NULL;
-    }
+    safe_free(overareas);
+    safe_free(areas);
     return overareas_nb;
 }
