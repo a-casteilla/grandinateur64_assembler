@@ -103,12 +103,17 @@ int check_overlapping_areas (struct line * lines) {
                 alloc_space_overareas += BUFSIZ;
                 overareas = realloc(overareas, alloc_space_overareas);
             }
+
+            /* Initialize the pointers to NULL */
+            (overareas + overareas_nb)->first_line = NULL;
+            (overareas + overareas_nb)->last_line = NULL;
+
             /* Searches the first line of the first region that has an address
              * less than the first address of the second region */
             for (struct line * l = (areas + a)->last_line;
-                    l >= (areas + a)->first_line
-                    && (areas + a + 1)->first_address
-                    < l->address + l->binsiz - 1;
+                    (l >= (areas + a)->first_line)
+                    &&
+                    ((areas + a + 1)->first_address < (l->address + l->binsiz - 1));
                     l--) {
                 (overareas + overareas_nb)->first_line = l;
             }
@@ -119,8 +124,10 @@ int check_overlapping_areas (struct line * lines) {
              * greater than the last address of the second region */
             (overareas + overareas_nb)->last_line = (areas + a)->last_line;
             for (struct line * l = (areas + a)->last_line;
-                    l >= (areas + a)->first_line
-                    && (areas + a + 1)->last_address < l->address; l--) {
+                    (l >= (areas + a)->first_line)
+                    &&
+                    ((areas + a + 1)->last_address < l->address);
+                    l--) {
                 (overareas + overareas_nb)->last_line = l;
             }
             (overareas + overareas_nb)->first_address  = (areas + a + 1)->first_address;
@@ -128,8 +135,9 @@ int check_overlapping_areas (struct line * lines) {
             /* Searches the last line of the second region that has an address
              * greater than the last address of the first region */
             for (struct line * l = (areas + a + 1)->first_line;
-                    l <= (areas + a + 1)->last_line
-                    && (areas + a)->last_address >= l->address;
+                    (l <= (areas + a + 1)->last_line)
+                    &&
+                    ((areas + a)->last_address >= l->address);
                     l++) {
                 (overareas + overareas_nb)->last_line = l;
             }
