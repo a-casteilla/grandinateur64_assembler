@@ -15,12 +15,13 @@
 #define safe_free(p) \
     if (p) { \
         free(p); \
-        p = NULL; \
+        (p) = NULL; \
     }
 
 
 struct line {
-    /* The terminating line (after the last line fetched) */
+    /* The terminating line (after the last line fetched) is the line with
+     * number=0 */
     unsigned int number;    /* The line number */
     char * text;            /* The original line */
     void * alloc_space;     /* Pointer used only for malloc */
