@@ -42,4 +42,4 @@ run: test
 		|| echo "gcovr is not installed on this computer"
 
 clean:
-	rm -rf test out.txt $C $H $(HMODIFIED) *.o *.gcda *.gcno *.gcov gcovr/ out_error_*.txt
+	rm -rf test out.txt $C $H $(HMODIFIED) *.o *.gcda *.gcno *.gcov gcovr/ out_error_*.txt out_big*.txt
