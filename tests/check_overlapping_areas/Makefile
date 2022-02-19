@@ -31,8 +31,7 @@ run: test
 	./test < input.txt > out.txt
 	./test < input_error_1.txt 2> out_error_1.txt > /dev/null
 	./test < input_big.txt > out_big.txt
-	./test < input_big_error.txt 2> out_big_error.txt > /dev/null || echo "Warning"
-	./test < input_big_error.txt
+	./test < input_big_error.txt 2> out_big_error.txt > /dev/null
 	vimdiff out.txt expected_output.txt
 	vimdiff out_error_1.txt expected_output_error_1.txt
 	vimdiff out_big.txt expected_output_big.txt
