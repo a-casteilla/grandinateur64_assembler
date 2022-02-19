@@ -37,23 +37,20 @@ int main () {
     scopes = find_scopes(lines);
     
     if (scopes) {
-        for (s = scopes; s->level; s++) {
+        s = scopes;
+        do {
             printf("Scope of level %u\n", s->level);
-            printf("Start at line no.%u\n", (s->first_line)->number);
+            printf("Starts at line no.%u\n", (s->first_line)->number);
             printf("Ends at line no.%u\n", (s->last_line)->number);
-            printf("Parent start at line no.%u\n",
+            printf("Parent starts at line no.%u\n",
                     (parent_scope(s)->first_line)->number);
-            printf("Parent ends at line no.%u\n\n",
+            printf("Parent ends at line no.%u\n",
                     (parent_scope(s)->last_line)->number);
-        }
-
-        printf("Scope of level %u\n", s->level);
-        printf("Start at line no.%u\n", (s->first_line)->number);
-        printf("Ends at line no.%u\n", (s->last_line)->number);
-        printf("Parent start at line no.%u\n",
-                (parent_scope(s)->first_line)->number);
-        printf("Parent ends at line no.%u\n\n",
-                (parent_scope(s)->last_line)->number);
+            printf("Root starts at line no.%u\n",
+                    (root_scope(s)->first_line)->number);
+            printf("Root ends at line no.%u\n\n",
+                    (root_scope(s)->last_line)->number);
+        } while ((s++)->level) ;
     }
 
     exit(EXIT_SUCCESS);
