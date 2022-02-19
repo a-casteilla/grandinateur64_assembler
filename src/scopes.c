@@ -1,3 +1,4 @@
+#include "mnemonic.h"
 #include "scopes.h"
 
 /* Purpose: this function finds the different scopes of code (where a label is
@@ -16,14 +17,12 @@ struct scope * find_scopes (struct line * lines) {
     struct scope scope_stack_base[256];
     struct scope * scope_stack_top = scope_stack_base + 256;
     struct scope * scope_stack_pointer = scope_stack_base + 256;
-    struct scope * scopes_pointer;
     struct scope temp_scope;
     struct line * l;
     unsigned int scopes_nb = 0;
     unsigned int level = 1;
 
     scopes = malloc(alloc_space_scopes);
-    scopes_pointer = scopes;
 
     for (l = lines; l->number; l++) {
         switch (mnemo[l->mnemo_nb].family) {
@@ -42,7 +41,7 @@ struct scope * find_scopes (struct line * lines) {
                 level++;
                 break;
             case close_scope_directive:
-                if (alloc_space_scopes <= scopes_nb * sizeof(struct scope) + 1) {
+                if (alloc_space_scopes <= (scopes_nb + 1) * sizeof(struct scope)) {
                     alloc_space_scopes += BUFSIZ;
                     scopes = realloc(scopes, alloc_space_scopes);
                 }
@@ -53,7 +52,7 @@ struct scope * find_scopes (struct line * lines) {
                 /* Close the scope */
                 scope_stack_pointer->last_line = l;
                 /* pull the scope from the stack and put it in the list */
-                *(scopes_pointer++) = *(scope_stack_pointer++);
+                *(scopes + (scopes_nb++)) = *(scope_stack_pointer++);
                 level--;
                 break;
             default:
@@ -71,7 +70,7 @@ struct scope * find_scopes (struct line * lines) {
     temp_scope.first_line = lines;
     temp_scope.last_line = l;
     temp_scope.level = 0;
-    *(scopes_pointer) = temp_scope;
+    *(scopes + scopes_nb) = temp_scope;
 
     return scopes;
 }
