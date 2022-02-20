@@ -1,4 +1,5 @@
-#include "imported_symbols.h"
+#include <string.h>
+#include "import_symbols.h"
 #include "scopes.h"
 
 /* Purpose: This function imports symbols from a file

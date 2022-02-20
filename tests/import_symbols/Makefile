@@ -1,19 +1,32 @@
+include ../../config.mk
+
+C := import_symbols.c scopes.c
+H := common.h import_symbols.h scopes.h mnemonic.h
+O := $(C:%.c=%.o)
+
 default: run
 
-assembler:
-	cd ../.. ;\
-	mv config.h config.h.bak ;\
-	sed "s/\/\/#define unit_test_of_import_symbols/#define \
-	unit_test_of_import_symbols/" < config.h.bak > config.h ;\
-	make clean ; \
-	make ; \
-	mv assembler tests/import_symbols/ ; \
-	make clean ; \
-	mv config.h.bak config.h
+$H:
+	cp ../../src/$@ .
 
-run: assembler
-	./assembler > out.txt
+$C:
+	cp ../../src/$@ .
+
+%.o: %.c $H
+	$(CC) $(CFLAGS) $(DBCFLAGS) -c $< -o $@
+
+test: $O test.c
+	$(CC) $(CFLAGS) $(DBCFLAGS) $^ -o $@
+
+default: run
+
+run: test
+	./test > out.txt
 	vimdiff out.txt expected_output.txt
+	gcov $C || echo "gcov is not installed on this computer"
+	mkdir gcovr || rm -f gcovr/*
+	python -m gcovr --output gcovr/gcovr.html --html-details \
+		|| echo "gcovr is not installed on this computer"
 
 clean:
-	rm assembler out.txt
+	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/ 
