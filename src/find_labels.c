@@ -1,3 +1,4 @@
+#include "scopes.h"
 #include "find_labels.h"
 
 /* Purpose: each line is read to know if there is a label.
@@ -33,7 +34,7 @@ struct symbol * find_labels (struct line * lines) {
             (symbols+nb_of_symbols)->is_label = true;
             nb_of_symbols++;
             /* Alloc more space if necessary */
-            if (nb_of_symbols > symbols_size / sizeof(struct symbol)) {
+            if ((nb_of_symbols + 1) * sizeof(struct symbol) > symbols_size) {
                 symbols_size += BUFSIZ;
                 symbols = realloc(symbols, symbols_size);
             }
