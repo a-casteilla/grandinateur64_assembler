@@ -1,6 +1,13 @@
+#include "imported_symbols.h"
+#include "scopes.h"
 
-/* This function import symbols from a file */
-/* Returns a pointer to the imported symbols */
+/* Purpose: This function imports symbols from a file
+ * Return:  a pointer to the imported symbols, or NULL if an error occured
+ * 
+ * filename: the name of the file to import
+ * offset: the offset added to the labels
+ * scope: the scope where the directive is declared
+ */
 struct symbol * import_symbols (char * filename, uint64_t offset,
         struct scope * scope) {
 
@@ -65,7 +72,7 @@ struct symbol * import_symbols (char * filename, uint64_t offset,
                         strcpy((imported_symbols + nb_of_symbols)->name,
                                 line_parsed);
                         (imported_symbols + nb_of_symbols)->scope
-                            = scope; /* Reminder scope is the root scope */
+                            = scope; /* Reminder: scope is the root scope */
                         (imported_symbols+nb_of_symbols)->is_label = is_label;
                         nb_of_symbols++;
                         /* alloc more space if necessary */
