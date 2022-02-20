@@ -1,19 +1,36 @@
+include ../../config.mk
+
+C := parse_line.c find_mnemo.c compute_size.c \
+     compute_addresses.c conv_string.c align.c scopes.c find_labels.c
+H := parse_line.h find_mnemo.h compute_size.h compute_addresses.h conv_string.h \
+     common.h mnemonic.h align.h scopes.h find_labels.h
+O := $(C:%.c=%.o)
+
 default: run
 
-assembler:
-	cd ../.. ;\
-	mv config.h config.h.bak ;\
-	sed "s/\/\/#define unit_test_of_find_labels/#define \
-	unit_test_of_find_labels/" < config.h.bak > config.h ;\
-	make clean ; \
-	make ; \
-	mv assembler tests/find_labels/ ; \
-	make clean ; \
-	mv config.h.bak config.h
+$H:
+	cp ../../src/$@ .
 
-run: assembler
-	./assembler < input.txt > out.txt
+$C:
+	cp ../../src/$@ .
+
+%.o: %.c $H
+	$(CC) $(CFLAGS) $(DBCFLAGS) -c $< -o $@
+
+test: $O test.c
+	$(CC) $(CFLAGS) $(DBCFLAGS) $^ -o $@
+
+default: run
+
+run: test
+	./test < input.txt > out.txt
+	./test < input_big.txt > out_big.txt
 	vimdiff out.txt expected_output.txt
+	vimdiff out_big.txt expected_output_big.txt
+	gcov $C || echo "gcov is not installed on this computer"
+	mkdir gcovr || rm -f gcovr/*
+	python -m gcovr --output gcovr/gcovr.html --html-details \
+		|| echo "gcovr is not installed on this computer"
 
 clean:
-	rm assembler out.txt
+	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/ out_big.txt
