@@ -114,4 +114,4 @@ AD
     ASCII "Hi there ! ", "It's me ! "
     ASCIZ "Hello \"world\" ! "
     BIN "Something"
-    DEF foo 74
+    DEF foo, 74

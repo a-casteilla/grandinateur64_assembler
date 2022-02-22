@@ -192,7 +192,7 @@
     BIN "Something"
     BIN Something
     BIN Something_else
-    DEF foo 74
+    DEF foo, 74
     DD
     DW
     DH

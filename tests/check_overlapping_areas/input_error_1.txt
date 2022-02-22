@@ -114,7 +114,7 @@ AD
     ASCII "Hi there ! ", "It's me ! "
     ASCIZ "Hello \"world\" ! "
     BIN "Something"
-    DEF foo 74
+    DEF foo, 74
 PC $1220
     ADDB R27, R19, #$017 ; 23 in decimal
     SUBD R27, R19, #$017 ; 23 in decimal

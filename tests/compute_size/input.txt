@@ -191,4 +191,4 @@
     PC $1234
     BIN "Something"
     BIN Something
-    DEF foo 74
+    DEF foo, 74

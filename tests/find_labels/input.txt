@@ -130,7 +130,7 @@ AD
     ASCII "Hi there ! ", "It's me ! "
     ASCIZ "Hello \"world\" ! "
     BIN "Something"
-    DEF foo 74
+    DEF foo, 74
 PC $4000
     DD $1324
 

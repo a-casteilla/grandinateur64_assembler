@@ -117,9 +117,9 @@
     TSR R5
     TRS R6
     RTI
-    DEF abc $abc
-    def Dff $Dff
-    dEf idontknow $bac
+    DEF abc, $abc
+    def Dff, $Dff
+    dEf idontknow, $bac
     SYS #42
     ILG
     LDWS R20, R21, $128
@@ -194,4 +194,4 @@
     PC $1234
     BIN "Something"
     BIN Something
-    DEF foo 74
+    DEF foo, 74

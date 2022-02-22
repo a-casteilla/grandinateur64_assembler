@@ -191,6 +191,6 @@
     AH
     PC $1234
     BIN "Something"
-    DEF foo 74
+    DEF foo, 74
     FOO
     BAR $123456

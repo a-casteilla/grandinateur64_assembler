@@ -767,7 +767,7 @@ That starts at line no.1
 and ends at line no.0
 
 Line no.129
-    DEF foo 74
+    DEF foo, 74
 Is within scope with a level of 0
 That starts at line no.1
 and ends at line no.0

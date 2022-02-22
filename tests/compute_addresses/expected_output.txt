@@ -579,7 +579,7 @@ Size of line : 29
 Address of line : $0000000000008166
 
 Line no.117
-    DEF foo 74
+    DEF foo, 74
 Size of line : 0
 Address of line : $0000000000008183
 
