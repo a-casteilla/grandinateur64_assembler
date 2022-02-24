@@ -1,0 +1,3 @@
+Symbol label_1 has the value $0000000010000000
+Symbol label_2 has the value $0000000010123409
+Symbol const_1 has the value $00000000feedbeef
