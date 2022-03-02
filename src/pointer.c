@@ -1,4 +1,6 @@
-#include <stbool.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include "pointer.h"
 
 /* Didn't find something like that in the glibc btw */
 /* Well, actually just for strings */
@@ -8,9 +10,10 @@
  *
  * test: the pointer to test if it is in the list.
  * list: the list of pointer
- * size: the size of the list
+ * pointercount: the size of the list
  */
-void * mempointer (const void ** list, const void * test, size_t pointercount) {
+/* No const for list (so, no headache, and no warnings) */
+void ** mempointer (void ** list, const void * test, size_t pointercount) {
     size_t i;           /* Size of the array of pointers */
     bool match = false; /* Becomes true, when the corresponding pointer is
                            found */
@@ -21,6 +24,7 @@ void * mempointer (const void ** list, const void * test, size_t pointercount) {
             match = true;
         }
     }
+    i--;
 
     /* Returns the position of the match, or NULL */
     /* Use the ternary operator, to keep only one return */
@@ -32,10 +36,10 @@ void * mempointer (const void ** list, const void * test, size_t pointercount) {
  *
  * list: The string of pointers
  */
-size_t pointerlen (const void ** list) {
+size_t pointerlen (void ** list) {
     size_t len = 0;
     
-    for (void ** pos = (void **)list; *pos != NULL; pos++) {
+    for (void ** pos = list; *pos != NULL; pos++) {
         len++;
     }
 
