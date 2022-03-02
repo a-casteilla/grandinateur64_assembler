@@ -21,4 +21,16 @@ struct symbol * symcat (struct symbol * dest, const struct symbol * src) ;
  */
 size_t symlen (const struct symbol * sym) ;
 
+/* Purpose: convert a symbol back to its numerical value
+ * Return:  boolean (true if a value has been found in the current scope)
+ * Modified input: out
+ *
+ * out: a pointer to the output number
+ * in: a string that contains the symbol's name
+ * scope: a pointer to the scope where the conversion is
+ * sym: the symbol table
+ */
+bool symtonum (uint64_t * out, const char * in, struct scope * scope,
+        struct symbol * sym) ;
+
 #endif

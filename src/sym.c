@@ -1,4 +1,6 @@
 #include <string.h>
+#include "pointer.h"
+#include "scopes.h"
 #include "sym.h"
 
 /* Purpose: concatenate symbol tables
@@ -39,3 +41,53 @@ size_t symlen (const struct symbol * sym) {
     }
     return sym_count;
 }
+
+/* Purpose: convert a symbol back to its numerical value
+ * Return:  boolean (true if a value has been found in the current scope)
+ * Modified input: out
+ *
+ * out: a pointer to the output number
+ * in: a string that contains the symbol's name
+ * scope: a pointer to the scope where the conversion is
+ * sym: the symbol table
+ */
+bool symtonum (uint64_t * out, const char * in, struct scope * scope,
+        struct symbol * sym) {
+
+    size_t i;
+    bool match = false;
+    size_t len_of_sym = symlen(sym);
+
+    struct scope * valid_scopes[256]; /* list of the scopes where the symbol is
+                                         valid */
+    size_t len_of_valid_scopes;
+
+    /* find the list of scopes where the symbol is valid */
+    {   /* Well, actually it was also weird with a for loop */
+        struct scope * s = scope;
+        struct scope ** vs = valid_scopes;
+        vs = scope;
+        
+        while (s->level != 0) {
+            s = parent_scope(s);
+            *(++vs) = s;
+        }
+        *vs = NULL
+    }
+
+    len_of_valid_scopes = pointerlen(valid_scopes);
+
+    for (i = 0; i < len_of_sym && !match; i++) {
+        /* actually searches the correspondance */
+        if (strcmp((sym + i)->name, in) == 0
+                && mempointer(valid_scopes, (sym + i)->scope, len_of_valid_scopes) != NULL) {
+            match = true;
+        }
+    }
+    i--;
+
+    *out = (sym + i)->value;
+
+    return match;
+}
+            
