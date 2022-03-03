@@ -1,3 +1,4 @@
+#include <sys/types.h>
 #include <string.h>
 #include "pointer.h"
 #include "scopes.h"
@@ -54,8 +55,7 @@ size_t symlen (const struct symbol * sym) {
 bool symtonum (uint64_t * out, const char * in, struct scope * scope,
         struct symbol * sym) {
 
-    size_t i;
-    bool match = false;
+    ssize_t last_match = -1; /* -1 means no match */
     size_t len_of_sym = symlen(sym);
 
     struct scope * valid_scopes[256]; /* list of the scopes where the symbol is
@@ -66,28 +66,27 @@ bool symtonum (uint64_t * out, const char * in, struct scope * scope,
     {   /* Well, actually it was also weird with a for loop */
         struct scope * s = scope;
         struct scope ** vs = valid_scopes;
-        vs = scope;
+        *(vs++) = scope;
         
         while (s->level != 0) {
             s = parent_scope(s);
-            *(++vs) = s;
+            *(vs++) = s;
         }
-        *vs = NULL
+        *vs = NULL;
     }
 
     len_of_valid_scopes = pointerlen(valid_scopes);
 
-    for (i = 0; i < len_of_sym && !match; i++) {
+    for (ssize_t i = 0; i < len_of_sym; i++) {
         /* actually searches the correspondance */
         if (strcmp((sym + i)->name, in) == 0
                 && mempointer(valid_scopes, (sym + i)->scope, len_of_valid_scopes) != NULL) {
-            match = true;
+            last_match = i;
         }
     }
-    i--;
 
-    *out = (sym + i)->value;
+    *out = (sym + last_match)->value;
 
-    return match;
+    return last_match != -1;
 }
             

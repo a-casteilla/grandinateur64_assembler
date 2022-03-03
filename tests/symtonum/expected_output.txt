@@ -1,0 +1,75 @@
+Label "l1" is at address $00000000000011f4
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "label" is at address $0000000000001208
+Is within scope with a level of 1
+That starts at line no.10
+and ends at line no.75
+
+Label "label" is at address $0000000000001220
+Is within scope with a level of 2
+That starts at line no.16
+and ends at line no.23
+
+Label "l3" is at address $0000000000001250
+Is within scope with a level of 2
+That starts at line no.29
+and ends at line no.64
+
+Label "label_global" is at address $0000000000001264
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "chouette" is at address $0000000000007fb8
+Is within scope with a level of 2
+That starts at line no.29
+and ends at line no.64
+
+Label "label4" is at address $0000000000007fbc
+Is within scope with a level of 1
+That starts at line no.10
+and ends at line no.75
+
+Label "truc" is at address $0000000000007fc0
+Is within scope with a level of 3
+That starts at line no.54
+and ends at line no.60
+
+Label "machin" is at address $0000000000007fc4
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "bidule" is at address $0000000000007fc8
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "label5" is at address $0000000000007fec
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "label6" is at address $0000000000007ff4
+Is within scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Label "label" is at address $000000000000804c
+Is within scope with a level of 1
+That starts at line no.94
+and ends at line no.113
+
+At line no.7, symbol "machin" has a value of $0000000000007fc4
+At line no.12, symbol "truc" is not defined
+At line no.14, symbol "label" has a value of $0000000000001208
+At line no.17, symbol "label" has a value of $0000000000001220
+At line no.27, symbol "chouette" is not defined
+At line no.28, symbol "label" has a value of $0000000000001208
+At line no.30, symbol "chouette" has a value of $0000000000007fb8
+At line no.31, symbol "label_inconnu" is not defined
+At line no.34, symbol "label" has a value of $0000000000001208
+At line no.103, symbol "label" has a value of $000000000000804c
