@@ -12,7 +12,7 @@
  * lines: a pointer to the array of lines of the input. The pointer itself
  *        points to the first line of the input.
  */
-struct scope * find_scopes (struct line * lines) ;
+struct scope * find_scopes (const struct line * lines) ;
 
 /* Purpose: This function finds the parent scope of a scope, the scope that
  *          contains the input scope
@@ -21,7 +21,7 @@ struct scope * find_scopes (struct line * lines) ;
  *          
  * child: the address of the input scope for which we need to know the parents
  */
-struct scope * parent_scope (struct scope * child) ;
+const struct scope * parent_scope (const struct scope * child) ;
 
 /* Purpose: This function finds the root scope of a scope or the root scope of
  *          list of scopes
@@ -31,7 +31,7 @@ struct scope * parent_scope (struct scope * child) ;
  * child: the address of the input scope or of the list of scopes for which we
  *        need to know the root
  */
-struct scope * root_scope (struct scope * child) ;
+const struct scope * root_scope (const struct scope * child) ;
 
 /* Purpose: This function finds in which scope is a line
  * Return:  the address of the scope that contains the line (the one that is a
@@ -40,7 +40,7 @@ struct scope * root_scope (struct scope * child) ;
  * line: a pointer to the line for which we need to know the containing scope
  * scopes: the list of the scopes
  */
-struct scope * scope_of_line (struct line * line, struct scope * scopes) ;
+const struct scope * scope_of_line (const struct line * line, const struct scope * scopes) ;
 
 /* Purpose: This function finds in which scopes are all the lines
  * Return:  void
@@ -50,6 +50,6 @@ struct scope * scope_of_line (struct line * line, struct scope * scopes) ;
  *        containing scopes
  * scopes: the list of the scopes
  */
-void scope_of_lines (struct line * lines, struct scope * scopes) ;
+void scope_of_lines (struct line * lines, const struct scope * scopes) ;
 
 #endif

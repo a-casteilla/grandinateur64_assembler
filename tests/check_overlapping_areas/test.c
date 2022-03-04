@@ -3,6 +3,7 @@
 #include "find_mnemo.h"
 #include "compute_size.h"
 #include "compute_addresses.h"
+#include "check_overlapping_areas.h"
 
 /* This test suppose that the following functions work : 
  *     parse_line

@@ -9,7 +9,7 @@
  *           If not, this function has an undefined behavior
  */
 uint64_t align (uint64_t address, uint64_t boundary) {
-    if (address & (boundary - 1)) {
+    if ((address & (boundary - 1)) != 0) {
         return ((address + boundary) & ~(boundary-1));
     } else {
         return address;
@@ -19,7 +19,7 @@ uint64_t align (uint64_t address, uint64_t boundary) {
 /* Purpose: align the given address on a power of two, or check if the code is
  *          aligned.
  * Return:  the amount of byte to subtract to each addresses since
- *          the following align directive.
+ *          the following align directive. Or returns 0 if the code is aligned.
  *
  * address:  can be any uint64_t number
  * boundary: is supposed to be a power of two.
@@ -36,9 +36,10 @@ uint64_t align_backward (uint64_t address, uint64_t boundary) {
  */
 bool is_a_power_of_two (uint64_t nb) {
     int number_of_one = 0;
-    for (uint64_t mask = 0x1; mask; mask <<= 1)
-        if (mask & nb)
+    for (uint64_t mask = 0x1; mask; mask <<= 1) {
+        if (mask & nb) {
             number_of_one++;
+        }
+    }
     return (number_of_one == 1);
 }
-    

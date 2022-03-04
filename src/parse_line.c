@@ -32,7 +32,7 @@ int parse_line (struct line * current_line) {
     remove_preceeding_whitespaces(current_line->label);
 
     /* If the line is blank, there is nothing to do */
-    if (!*(current_line->label)) {
+    if (*(current_line->label) == '\0') {
         current_line->label = NULL;
         safe_free(current_line->alloc_space);
         return 0;
@@ -68,15 +68,17 @@ int parse_line (struct line * current_line) {
      * token is the mnemonic */
     /* The only case when these conditions aren't executed, is when there is a
      * valid label and no mnemonic */
-    if (*(current_line->label + strlen(current_line->label) -1) != ':') {
+    if (*(current_line->label + strlen(current_line->label) - 1) != ':') {
         /* So the first field is the mnemonic and not the label */
         current_line->mnemo = current_line->label;
         current_line->label = NULL;
+
     } else if (strlen(current_line->label) == 1) {
         /* It's the case where the label field is ":" */
         display_error("Label name can't be void", current_line);
         safe_free(current_line->alloc_space);
         return 1;
+
     } else if (next_token != NULL) {
         /* If the first field is a label and there is a second field */
         current_line->mnemo = next_token;
@@ -116,7 +118,7 @@ int parse_line (struct line * current_line) {
      * then the mnemonic is made NULL */
     if (current_line->mnemo != NULL) {
         /* If there is a mnemonic */
-        if (!*(current_line->mnemo)) {
+        if (*(current_line->mnemo) == '\0') {
             /* If the mnemonic field is void */
             current_line->mnemo = NULL;
         }

@@ -15,6 +15,6 @@
  * lines: a pointer to the array of lines of the input. The pointer itself
  *        points to the first line of the input.
  */
-int check_overlapping_areas (struct line * lines) ;
+int check_overlapping_areas (const struct line * lines) ;
 
 #endif

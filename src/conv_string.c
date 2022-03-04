@@ -13,7 +13,7 @@
  * handles them correctly. (It's explained in the man page section 3 of
  * strtoull)
  */
-uint64_t convert_str_num (char * input) {
+uint64_t convert_str_num (const char * input) {
     if (*input == '$') {
         return strtoull(input+1, NULL, 16);
     } else if (*input == '%') {
@@ -94,6 +94,7 @@ void convert_literal (char ** string_to_convert) {
                     *p2 = *p1;
                     p1++;
                     p2++;
+                    break;
             }
         } else {
             *p2 = *p1;

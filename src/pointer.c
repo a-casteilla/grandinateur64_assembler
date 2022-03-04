@@ -12,8 +12,8 @@
  * list: the list of pointer
  * pointercount: the size of the list
  */
-/* No const for list (so, no headache, and no warnings) */
-void ** mempointer (void ** list, const void * test, size_t pointercount) {
+const void ** mempointer (const void ** list, const void * test, size_t pointercount) {
+
     size_t i;           /* Size of the array of pointers */
     bool match = false; /* Becomes true, when the corresponding pointer is
                            found */
@@ -36,10 +36,10 @@ void ** mempointer (void ** list, const void * test, size_t pointercount) {
  *
  * list: The string of pointers
  */
-size_t pointerlen (void ** list) {
+size_t pointerlen (const void ** list) {
     size_t len = 0;
     
-    for (void ** pos = list; *pos != NULL; pos++) {
+    for (const void ** pos = list; *pos != NULL; pos++) {
         len++;
     }
 

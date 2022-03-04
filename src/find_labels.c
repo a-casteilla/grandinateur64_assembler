@@ -13,8 +13,9 @@ struct symbol * find_labels (struct line * lines) {
     size_t symbols_size = BUFSIZ;
     struct symbol * symbols = malloc(symbols_size);
     unsigned int nb_of_symbols = 0;
+
     for (struct line * l = lines; l->number; l++) {
-        if (l->label) {
+        if (l->label != NULL) {
             /* Firstly, fetch the scope of the label */
             (symbols+nb_of_symbols)->scope = l->scope;
             /* Check if the label is global */

@@ -4,8 +4,8 @@
 /* Area of code : used to detect intersecting regions */
 struct area {
     /* There isn't a terminating area : the number of area has to be kept */
-    struct line * first_line; /* first line in the area */
-    struct line * last_line;  /* last one */
+    const struct line * first_line; /* first line in the area */
+    const struct line * last_line;  /* last one */
     uint64_t first_address;   /* first address in the area */
     uint64_t last_address;    /* last one */
 };
@@ -33,7 +33,7 @@ static int compare_first_address_of_area (const void * area1, const void * area2
  * lines: a pointer to the array of lines of the input. The pointer itself
  *        points to the first line of the input.
  */
-int check_overlapping_areas (struct line * lines) {
+int check_overlapping_areas (const struct line * lines) {
     size_t alloc_space_areas = BUFSIZ;
     size_t alloc_space_overareas = BUFSIZ;
 
@@ -45,8 +45,8 @@ int check_overlapping_areas (struct line * lines) {
     unsigned int areas_nb = 0;     /* number of area of code */
     unsigned int overareas_nb = 0; /* number of intersections of area of code */
 
-    for (struct line * l = lines; l->number; l++) {
-        if (l->binsiz) {
+    for (const struct line * l = lines; l->number; l++) {
+        if (l->binsiz != 0) {
             if (areas_nb == 0) {
                 (areas + areas_nb)->first_line     = l;
                 (areas + areas_nb)->last_line      = l;
@@ -110,7 +110,7 @@ int check_overlapping_areas (struct line * lines) {
 
             /* Searches the first line of the first region that has an address
              * less than the first address of the second region */
-            for (struct line * l = (areas + a)->last_line;
+            for (const struct line * l = (areas + a)->last_line;
                     (l >= (areas + a)->first_line)
                     &&
                     ((areas + a + 1)->first_address < (l->address + l->binsiz - 1));
@@ -123,7 +123,7 @@ int check_overlapping_areas (struct line * lines) {
             /* Searches the last line of the first region that has an address
              * greater than the last address of the second region */
             (overareas + overareas_nb)->last_line = (areas + a)->last_line;
-            for (struct line * l = (areas + a)->last_line;
+            for (const struct line * l = (areas + a)->last_line;
                     (l >= (areas + a)->first_line)
                     &&
                     ((areas + a + 1)->last_address < l->address);
@@ -134,7 +134,7 @@ int check_overlapping_areas (struct line * lines) {
             (overareas + overareas_nb++)->last_address = (areas + a)->last_address;
             /* Searches the last line of the second region that has an address
              * greater than the last address of the first region */
-            for (struct line * l = (areas + a + 1)->first_line;
+            for (const struct line * l = (areas + a + 1)->first_line;
                     (l <= (areas + a + 1)->last_line)
                     &&
                     ((areas + a)->last_address >= l->address);
@@ -150,7 +150,7 @@ int check_overlapping_areas (struct line * lines) {
     printf("Done\n");
 #endif
 
-    if (overareas_nb) {
+    if (overareas_nb != 0) {
         for (unsigned int i = 0; i < overareas_nb; i += 2) {
             fprintf(stderr, "Lines from %d to %d ",
                     ((overareas + i)->first_line)->number,

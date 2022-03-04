@@ -26,6 +26,7 @@ static void rpnneg (uint64_t sp) ;
  * symbols: the table of symbols in input
  * out: a pointer to the uint64_t in the output
  */
+/* No const for exp, because it is passed as an argument to strtok */
 int rpneval (char * exp, const struct scope * scope,
         const struct symbol * symbols, uint64_t * out) {
 

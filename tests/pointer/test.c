@@ -20,7 +20,7 @@ int main () {
     }
 
     /* Test of pointerlen with a non-void string of pointers */
-    len_of_list = pointerlen(list);
+    len_of_list = pointerlen((const void **)list);
 
     if (len_of_list == NUMBER_OF_POINTERS) {
         fprintf(stderr, "pointerlen with non-empty input: OK \n");
@@ -35,7 +35,7 @@ int main () {
     free(list[0]);
     list[0] = NULL;
 
-    len_of_list = pointerlen(list);
+    len_of_list = pointerlen((const void **)list);
 
     if (len_of_list == 0) {
         fprintf(stderr, "pointerlen with empty input: OK \n");
@@ -48,10 +48,11 @@ int main () {
     /* Test of mempointer with a non-void table */
     for (size_t i = 0; i < NUMBER_OF_POINTERS; i++) {
         has_passed &=
-            (mempointer(list, list[i], NUMBER_OF_POINTERS) == list + i);
+            (mempointer((const void **)list, list[i], NUMBER_OF_POINTERS)
+             == (const void **)(list + i));
     }
 
-    has_passed &= (mempointer(list, random_pointer, NUMBER_OF_POINTERS) == NULL);
+    has_passed &= (mempointer((const void **)list, random_pointer, NUMBER_OF_POINTERS) == NULL);
 
     if (has_passed) {
         fprintf(stderr, "mempointer with non-empty input: OK \n");
@@ -62,10 +63,10 @@ int main () {
     /* Test of mempointer with a void table */
     for (size_t i = 0; i < NUMBER_OF_POINTERS; i++) {
         has_passed &=
-            (mempointer(list, list[i], 0) == NULL);
+            (mempointer((const void **)list, list[i], 0) == NULL);
     }
 
-    has_passed &= (mempointer(list, random_pointer, NUMBER_OF_POINTERS) == NULL);
+    has_passed &= (mempointer((const void **)list, random_pointer, NUMBER_OF_POINTERS) == NULL);
 
     if (has_passed) {
         fprintf(stderr, "mempointer with empty input: OK \n");

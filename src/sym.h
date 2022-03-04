@@ -30,7 +30,7 @@ size_t symlen (const struct symbol * sym) ;
  * scope: a pointer to the scope where the conversion is
  * sym: the symbol table
  */
-bool symtonum (uint64_t * out, const char * in, struct scope * scope,
-        struct symbol * sym) ;
+bool symtonum (uint64_t * out, const char * in, const struct scope * scope,
+        const struct symbol * sym) ;
 
 #endif

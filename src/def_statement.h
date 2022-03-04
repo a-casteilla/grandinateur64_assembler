@@ -10,6 +10,6 @@
  *
  * lines: the lines of the input file, where def directives have to be counted.
  */
-unsigned int count_def(struct line * lines) ;
+unsigned int count_def(const struct line * lines) ;
 
 #endif

@@ -25,26 +25,32 @@ int compute_addresses (struct line * lines) {
             if (mnemo[current_line->mnemo_nb].family == npc_directive) {
                 current_line++;
             }
-            /* goes forward to the next pc or npc directive */
-            for (; mnemo[current_line->mnemo_nb].family != pc_directive &&
+
+            /* goes forward to the next pc or npc directive or end of file*/
+            for ( /* current_line doesn't need to be initialised */;
+                    mnemo[current_line->mnemo_nb].family != pc_directive &&
                     mnemo[current_line->mnemo_nb].family != npc_directive &&
-                    current_line->number ; current_line++) {
-            }
+                    current_line->number ; current_line++) { }
+
+            /* ERROR HANDLING */
             if (mnemo[current_line->mnemo_nb].family == npc_directive) {
                 /* Traps because it means that : 
                  * There are more than one NPC directive between two PC 
                  * There aren't any PC directive. */
                 display_error("Can't resolve address", current_line);
                 return 1; /* No need to continue */
+
             } else if (!current_line->number) {
                 fprintf(stderr, "Can't resolve any address : no PC directive in"
                       " file \n\n");
                 return 1; /* No need to continue */
             }
+
             /* current_line contains a PC directive at this stage */
             current_line->address = convert_str_num(*(current_line->args));
             line_with_add_dir = current_line;
             line_after_pc = current_line + 1;
+
             /* compute the addresses of each line preceeding the PC directive */
             for (current_line--;
                     mnemo[current_line->mnemo_nb].family != npc_directive &&

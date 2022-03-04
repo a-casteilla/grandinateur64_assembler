@@ -14,7 +14,7 @@
  * handles them correctly. (It's explained in the man page section 3 of
  * strtoull)
  */
-uint64_t convert_str_num (char * input) ;
+uint64_t convert_str_num (const char * input) ;
 
 /* Purpose: substitute the escape sequences to the raw characters and delete
  *          the quotes

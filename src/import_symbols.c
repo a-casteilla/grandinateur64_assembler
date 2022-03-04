@@ -9,11 +9,12 @@
  * offset: the offset added to the labels
  * scope: the scope where the directive is declared
  */
-struct symbol * import_symbols (char * filename, uint64_t offset,
-        struct scope * scope) {
+struct symbol * import_symbols (const char * filename, uint64_t offset,
+        const struct scope * scope) {
 
-    scope = root_scope(scope); /* Find the root scope because all symbols in
-                                  the files belongs to the root scope */
+    /* Find the root scope because all symbols in the files belongs to the root
+     * scope */
+    const struct scope * rscope = root_scope(scope); 
 
     /* do the memory allocation */
     size_t imported_symbols_size = BUFSIZ;
@@ -42,6 +43,7 @@ struct symbol * import_symbols (char * filename, uint64_t offset,
             fprintf(stderr, "An error occured while reading file \"%s\"\n\n",
                     filename);
             return NULL;
+
         } else if (!feof(import_file)) {
             /* This is executed if the line has been fetched successfully and
              * if the file is not ended */
@@ -61,8 +63,9 @@ struct symbol * import_symbols (char * filename, uint64_t offset,
                     (imported_symbols + nb_of_symbols)->value
                         = strtoull(line_parsed, NULL, 16);
                     /* add the offset if it's a label */
-                    if (is_label)
+                    if (is_label) {
                         (imported_symbols + nb_of_symbols)->value += offset;
+                    }
 
                     line_parsed = strtok(NULL, " \n");
 
@@ -73,7 +76,7 @@ struct symbol * import_symbols (char * filename, uint64_t offset,
                         strcpy((imported_symbols + nb_of_symbols)->name,
                                 line_parsed);
                         (imported_symbols + nb_of_symbols)->scope
-                            = scope; /* Reminder: scope is the root scope */
+                            = rscope; /* Reminder: rscope is the root scope */
                         (imported_symbols+nb_of_symbols)->is_label = is_label;
                         nb_of_symbols++;
                         /* alloc more space if necessary */

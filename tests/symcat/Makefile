@@ -1,7 +1,7 @@
 include ../../config.mk
 
-C := import_symbols.c scopes.c sym.c
-H := common.h import_symbols.h scopes.h mnemonic.h sym.h
+C := import_symbols.c scopes.c sym.c pointer.c
+H := common.h import_symbols.h scopes.h mnemonic.h sym.h pointer.h
 O := $(C:%.c=%.o)
 
 default: run

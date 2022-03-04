@@ -7,9 +7,9 @@
  *
  * lines: the lines of the input file, where def directives have to be counted.
  */
-unsigned int count_def(struct line * lines) {
+unsigned int count_def(const struct line * lines) {
     unsigned int nb_def = 0;
-    for (struct line * l = lines; l->number; l++) {
+    for (const struct line * l = lines; l->number; l++) {
         if (mnemo[l->mnemo_nb].family == def_directive) {
             nb_def++;
         }

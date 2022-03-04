@@ -30,9 +30,11 @@ int find_mnemo (struct line * current_line) {
         mnemonic = strchr(current_line->mnemo, '.') + 1;
         * strchr(current_line->mnemo, '.') = 0;
         match = false;
-        for (i = 0; i < sizeof(prefix)/sizeof(prefix[0]) && !match; i++)
+        for (i = 0; i < sizeof(prefix)/sizeof(prefix[0]) && !match; i++) {
             match = !strcasecmp(current_line->mnemo, prefix[i].prefix);
+        }
         i--;
+
         if (match) {
             current_line->prefix_nb = i;
         } else {
@@ -42,13 +44,17 @@ int find_mnemo (struct line * current_line) {
             display_error("Unknown prefix", current_line);
             return 1;
         }
+
     } else {
         mnemonic = current_line->mnemo;
     }
+
     match = false;
-    for (i = 1; i < sizeof(mnemo)/sizeof(mnemo[0]) && !match; i++)
+    for (i = 1; i < sizeof(mnemo)/sizeof(mnemo[0]) && !match; i++) {
         match = !strcasecmp(mnemonic, mnemo[i].mnemo);
+    }
     i--;
+
     if (match) {
         current_line->mnemo_nb = i;
     } else {
@@ -60,4 +66,3 @@ int find_mnemo (struct line * current_line) {
     }
     return 0;
 }
-

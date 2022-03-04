@@ -52,22 +52,23 @@ size_t symlen (const struct symbol * sym) {
  * scope: a pointer to the scope where the conversion is
  * sym: the symbol table
  */
-bool symtonum (uint64_t * out, const char * in, struct scope * scope,
-        struct symbol * sym) {
+bool symtonum (uint64_t * out, const char * in, const struct scope * scope,
+        const struct symbol * sym) {
 
     ssize_t last_match = -1; /* -1 means no match */
-    size_t len_of_sym = symlen(sym);
+    ssize_t len_of_sym = symlen(sym);
 
-    struct scope * valid_scopes[256]; /* list of the scopes where the symbol is
-                                         valid */
+    const struct scope * valid_scopes[256]; /* list of the scopes where the
+                                               symbol is valid */
     size_t len_of_valid_scopes;
 
     /* find the list of scopes where the symbol is valid */
     {   /* Well, actually it was also weird with a for loop */
-        struct scope * s = scope;
-        struct scope ** vs = valid_scopes;
+        const struct scope * s = scope;
+        /* Below, it's a pointer to an array of constant struct scope */
+        const struct scope ** vs = valid_scopes;
         *(vs++) = scope;
-        
+
         while (s->level != 0) {
             s = parent_scope(s);
             *(vs++) = s;
@@ -75,12 +76,13 @@ bool symtonum (uint64_t * out, const char * in, struct scope * scope,
         *vs = NULL;
     }
 
-    len_of_valid_scopes = pointerlen(valid_scopes);
+    len_of_valid_scopes = pointerlen((const void **)valid_scopes);
 
     for (ssize_t i = 0; i < len_of_sym; i++) {
         /* actually searches the correspondance */
         if (strcmp((sym + i)->name, in) == 0
-                && mempointer(valid_scopes, (sym + i)->scope, len_of_valid_scopes) != NULL) {
+                && mempointer((const void **)valid_scopes, (sym + i)->scope,
+                    len_of_valid_scopes) != NULL) {
             last_match = i;
         }
     }
@@ -89,4 +91,3 @@ bool symtonum (uint64_t * out, const char * in, struct scope * scope,
 
     return last_match != -1;
 }
-            

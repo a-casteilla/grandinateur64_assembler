@@ -102,6 +102,7 @@ int compute_size (struct line * current_line) {
             break;
         default:
             size += 4;
+            break;
     }
     current_line->binsiz = size;
     return 0;

@@ -9,7 +9,7 @@
  * lines: a pointer to the array of lines of the input. The pointer itself
  *        points to the first line of the input.
  */
-struct scope * find_scopes (struct line * lines) {
+struct scope * find_scopes (const struct line * lines) {
     struct scope * scopes;
     size_t alloc_space_scopes = BUFSIZ;
     /* I won't resize the stack : 256 levels are more than enough */
@@ -18,7 +18,7 @@ struct scope * find_scopes (struct line * lines) {
     struct scope * scope_stack_top = scope_stack_base + 256;
     struct scope * scope_stack_pointer = scope_stack_base + 256;
     struct scope temp_scope;
-    struct line * l;
+    const struct line * l;
     unsigned int scopes_nb = 0;
     unsigned int level = 1;
 
@@ -91,15 +91,14 @@ struct scope * find_scopes (struct line * lines) {
  * they must have been opened after the first scope with a n-1 level has been
  * closed. So they can't contain the child scope. The only possibility is the
  * first scope with a n-1 level that has been closed after the child */
-struct scope * parent_scope (struct scope * child) {
-    struct scope * parent = child;
+const struct scope * parent_scope (const struct scope * child) {
+    const struct scope * parent = child;
     if (child->level) {
-        while (parent->level != child->level - 1)
+        while (parent->level != child->level - 1) {
             parent++;
-        return parent;
-    } else {
-        return child;
+        }
     }
+    return parent;
 }
 
 /* Purpose: This function finds the root scope of a scope or the root scope of
@@ -110,8 +109,8 @@ struct scope * parent_scope (struct scope * child) {
  * child: the address of the input scope or of the list of scopes for which we
  *        need to know the root
  */
-struct scope * root_scope (struct scope * child) {
-    struct scope * root = child;
+const struct scope * root_scope (const struct scope * child) {
+    const struct scope * root = child;
     while (root->level) root++;
     return root;
 }
@@ -123,13 +122,14 @@ struct scope * root_scope (struct scope * child) {
  * line: a pointer to the line for which we need to know the containing scope
  * scopes: the list of the scopes
  */
-struct scope * scope_of_line (struct line * line, struct scope * scopes) {
+const struct scope * scope_of_line (const struct line * line, const struct scope * scopes) {
     /* This for loop is exited when a scope that contains the line is found */
-    for (struct scope * s = scopes; ; s++) {
-        if (s->first_line <= line && s->last_line >= line) {
-            return s;
-        }
-    }
+    const struct scope * s;
+    for (s = scopes;
+            !(s->first_line <= line && s->last_line >= line);
+            /* true when line not in scope */
+            s++) {}
+    return s;
 }
 
 /* Purpose: This function finds in which scopes are all the lines
@@ -140,7 +140,7 @@ struct scope * scope_of_line (struct line * line, struct scope * scopes) {
  *        containing scopes
  * scopes: the list of the scopes
  */
-void scope_of_lines (struct line * lines, struct scope * scopes) {
+void scope_of_lines (struct line * lines, const struct scope * scopes) {
     for (struct line * l = lines; l->number; l++) {
         l->scope = scope_of_line(l, scopes);
     }
