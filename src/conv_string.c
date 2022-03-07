@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <string.h>
 #include "conv_string.h"
 
 /* Purpose: convert a string to a number. 

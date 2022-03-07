@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <stdlib.h>
 
 /* Purpose: convert a string to a number. 
  * Return: the corresponding value if valid.
