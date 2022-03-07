@@ -1,0 +1,252 @@
+digraph G {
+    graph [layout=fdp rankdir=LR];
+    label = "Call graph";
+    //mode="sgd";
+    overlap=false;
+    splines=true;
+
+    symcat -> { realloc memcpy };
+    symtonum -> { pointerlen mempointer strcmp }
+    find_scopes -> { malloc realloc fprintf }
+    rpneval -> { strtok strspn strlen strspn symtonum };
+    parse_line -> { strlen malloc free strcspn fprintf strtok };
+    import_symbols -> { root_scope malloc realloc fopen fclose fprintf fgets feof strtok strtoull strcpy };
+    find_mnemo -> { strchr strcasecmp free fprintf };
+    find_labels -> { malloc realloc root_scope parent_scope };
+    convert_str_num -> strtoull;
+    compute_size -> { fprintf convert_literal strlen strchr stat };
+    compute_addresses -> { fprintf convert_str_num align_backward align is_a_power_of_two };
+    check_overlapping_areas -> { fprintf qsort malloc realloc free };
+    qsort -> compare_first_address_of_area ;
+
+    //subgraph cluster_glibc {
+        //label = "glibc";
+        subgraph cluster_stdio_h {
+            label = "stdio.h";
+            fprintf;
+            fopen;
+            fclose;
+            fgets;
+            feof;
+            color=blue;
+        }
+
+        subgraph cluster_stdlib_h {
+            label = "stdlib.h";
+            malloc;
+            realloc;
+            qsort;
+            free;
+            strtoull;
+            color=blue;
+        }
+
+        subgraph cluster_string_h {
+            label = "string.h";
+            strlen;
+            strchr;
+            strcasecmp;
+            strtok;
+            strcpy;
+            strspn;
+            strcspn;
+            strcmp;
+            memcpy;
+            color=blue;
+        }
+
+        subgraph cluster_sys_stat_h {
+            label = "sys/stat.h";
+            stat;
+            color=blue;
+        }
+    //}
+
+    //subgraph cluster_whole_assembler {
+        subgraph cluster_align_c {
+            style=filled;
+            color=lightgrey;
+            label = "align.c";
+            subgraph cluster_align_h {
+                style = "";
+                color=blue ;
+                label = "align.h";
+                align             [href="../src/align.c"];
+                align_backward    [href="../src/align.c"];
+                is_a_power_of_two [href="../src/align.c"];
+            }
+        }
+
+        subgraph cluster_check_overlapping_areas {
+            style=filled;
+            color=lightgrey;
+            label = "check_overlapping_areas.c";
+            compare_first_address_of_area [href="../src/check_overlapping_areas.c"];
+            subgraph cluster_check_overlapping_areas_h {
+                style = "";
+                color=blue ;
+                label = "check_overlapping_areas.h";
+                check_overlapping_areas [href="../src/check_overlapping_areas.c"];
+            }
+        }
+
+        subgraph cluster_compute_addresses_c {
+            style=filled;
+            color=lightgrey;
+            label = "compute_addresses.c";
+            subgraph cluster_compute_addresses_h {
+                style = "";
+                color=blue ;
+                label = "compute_addresses.h";
+                compute_addresses [href="../src/compute_addresses.c"];
+            }
+        }
+
+        subgraph cluster_compute_size_c {
+            style=filled;
+            color=lightgrey;
+            label = "compute_size.c";
+            subgraph cluster_compute_size_h {
+                style = "";
+                color=blue ;
+                label = "compute_size.h";
+                compute_size [href="../src/compute_size.c"];
+            }
+        }
+
+        subgraph cluster_conv_string_c {
+            style=filled;
+            color=lightgrey;
+            label = "conv_string.c";
+            subgraph cluster_conv_string_h {
+                style = "";
+                color=blue ;
+                label = "conv_string.h";
+                convert_literal [href="../src/conv_string.c"];
+                convert_str_num [href="../src/conv_string.c"];
+            }
+        }
+
+        subgraph cluster_def_statement_c {
+            style=filled;
+            color=lightgrey;
+            label = "def_statement.c";
+            subgraph cluster_def_statement_h {
+                style = "";
+                color=blue ;
+                label = "def_statement.h";
+                count_def [href="../src/def_statement.c"];
+            }
+        }
+
+        subgraph cluster_find_mnemo_c {
+            style=filled;
+            color=lightgrey;
+            label = "find_mnemo.c";
+            subgraph cluster_find_mnemo_h {
+                style = "";
+                color=blue ;
+                label = "find_mnemo.h";
+                find_mnemo [href="../src/find_mnemo.c"];
+            }
+        }
+
+        subgraph cluster_find_labels_c {
+            style=filled;
+            color=lightgrey;
+            label = "find_labels.c";
+            subgraph cluster_find_labels_h {
+                style = "";
+                color=blue ;
+                label = "find_labels.h";
+                find_labels [href="../src/find_labels.c"];
+            }
+        }
+
+        subgraph cluster_import_symbols_c {
+            style=filled;
+            color=lightgrey;
+            label = "import_symbols.c";
+            subgraph cluster_import_symbols_h {
+                style = "";
+                color=blue ;
+                label = "import_symbols.h";
+                import_symbols [href="../src/import_symbols.c"];
+            }
+        }
+
+        subgraph cluster_parse_line_c {
+            style=filled;
+            color=lightgrey;
+            label = "parse_line.c";
+            subgraph cluster_parse_line_h {
+                style = "";
+                color=blue ;
+                label = "parse_line.h";
+                parse_line [href="../src/parse_line.c"];
+            }
+        }
+
+        subgraph cluster_pointer_c {
+            style=filled;
+            color=lightgrey;
+            label = "pointer.c";
+            subgraph cluster_pointer_h {
+                style = "";
+                color=blue ;
+                label = "pointer.h";
+                mempointer [href="../src/pointer.c"];
+                pointerlen [href="../src/pointer.c"];
+            }
+        }
+
+        subgraph cluster_rpn_c {
+            style=filled;
+            color=lightgrey;
+            label = "rpn.c";
+            rpneval -> { rpnadd rpnsub rpnmul rpndiv rpnlsh rpnrsh rpnmod
+                rpnand rpnor rpnxor rpninv rpnneg rpndivsign rpnrshsign
+                    rpnmodsign };
+            subgraph cluster_rpn_h {
+                style = "";
+                color=blue ;
+                label = "rpn.h";
+                rpneval [href="../src/rpn.c"];
+            }
+        }
+
+        subgraph cluster_scopes_c {
+            style=filled;
+            color=lightgrey;
+            label = "scopes.c";
+            scope_of_lines -> scope_of_line;
+            subgraph cluster_scopes_h {
+                style = "";
+                color=blue ;
+                label = "scopes.h";
+                find_scopes    [href="../src/scopes.c"];
+                parent_scope   [href="../src/scopes.c"];
+                root_scope     [href="../src/scopes.c"];
+                scope_of_line  [href="../src/scopes.c"];
+                scope_of_lines [href="../src/scopes.c"];
+            }
+        }
+
+        subgraph cluster_sym_c {
+            style=filled;
+            color=lightgrey;
+            label = "sym.c";
+            symcat -> symlen;
+            symtonum -> symlen;
+            subgraph cluster_sym_h {
+                style = "";
+                color=blue ;
+                label = "sym.h";
+                symcat   [href="../src/sym.c"];
+                symlen   [href="../src/sym.c"];
+                symtonum [href="../src/sym.c"];
+            }
+        }
+
+    //}
+}
