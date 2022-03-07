@@ -106,6 +106,8 @@ struct symbol * import_symbols (const char * filename, uint64_t offset,
         imported_symbols = realloc(imported_symbols, imported_symbols_size);
     }
 
+    fclose(import_file);
+
     return imported_symbols;
 }
 
