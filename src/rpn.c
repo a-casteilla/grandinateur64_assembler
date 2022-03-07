@@ -2,24 +2,29 @@
 #include <stdbool.h>
 #include "conv_string.h"
 #include "rpn.h"
+#include "sym.h"
 
 /* Go to each function if you want to see there purpose. */
-static void rpnadd (uint64_t sp) ;
-static void rpnsub (uint64_t sp) ;
-static void rpnmul (uint64_t sp) ;
-static void rpndiv (uint64_t sp) ;
-static void rpnlsh (uint64_t sp) ;
-static void rpnrsh (uint64_t sp) ;
-static void rpnmod (uint64_t sp) ;
-static void rpnand (uint64_t sp) ;
-static void rpnor  (uint64_t sp) ;
-static void rpnxor (uint64_t sp) ;
-static void rpninv (uint64_t sp) ;
-static void rpnneg (uint64_t sp) ;
+static void rpnadd (uint64_t ** sp) ;
+static void rpnsub (uint64_t ** sp) ;
+static void rpnmul (uint64_t ** sp) ;
+static void rpndiv (uint64_t ** sp) ;
+static void rpnlsh (uint64_t ** sp) ;
+static void rpnrsh (uint64_t ** sp) ;
+static void rpnmod (uint64_t ** sp) ;
+static void rpnand (uint64_t ** sp) ;
+static void rpnor  (uint64_t ** sp) ;
+static void rpnxor (uint64_t ** sp) ;
+static void rpninv (uint64_t ** sp) ;
+static void rpnneg (uint64_t ** sp) ;
+static void rpndivsign (uint64_t ** sp) ;
+static void rpnrshsign (uint64_t ** sp) ;
+static void rpnmodsign (uint64_t ** sp) ;
 
 /* Purpose: perform a calculation, written with a post-fixed format.
  * Return:  error code (0 = no error, syntax error, unknown symbol,
- *          stack overflow, stack underflow, stack non-void, no operation done)
+ *          stack overflow, stack underflow, stack non-empty, no operation done)
+ * modified input: out
  *
  * exp: the input expression
  * scope: the scope were the symbols are valid
@@ -27,7 +32,7 @@ static void rpnneg (uint64_t sp) ;
  * out: a pointer to the uint64_t in the output
  */
 /* No const for exp, because it is passed as an argument to strtok */
-int rpneval (char * exp, const struct scope * scope,
+enum rpn_error rpneval (char * exp, const struct scope * scope,
         const struct symbol * symbols, uint64_t * out) {
 
     /* Initialise a stack with a fixed number of elements (253 are enough) */
@@ -35,22 +40,23 @@ int rpneval (char * exp, const struct scope * scope,
      * stack overflow and stack underflow */
     uint64_t stack[256];
 
-    int error_nb = rpn_error_warning_no_op;
+    enum rpn_error error_nb = rpn_error_warning_no_op;
 
     uint64_t * stack_base = stack + 254;
     uint64_t * stack_pointer = stack_base;
 
     /* Function pointer to the operation that will be done on the stack */
-    /* Returns void */
-    void (* operation) (uint64_t *) = NULL;
+    void (* operation) (uint64_t **) = NULL;
 
-    strtok(exp, " ");
+    char * stack_cmd;
+
+    stack_cmd = strtok(exp, " ");
 
     do {
         /* Verify if the token is an operator */
-        if ((strlen(exp) == 1) && (strcspn(exp, "+-*/<>%&|^~!"))) {
+        if ((strlen(stack_cmd) == 1) && (strspn(stack_cmd, "+-*/<>%&|^~!"))) {
             /* do the operation */
-            switch (*exp) {
+            switch (*stack_cmd) {
                 case '+':
                     operation = rpnadd;
                     break;
@@ -94,34 +100,134 @@ int rpneval (char * exp, const struct scope * scope,
                     abort();
                     break;
             }
-            operation(stack_pointer);
+            operation(&stack_pointer);
             error_nb = rpn_error_no_error;
-        } else if (strcspn(exp, "0123456789$%+-abcdefABCDEF")) {
+
+        /* Verify if the token is a signed operator */
+        } else if ((strlen(stack_cmd) == 2) && (strspn(stack_cmd, "/>%"))
+                && (*stack_cmd == *(stack_cmd + 1))) {
+            /* do the operation */
+            switch (*stack_cmd) {
+                case '/':
+                    operation = rpndivsign;
+                    break;
+                case '>':
+                    operation = rpnrshsign;
+                    break;
+                case '%':
+                    operation = rpnmodsign;
+                    break;
+                default:
+                    /* unknown error */
+                    /* Should not happend, even if the input is erroneous */
+                    /* Crashes the program btw on purpose */
+                    abort();
+                    break;
+            }
+            operation(&stack_pointer);
+            error_nb = rpn_error_no_error;
+
+            /* Verifies if the token is a number */
+        } else if (strspn(stack_cmd, "0123456789$%+-")) {
             /* push the number */
-            *(--sp) = convert_str_num(exp);
+            /* TODO: check input valid in a subroutine */
+            switch (*stack_cmd) {
+                case '0':
+                    if (strspn(stack_cmd+1, "01234567")
+                            != strlen(stack_cmd + 1)) {
+                        error_nb = rpn_error_syntax_error;
+                    } else if ((*(stack_cmd+1) == 'x'
+                                || *(stack_cmd+1) == 'X')
+                            && (strspn(stack_cmd+2, "0123456789abcdefABCDEF")
+                                != strlen(stack_cmd + 2))) {
+                        error_nb = rpn_error_syntax_error;
+                    }
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '+':
+                case '-':
+                    if (strspn(stack_cmd+1, "0123456789")
+                            != strlen(stack_cmd + 1)) {
+                        error_nb = rpn_error_syntax_error;
+                    }
+                    break;
+                case '$':
+                    if ((strspn(stack_cmd+1, "0123456789abcdefABCDEF")
+                                != strlen(stack_cmd + 1))) {
+                        error_nb = rpn_error_syntax_error;
+                    }
+                    break;
+                case '%':
+                    if ((strspn(stack_cmd+1, "01")
+                                != strlen(stack_cmd + 1))) {
+                        error_nb = rpn_error_syntax_error;
+                    }
+                    break;
+                default:
+                    /* unknown error */
+                    /* Should not happend, even if the input is erroneous */
+                    /* Crashes the program btw on purpose */
+                    abort();
+                    break;
+            }
+            *(--stack_pointer) = convert_str_num(stack_cmd);
+
+            /* Check for a syntax error */
+        } else if (strspn(stack_cmd, "*/<>&|^~!")) {
+            error_nb = rpn_error_syntax_error;
         } else {
             /* fetches the label and push it to the stack */
-            /* TODO: because the conversion of the labels is missing */
-            *(--sp) = convert_str_num(exp);
+            if (!symtonum(--stack_pointer, stack_cmd, scope, symbols)) {
+                error_nb = rpn_error_unknown_symbol;
+            }
         }
 
         /* Check that the stack doesn't underflow nor overflow */
         if (stack_pointer <= stack) {
             /* Case of a stack overflow */
             error_nb = rpn_error_stack_overflow;
-        } else if ((stack_pointer > stack_base)) {
+        } else if ((stack_pointer >= stack_base) &&
+                (operation != rpninv)
+                && (operation != rpnneg)
+                && (operation != NULL)
+                ) {
             /* Case of a stack underflow */
             error_nb = rpn_error_stack_underflow;
         }
+        
+        /* The next operation is parsed */
+        stack_cmd = strtok(NULL, " ");
+        
     } while (
-            strtok(exp, " ") != NULL
+            stack_cmd != NULL
             && error_nb != rpn_error_stack_overflow
             && error_nb != rpn_error_stack_underflow
             && error_nb != rpn_error_unknown_symbol
             && error_nb != rpn_error_syntax_error
             ) ;
-    
+
+    /* set the output */
+    *out = *(stack_pointer++);
+    /* test the stack non-empty condition */
     if (
+            stack_pointer != stack_base
+            && error_nb != rpn_error_stack_overflow
+            && error_nb != rpn_error_stack_underflow
+            && error_nb != rpn_error_unknown_symbol
+            && error_nb != rpn_error_syntax_error
+       ) {
+        error_nb = rpn_error_warning_non_empty;
+    }
+
+    return error_nb;
 }
 
 /* Purpose: adds two numbers on the stack
@@ -129,8 +235,9 @@ int rpneval (char * exp, const struct scope * scope,
  *
  * sp: pointer to the stack
  */
-static void rpnadd (uint64_t sp) {
-    *(sp++) = *sp + *(sp+1);
+static void rpnadd (uint64_t ** sp) {
+    *((*sp)+1) += **sp;
+    (*sp)++;
 }
 
 /* Purpose: subtracts two numbers on the stack
@@ -138,8 +245,9 @@ static void rpnadd (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnsub (uint64_t sp) {
-    *(sp++) = *sp - *(sp+1);
+static void rpnsub (uint64_t ** sp) {
+    *((*sp)+1) -= **sp;
+    (*sp)++;
 }
 
 /* Purpose: multiplies two numbers on the stack
@@ -147,8 +255,9 @@ static void rpnsub (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnmul (uint64_t sp) {
-    *(sp++) = *sp * *(sp+1);
+static void rpnmul (uint64_t ** sp) {
+    *((*sp)+1) *= **sp;
+    (*sp)++;
 }
 
 /* Purpose: divides two numbers on the stack
@@ -156,8 +265,9 @@ static void rpnmul (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpndiv (uint64_t sp) {
-    *(sp++) = *sp / *(sp+1);
+static void rpndiv (uint64_t ** sp) {
+    *((*sp)+1) /= **sp;
+    (*sp)++;
 }
 
 /* Purpose: left shifts two numbers on the stack
@@ -165,8 +275,9 @@ static void rpndiv (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnlsh (uint64_t sp) {
-    *(sp++) = *sp << *(sp+1);
+static void rpnlsh (uint64_t ** sp) {
+    *((*sp)+1) <<= **sp;
+    (*sp)++;
 }
 
 /* Purpose: right shifts two numbers on the stack
@@ -174,16 +285,19 @@ static void rpnlsh (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnrsh (uint64_t sp) {
-    *(sp++) = *sp >> *(sp+1);
+static void rpnrsh (uint64_t ** sp) {
+    *((*sp)+1) >>= **sp;
+    (*sp)++;
+}
 
 /* Purpose: does the modulo of two numbers on the stack
  * Return: void
  *
  * sp: pointer to the stack
  */
-static void rpnmod (uint64_t sp) {
-    *(sp++) = *sp % *(sp+1);
+static void rpnmod (uint64_t ** sp) {
+    *((*sp)+1) %= **sp;
+    (*sp)++;
 }
 
 /* Purpose: ands two numbers on the stack
@@ -191,8 +305,9 @@ static void rpnmod (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnand (uint64_t sp) {
-    *(sp++) = *sp & *(sp+1);
+static void rpnand (uint64_t ** sp) {
+    *((*sp)+1) &= **sp;
+    (*sp)++;
 }
 
 /* Purpose: ors two numbers on the stack
@@ -200,8 +315,9 @@ static void rpnand (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnor (uint64_t sp) {
-    *(sp++) = *sp | *(sp+1);
+static void rpnor (uint64_t ** sp) {
+    *((*sp)+1) |= **sp;
+    (*sp)++;
 }
 
 /* Purpose: does the exclusive-or of two numbers on the stack
@@ -209,8 +325,9 @@ static void rpnor (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnxor (uint64_t sp) {
-    *(sp++) = *sp ^ *(sp+1);
+static void rpnxor (uint64_t ** sp) {
+    *((*sp)+1) ^= **sp;
+    (*sp)++;
 }
 
 /* Purpose: find the first complement of a number on the stack
@@ -218,8 +335,8 @@ static void rpnxor (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpninv (uint64_t sp) {
-    *sp = ~(*sp);
+static void rpninv (uint64_t ** sp) {
+    **sp = ~(**sp);
 }
 
 /* Purpose: negates one number on the stack
@@ -227,6 +344,36 @@ static void rpninv (uint64_t sp) {
  *
  * sp: pointer to the stack
  */
-static void rpnneg (uint64_t sp) {
-    *sp = -(*sp);
+static void rpnneg (uint64_t ** sp) {
+    **sp = -(**sp);
+}
+
+/* Purpose: divides two signed numbers on the stack
+ * Return: void
+ *
+ * sp: pointer to the stack
+ */
+static void rpndivsign (uint64_t ** sp) {
+    *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) / (int64_t)(**sp));
+    (*sp)++;
+}
+
+/* Purpose: right shifts two signed numbers on the stack
+ * Return: void
+ *
+ * sp: pointer to the stack
+ */
+static void rpnrshsign (uint64_t ** sp) {
+    *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) >> (int64_t)(**sp));
+    (*sp)++;
+}
+
+/* Purpose: does the modulo of two signed numbers on the stack
+ * Return: void
+ *
+ * sp: pointer to the stack
+ */
+static void rpnmodsign (uint64_t ** sp) {
+    *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) % (int64_t)(**sp));
+    (*sp)++;
 }

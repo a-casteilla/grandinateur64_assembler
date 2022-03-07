@@ -1,0 +1,88 @@
+-2 3 +
+Result: 1
+-2 3 -
+Result: -5
+-2 3 *
+Result: -6
+-1 $1000000000000000 /
+Result: 15
+-1 $1000000000000000 //
+Result: 0
+13 3 //
+Result: 4
+-13 3 //
+Result: -4
+13 -3 //
+Result: -4
+-13 -3 //
+Result: 4
+12 3 <
+Result: 96
+$abcdef80 33 >
+Result: 0
+$e000000000000000 62 >
+Result: 3
+$e000000000000000 62 >>
+Result: -1
+156 const_1 %
+Result: 6
+-153 10 %%
+Result: -3
+153 -10 %%
+Result: 3
+-153 -10 %%
+Result: -3
+%1100 %1010 &
+Result: 8
+%1100 %1010 |
+Result: 14
+%1100 %1010 ^
+Result: 6
+12345 ~
+Result: -12346
+12345 !
+Result: -12345
+7 4 8 * +
+Result: 39
+3 11 * 7 4 * -
+Result: 5
+32 4 / 2 - 7 3 * +
+Result: 27
+5 7 * 3 + 2 / 1 +
+Result: 20
+$ff 5 ! //
+Result: -51
+01774 %11000011 &
+Result: 192
+30 const_9 -
+Result: -60
+const_1 const_9 + 4 <
+Result: 1600
+const_8 31 |
+Result: 95
+const_9 -1 ^ const_9 ~ ^
+Result: 0
+23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 
+Error: stack overflow
+123 456+ 2 -
+Error: syntax error
+%1234
+Error: syntax error
+1234 345 +-
+Error: syntax error
+2const_2 *
+Error: syntax error
+3-3
+Error: syntax error
+10 32 ///
+Error: syntax error
+34 foo +
+Error: symbol can't be resolved
+1234 5768 + +
+Error: stack underflow
+1234 +
+Error: stack underflow
+32 4 / 2 - 7 3 *
+Result: 21 warning: non-empty stack
+const_3
+Result: 30 warning: no operation done
