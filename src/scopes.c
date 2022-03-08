@@ -36,6 +36,7 @@ struct scope * find_scopes (const struct line * lines) {
                 /* I won't resize the stack : 256 levels are more than enough */
                 if (scope_stack_pointer <= scope_stack_base) {
                     display_error("Too many nested scopes (256 maximum)", l);
+                    safe_free(scopes);
                     return NULL;
                 }
                 level++;
@@ -47,6 +48,7 @@ struct scope * find_scopes (const struct line * lines) {
                 }
                 if (scope_stack_pointer >= scope_stack_top) {
                     display_error("Closing an inexistant scope", l);
+                    safe_free(scopes);
                     return NULL;
                 }
                 /* Close the scope */
@@ -63,6 +65,7 @@ struct scope * find_scopes (const struct line * lines) {
     /* Throw an error if the stack is non-void */
     if (scope_stack_pointer != scope_stack_top) {
         fprintf(stderr, "Opened scope not closed (detected at the end of the file)\n\n");
+        safe_free(scopes);
         return NULL;
     }
 
