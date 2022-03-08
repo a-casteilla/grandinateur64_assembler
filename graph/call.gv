@@ -8,7 +8,7 @@ digraph G {
     symcat -> { realloc memcpy };
     symtonum -> { pointerlen mempointer strcmp }
     find_scopes -> { malloc realloc fprintf }
-    rpneval -> { strtok strspn strlen strspn symtonum };
+    rpneval -> { strtok strspn strlen strspn symtonum convert_str_num };
     parse_line -> { strlen malloc free strcspn fprintf strtok };
     import_symbols -> { root_scope malloc realloc fopen fclose fprintf fgets feof strtok strtoull strcpy };
     find_mnemo -> { strchr strcasecmp free fprintf };

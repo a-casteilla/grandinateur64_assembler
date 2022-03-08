@@ -6,7 +6,7 @@ digraph G {
     splines=ortho;
 
     symtonum -> { pointerlen mempointer }
-    rpneval -> { symtonum };
+    rpneval -> { symtonum convert_str_num };
     import_symbols -> { root_scope };
     find_labels -> { root_scope parent_scope };
     compute_size -> { convert_literal };
