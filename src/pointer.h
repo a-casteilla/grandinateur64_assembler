@@ -12,13 +12,13 @@
  * list: the list of pointer
  * pointercount: the size of the list
  */
-const void ** mempointer (const void ** list, const void * test, size_t pointercount) ;
+void * mempointer (void * list, const void * test, size_t pointercount) ;
 
 /* Purpose: Tells the size of a string of pointers NULL terminated
  * Return:  The number of pointer in the string excluding the terminator
  *
  * list: The string of pointers
  */
-size_t pointerlen (const void ** list) ;
+size_t pointerlen (void * list) ;
 
 #endif

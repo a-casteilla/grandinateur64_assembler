@@ -76,12 +76,12 @@ bool symtonum (uint64_t * out, const char * in, const struct scope * scope,
         *vs = NULL;
     }
 
-    len_of_valid_scopes = pointerlen((const void **)valid_scopes);
+    len_of_valid_scopes = pointerlen(valid_scopes);
 
     for (ssize_t i = 0; i < len_of_sym; i++) {
         /* actually searches the correspondance */
         if (strcmp((sym + i)->name, in) == 0
-                && mempointer((const void **)valid_scopes, (sym + i)->scope,
+                && mempointer(valid_scopes, (sym + i)->scope,
                     len_of_valid_scopes) != NULL) {
             last_match = i;
         }

@@ -12,7 +12,7 @@
  * list: the list of pointer
  * pointercount: the size of the list
  */
-const void ** mempointer (const void ** list, const void * test, size_t pointercount) {
+void * mempointer (void * list, const void * test, size_t pointercount) {
 
     size_t i;           /* Size of the array of pointers */
     bool match = false; /* Becomes true, when the corresponding pointer is
@@ -20,7 +20,7 @@ const void ** mempointer (const void ** list, const void * test, size_t pointerc
 
     /* Loops until a match or the end of the list */
     for (i = 0; (i < pointercount) && (!match); i++) {
-        if (*(list + i) == test) {
+        if (*((const void **)list + i) == test) {
             match = true;
         }
     }
@@ -28,7 +28,7 @@ const void ** mempointer (const void ** list, const void * test, size_t pointerc
 
     /* Returns the position of the match, or NULL */
     /* Use the ternary operator, to keep only one return */
-    return match ? list + i : NULL;
+    return match ? (const void **)list + i : NULL;
 }
 
 /* Purpose: Tells the size of a string of pointers NULL terminated
@@ -36,7 +36,7 @@ const void ** mempointer (const void ** list, const void * test, size_t pointerc
  *
  * list: The string of pointers
  */
-size_t pointerlen (const void ** list) {
+size_t pointerlen (void * list) {
     size_t len = 0;
     
     for (const void ** pos = list; *pos != NULL; pos++) {
