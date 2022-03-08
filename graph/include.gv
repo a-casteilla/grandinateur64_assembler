@@ -1,0 +1,79 @@
+digraph G {
+    graph [layout=dot rankdir=LR];
+    label = "Include graph";
+    overlap=false;
+    splines=ortho;
+
+    subgraph cluster_c {
+        label = "";
+        color = blue;
+        "align.c";
+        "check_overlapping_areas.c";
+        "compute_addresses.c";
+        "compute_size.c";
+        "conv_string.c";
+        "def_statement.c";
+        "find_labels.c";
+        "find_mnemo.c";
+        "import_symbols.c";
+        "parse_line.c";
+        "pointer.c";
+        "rpn.c";
+        "scopes.c";
+        "sym.c";
+    }
+
+    subgraph cluster_h {
+        label = ""
+        color = blue;
+        "align.h";
+        "assembler.h";
+        "check_overlapping_areas.h";
+        "common.h";
+        "compute_addresses.h";
+        "compute_size.h";
+        "conv_string.h";
+        "def_statement.h";
+        "find_labels.h";
+        "find_mnemo.h";
+        "import_symbols.h";
+        "mnemonic.h";
+        "parse_line.h";
+        "pointer.h";
+        "rpn.h";
+        "scopes.h";
+        "sym.h";
+    }
+
+    "align.c" -> { "align.h" };
+    "align.h" -> { };
+    "assembler.h" -> { };
+    "check_overlapping_areas.c" -> { "check_overlapping_areas.h" };
+    "check_overlapping_areas.h" -> { "common.h" };
+    "common.h" -> { };
+    "compute_addresses.c" -> { "align.h" "conv_string.h" "compute_addresses.h" "mnemonic.h" };
+    "compute_addresses.h" -> { "common.h" };
+    "compute_size.c" -> { "compute_size.h" "conv_string.h" "mnemonic.h" };
+    "compute_size.h" -> { "common.h" };
+    "conv_string.c" -> { "conv_string.h" };
+    "conv_string.h" -> { };
+    "def_statement.c" -> { "mnemonic.h" "def_statement.h" };
+    "def_statement.h" -> { "common.h" };
+    "find_labels.c" -> { "scopes.h" "find_labels.h" };
+    "find_labels.h" -> { "common.h" };
+    "find_mnemo.c" -> { "mnemonic.h" "find_mnemo.h" };
+    "find_mnemo.h" -> { "common.h" };
+    "import_symbols.c" -> { "import_symbols.h" "scopes.h" };
+    "import_symbols.h" -> { "common.h" };
+    "mnemonic.h" -> { };
+    "parse_line.c" -> { "common.h" "parse_line.h" };
+    "parse_line.h" -> { "common.h" };
+    "pointer.c" -> { "pointer.h" };
+    "pointer.h" -> { };
+    "rpn.c" -> { "conv_string.h" "rpn.h" "sym.h" };
+    "rpn.h" -> { "common.h" };
+    "scopes.c" -> { "mnemonic.h" "scopes.h" };
+    "scopes.h" -> { "common.h" };
+    "sym.c" -> { "pointer.h" "scopes.h" "sym.h" };
+    "sym.h" -> { "common.h" };
+}

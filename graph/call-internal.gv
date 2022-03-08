@@ -3,7 +3,7 @@ digraph G {
     label = "Call graph";
     //mode="sgd";
     overlap=false;
-    splines=true;
+    splines=ortho;
 
     symtonum -> { pointerlen mempointer }
     rpneval -> { symtonum };
