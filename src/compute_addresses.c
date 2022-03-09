@@ -11,14 +11,15 @@
  * lines: a pointer to the array of lines of the input. The pointer itself
  *        points to the first line of the input.
  */
-int compute_addresses (struct line * lines) {
+enum ca_error compute_addresses (struct line * lines) {
     /* First of all, find the first PC directive
      * If there are none, throws an error */
-    int return_value = 0;                   /* return value of the program */
-    struct line * line_after_pc = NULL;     /* Line just after the last PC
-                                               directive discovered */
-    struct line * line_with_add_dir = NULL; /* Line containing an align
-                                               directive or a PC directive */
+    /* return value of the program */
+    enum ca_error return_value = ca_error_no_error;
+    /* Line just after the last PC directive discovered */
+    struct line * line_after_pc = NULL;
+    /* Line containing an align directive or a PC directive */
+    struct line * line_with_add_dir = NULL;
     for (struct line * current_line = lines; current_line->number; ) {
         if (mnemo[current_line->mnemo_nb].family != pc_directive) {
             /* Check if the first directive is npc */
@@ -38,18 +39,18 @@ int compute_addresses (struct line * lines) {
                  * There are more than one NPC directive between two PC 
                  * There aren't any PC directive. */
                 display_error("Can't resolve address", current_line);
-                return 1; /* No need to continue */
+                return ca_error_undef_address; /* No need to continue */
 
             } else if (!current_line->number) {
                 fprintf(stderr, "Can't resolve any address : no PC directive in"
                       " file \n\n");
-                return 1; /* No need to continue */
+                return ca_error_no_pc; /* No need to continue */
             }
 
             /* current_line contains a PC directive at this stage */
             if (convert_str_num(*(current_line->args), &(current_line->address))) {
                 display_error("Bad number format", current_line);
-                return_value = 1;
+                return_value = ca_error_bad_nb;
             }
 
             line_with_add_dir = current_line;
@@ -81,12 +82,12 @@ int compute_addresses (struct line * lines) {
                         case align_directive:
                             if (convert_str_num(*(current_line->args), &boundary)) {
                                 display_error("Bad number format", current_line);
-                                return_value = 1;
+                                return_value = ca_error_bad_nb;
                             }
                             if (!is_a_power_of_two(boundary)) {
                                 display_error("Alignement can only be done on a"
                                         " power of two", current_line);
-                                return_value = 1;
+                                return_value = ca_error_align;
                             }
                             break;
                         default: /* Should not be executed */
@@ -103,7 +104,7 @@ int compute_addresses (struct line * lines) {
         } else {
             if (convert_str_num(*(current_line->args), &(current_line->address))) {
                 display_error("Bad number format", current_line);
-                return_value = 1;
+                return_value = ca_error_bad_nb;
             }
             current_line++;
         }
@@ -128,12 +129,12 @@ int compute_addresses (struct line * lines) {
                     case align_directive:
                         if (convert_str_num(*(current_line->args), &boundary)) {
                             display_error("Bad number format", current_line);
-                            return_value = 1;
+                            return_value = ca_error_bad_nb;
                         }
                         if (!is_a_power_of_two(boundary)) {
                             display_error("Alignement can only be done on a"
                                     " power of two", current_line);
-                            return_value = 1;
+                            return_value = ca_error_align;
                         }
                         break;
                     default: /* Should not be executed */
