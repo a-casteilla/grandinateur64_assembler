@@ -71,3 +71,156 @@ $123
 
 Numeric value: 
 123
+Original: 
+""
+
+Converted: 
+
+Original: 
+$adz
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+%0123
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+f23
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+0x234r
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+0Xfghj
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+0123456789
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
++33d
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+-24v123
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+1324f
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+223456TFDSCSDF
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+33245RF
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+412345REDS
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+52134REDQS
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+626534EZEDSDFDD
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+73452QFDSF
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+823ERZFQDS
+
+Bad format
+Original: 
+""
+
+Converted: 
+
+Original: 
+912ZQSDcqcza
+
+Bad format

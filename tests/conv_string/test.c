@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include "conv_string.h"
 
 /*
@@ -28,9 +29,15 @@ int main () {
         if (!feof(stdin)) {
             printf("Original: \n");
             puts(line);
-            value = convert_str_num(line);
-            printf("Numeric value: \n");
-            printf("%lx\n", value);
+            if (*(line + strlen(line) - 1) == '\n') {
+                *(line + strlen(line) - 1) = '\0';
+            }
+            if (convert_str_num(line, &value)) {
+                printf("Bad format\n");
+            } else {
+                printf("Numeric value: \n");
+                printf("%lx\n", value);
+            }
         }
     }
     exit(EXIT_SUCCESS);

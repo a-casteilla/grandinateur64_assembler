@@ -3,9 +3,11 @@
 #include "conv_string.h"
 
 /* Purpose: convert a string to a number. 
- * Return: the corresponding value if valid.
+ * Return: true if an error happend.
+ * Modified input: out
  *
  * input: a string
+ * out: the value once converted
  */
 /* Additionnal notes:
  * I have added this function because strtoull lacks some features in term of
@@ -15,14 +17,60 @@
  * handles them correctly. (It's explained in the man page section 3 of
  * strtoull)
  */
-uint64_t convert_str_num (const char * input) {
-    if (*input == '$') {
-        return strtoull(input+1, NULL, 16);
-    } else if (*input == '%') {
-        return strtoull(input+1, NULL, 2);
-    } else {
-        return strtoull(input, NULL, 0);
+bool convert_str_num (const char * input, uint64_t * out) {
+    switch (*input) {
+        case '0':
+            if (strspn(input+1, "01234567")
+                    != strlen(input + 1)) {
+                return true;
+            } else if ((*(input+1) == 'x'
+                        || *(input+1) == 'X')
+                    && (strspn(input+2, "0123456789abcdefABCDEF")
+                        != strlen(input + 2))) {
+                return true;
+            }
+            break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '+':
+        case '-':
+            if (strspn(input+1, "0123456789")
+                    != strlen(input + 1)) {
+                return true;
+            }
+            break;
+        case '$':
+            if ((strspn(input+1, "0123456789abcdefABCDEF")
+                        != strlen(input + 1))) {
+                return true;
+            }
+            break;
+        case '%':
+            if ((strspn(input+1, "01")
+                        != strlen(input + 1))) {
+                return true;
+            }
+            break;
+        default:
+            /* It's not a number */
+            return true;
+            break;
     }
+    if (*input == '$') {
+        *out = strtoull(input+1, NULL, 16);
+    } else if (*input == '%') {
+        *out = strtoull(input+1, NULL, 2);
+    } else {
+        *out = strtoull(input, NULL, 0);
+    }
+    return false;
 }
 
 /* Purpose: substitute the escape sequences to the raw characters and delete

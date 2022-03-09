@@ -1,9 +1,16 @@
+#ifndef CONV_STRING_H
+
+#define CONV_STRING_H
+
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Purpose: convert a string to a number. 
- * Return: the corresponding value if valid.
+ * Return: true if an error happend.
+ * Modified input: out
  *
  * input: a string
+ * out: the value once converted
  */
 /* Additionnal notes:
  * I have added this function because strtoul lacks some features in term of
@@ -13,7 +20,7 @@
  * handles them correctly. (It's explained in the man page section 3 of
  * strtoull)
  */
-uint64_t convert_str_num (const char * input) ;
+bool convert_str_num (const char * input, uint64_t * out) ;
 
 /* Purpose: substitute the escape sequences to the raw characters and delete
  *          the quotes
@@ -22,3 +29,5 @@ uint64_t convert_str_num (const char * input) ;
  * string_to_convert: a pointer to the string to convert
  */
 void convert_literal (char ** string_to_convert) ;
+
+#endif

@@ -47,7 +47,11 @@ int compute_addresses (struct line * lines) {
             }
 
             /* current_line contains a PC directive at this stage */
-            current_line->address = convert_str_num(*(current_line->args));
+            if (convert_str_num(*(current_line->args), &(current_line->address))) {
+                display_error("Bad number format", current_line);
+                return_value = 1;
+            }
+
             line_with_add_dir = current_line;
             line_after_pc = current_line + 1;
 
@@ -75,7 +79,10 @@ int compute_addresses (struct line * lines) {
                         case ah_directive:
                             boundary = 2; break;
                         case align_directive:
-                            boundary = convert_str_num(*(current_line->args));
+                            if (convert_str_num(*(current_line->args), &boundary)) {
+                                display_error("Bad number format", current_line);
+                                return_value = 1;
+                            }
                             if (!is_a_power_of_two(boundary)) {
                                 display_error("Alignement can only be done on a"
                                         " power of two", current_line);
@@ -94,7 +101,10 @@ int compute_addresses (struct line * lines) {
             }
             current_line = line_after_pc;
         } else {
-            current_line->address = convert_str_num(*(current_line->args));
+            if (convert_str_num(*(current_line->args), &(current_line->address))) {
+                display_error("Bad number format", current_line);
+                return_value = 1;
+            }
             current_line++;
         }
         for (; mnemo[current_line->mnemo_nb].family != pc_directive &&
@@ -116,7 +126,10 @@ int compute_addresses (struct line * lines) {
                     case ah_directive:
                         boundary = 2; break;
                     case align_directive:
-                        boundary = convert_str_num(*(current_line->args));
+                        if (convert_str_num(*(current_line->args), &boundary)) {
+                            display_error("Bad number format", current_line);
+                            return_value = 1;
+                        }
                         if (!is_a_power_of_two(boundary)) {
                             display_error("Alignement can only be done on a"
                                     " power of two", current_line);

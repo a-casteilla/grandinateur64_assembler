@@ -130,55 +130,10 @@ enum rpn_error rpneval (char * exp, const struct scope * scope,
             /* Verifies if the token is a number */
         } else if (strspn(stack_cmd, "0123456789$%+-")) {
             /* push the number */
-            /* TODO: check input valid in a subroutine */
-            switch (*stack_cmd) {
-                case '0':
-                    if (strspn(stack_cmd+1, "01234567")
-                            != strlen(stack_cmd + 1)) {
-                        error_nb = rpn_error_syntax_error;
-                    } else if ((*(stack_cmd+1) == 'x'
-                                || *(stack_cmd+1) == 'X')
-                            && (strspn(stack_cmd+2, "0123456789abcdefABCDEF")
-                                != strlen(stack_cmd + 2))) {
-                        error_nb = rpn_error_syntax_error;
-                    }
-                    break;
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                case '+':
-                case '-':
-                    if (strspn(stack_cmd+1, "0123456789")
-                            != strlen(stack_cmd + 1)) {
-                        error_nb = rpn_error_syntax_error;
-                    }
-                    break;
-                case '$':
-                    if ((strspn(stack_cmd+1, "0123456789abcdefABCDEF")
-                                != strlen(stack_cmd + 1))) {
-                        error_nb = rpn_error_syntax_error;
-                    }
-                    break;
-                case '%':
-                    if ((strspn(stack_cmd+1, "01")
-                                != strlen(stack_cmd + 1))) {
-                        error_nb = rpn_error_syntax_error;
-                    }
-                    break;
-                default:
-                    /* unknown error */
-                    /* Should not happend, even if the input is erroneous */
-                    /* Crashes the program btw on purpose */
-                    abort();
-                    break;
+            --stack_pointer;
+            if (convert_str_num(stack_cmd, stack_pointer)) {
+                error_nb = rpn_error_syntax_error;
             }
-            *(--stack_pointer) = convert_str_num(stack_cmd);
 
             /* Check for a syntax error */
         } else if (strspn(stack_cmd, "*/<>&|^~!")) {
