@@ -22,12 +22,14 @@ bool convert_str_num (const char * input, uint64_t * out) {
         case '0':
             if (strspn(input+1, "01234567")
                     != strlen(input + 1)) {
-                return true;
-            } else if ((*(input+1) == 'x'
-                        || *(input+1) == 'X')
-                    && (strspn(input+2, "0123456789abcdefABCDEF")
-                        != strlen(input + 2))) {
-                return true;
+                if ((*(input+1) == 'x'
+                            || *(input+1) == 'X')
+                        && (strspn(input+2, "0123456789abcdefABCDEF")
+                            != strlen(input + 2))) {
+                    return true;
+                } else if (*(input+1) != 'x' && *(input+1) != 'X') {
+                    return true;
+                }
             }
             break;
         case '1':

@@ -21,9 +21,10 @@ test: $O test.c
 run: test
 	./test < input.txt > out.txt
 	vimdiff out.txt expected_output.txt
-	gcov $C
-	mkdir gcovr
-	python -m gcovr --output gcovr/gcovr.html --html-details
+	gcov $C || echo "gcov is not installed on this computer"
+	mkdir gcovr || rm -f gcovr/*
+	python -m gcovr --output gcovr/gcovr.html --html-details \
+		|| echo "gcovr is not installed on this computer"
 
 clean:
 	rm -rf test out.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/

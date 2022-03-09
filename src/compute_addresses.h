@@ -10,7 +10,7 @@ enum ca_error {
     ca_error_no_pc,
     ca_error_bad_nb,
     ca_error_align
-}
+};
 
 /* Purpose: This function compute the address of each line
  * Return:  error code (0 when everything is fine)

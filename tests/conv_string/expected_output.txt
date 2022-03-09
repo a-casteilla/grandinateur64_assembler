@@ -77,6 +77,26 @@ Original:
 Converted: 
 
 Original: 
+0xabcd
+
+Numeric value: 
+abcd
+Original: 
+""
+
+Converted: 
+
+Original: 
+0X123
+
+Numeric value: 
+123
+Original: 
+""
+
+Converted: 
+
+Original: 
 $adz
 
 Bad format
