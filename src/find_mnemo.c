@@ -1,18 +1,30 @@
+/**
+ * \file find_mnemo.c
+ * \brief Function made to match the mnemonics against their numerical representation
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 9th may 2022
+ *
+ */
+
 #include <string.h>
 #include <strings.h>
 #include "mnemonic.h"
 #include "find_mnemo.h"
 
-/* Purpose: This function associates the mnemonic (or directive) of a line with
- *          its mnemonic number
- * Return:  error code (0 when everything is fine)
- * Modified input: current_line
+/**
+ * \brief This function associates the mnemonic (or directive) of a line with its mnemonic number
+ * \return error code (0 when everything is fine)
  *
- * current_line: a pointer to the last fetched line (the line where we have to
- *               find the mnemo)
+ * \param current_line a pointer to the last fetched line (the line where we have to find the mnemo)
+ *
+ * Each keyword is associated with a number. This function associate the
+ * mnemonic to its number
  */
-int find_mnemo (struct line * current_line) {
-    char * mnemonic; /* */
+int
+find_mnemo (struct line * current_line)
+{
+    char * mnemonic; /* contains the mnemonic string which has to be compared */
     bool match;      /* becomes true whenever a valid keyword is found */
     size_t i;        /* loop counter, and index of the valid keyword */
 

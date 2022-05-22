@@ -1,23 +1,32 @@
+/**
+ * \file parse_line.h
+ * \brief API for the function made to parse the input line in separated tokens
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #ifndef PARSE_LINE_H
 #define PARSE_LINE_H
 
 #include <string.h>
 #include "common.h"
 
+/**
+ * \def remove_preceeding_whitespaces(str)
+ * \brief Macro to made to remove spaces and tabs at the beginning of a line
+ */
 #define remove_preceeding_whitespaces(str) \
     while(*(str) == ' ' || *(str) == '\t') (str)++ ;
 
-#define remove_trailing_whitespaces(str) \
-    for (char * j = (str) + strlen(str) - 1; *j == ' '; j--) *j = 0;
-
-/* Purpose: parse a line into separated tokens
- *          split the input on spaces, then on commas
- *          detect the label of the line and the comment (if there is any)
- * Return:  error code (0 when everything is fine)
- * Modified input: current_line
- *
- * current_line: a pointer to the last fetched line
+/**
+ * \def remove_trailing_whitespaces(str)
+ * \brief Macro to made to remove spaces and tabs at the end of a line
  */
+#define remove_trailing_whitespaces(str) \
+    for (char * j = (str) + strlen(str) - 1; *j == ' ' || *j == '\t'; j--) *j = 0;
+
 int parse_line (struct line * current_line) ;
 
 #endif

@@ -1,17 +1,28 @@
+/**
+ * \file parse_line.c
+ * \brief Function made to parse the input line in separated tokens
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #include "common.h"
 #include "parse_line.h"
 
-/* Purpose: parse a line into separated tokens
- *          split the input on spaces, then on commas
- *          detect the label of the line and the comment (if there is any)
- * Return:  error code (0 when everything is fine)
- * Modified input: current_line
+/**
+ * \brief parse a line into separated tokens
+ * \return error code (0 when everything is fine)
  *
+ * \param current_line a pointer to the last fetched line
+ *
+ * The input line is splitted on spaces, then on commas
+ * The label of the line and the comment (if there is any) are also detected
  * May be malloced: current_line->alloc_space, current_line->args
- *
- * current_line: a pointer to the last fetched line
  */
-int parse_line (struct line * current_line) {
+int
+parse_line (struct line * current_line)
+{
     size_t size_of_line = strlen(current_line->text);
     /* Size of the actual textual line */
     char * next_token;

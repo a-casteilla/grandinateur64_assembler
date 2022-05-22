@@ -1,15 +1,24 @@
+/**
+ * \file scopes.c
+ * \brief Functions made to process scopes inside an input file
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #include "mnemonic.h"
 #include "scopes.h"
 
-/* Purpose: this function finds the different scopes of code (where a label is
- *          defined in a program
- * Return:  a pointer to the list of the scopes, NULL is returned if an error
- *          has occured
+/**
+ * \brief this function finds the different scopes of code
+ * \return a pointer to the list of the scopes, NULL is returned if an error has occured
  *
- * lines: a pointer to the array of lines of the input. The pointer itself
- *        points to the first line of the input.
+ * \param lines a pointer to the array of lines of the input. The pointer itself points to the first line of the input.
  */
-struct scope * find_scopes (const struct line * lines) {
+struct scope *
+find_scopes (const struct line * lines)
+{
     struct scope * scopes;
     size_t alloc_space_scopes = BUFSIZ;
     /* I won't resize the stack : 256 levels are more than enough */
@@ -78,14 +87,16 @@ struct scope * find_scopes (const struct line * lines) {
     return scopes;
 }
 
-/* Purpose: This function finds the parent scope of a scope, the scope that
- *          contains the input scope
- * Return:  the address of the parent scope or the address of the input scope
- *          itself if it's the root
+/**
+ * \brief This function finds the parent scope of a scope, the scope that contains the input scope
+ * \return the address of the parent scope or the address of the input scope itself if it's the root
  *          
- * child: the address of the input scope for which we need to know the parents
+ * \param child the address of the input scope for which we need to know the parents
+ *
+ * For additionnal notes about the actual implementation, go directly to the source code
  */
-/* Note : the function here is simpler than what we could expect.
+/*
+ * Note: the function here is simpler than what we could expect.
  * Let's suppose we have a child with the level n. The parent has a level of n-1.
  * The list of scopes are ordered with the first scope closed first. This way,
  * we know that the parent scope has to be closed after the child. Otherwise,
@@ -93,8 +104,11 @@ struct scope * find_scopes (const struct line * lines) {
  * after with a level of n-1 can't be the parent scope, because it means that
  * they must have been opened after the first scope with a n-1 level has been
  * closed. So they can't contain the child scope. The only possibility is the
- * first scope with a n-1 level that has been closed after the child */
-const struct scope * parent_scope (const struct scope * child) {
+ * first scope with a n-1 level that has been closed after the child
+ */
+const struct scope *
+parent_scope (const struct scope * child)
+{
     const struct scope * parent = child;
     if (child->level) {
         while (parent->level != child->level - 1) {
@@ -104,28 +118,32 @@ const struct scope * parent_scope (const struct scope * child) {
     return parent;
 }
 
-/* Purpose: This function finds the root scope of a scope or the root scope of
- *          list of scopes
- * Return:  the address of the root scope or the address of the input scope
- *          itself if it's the root
+/**
+ * \brief This function finds the root scope of a scope or the root scope of list of scopes
+ * \return the address of the root scope or the address of the input scope itself if it's the root
  *          
- * child: the address of the input scope or of the list of scopes for which we
- *        need to know the root
+ * \param child the address of the input scope or of the list of scopes for which we need to know the root
  */
-const struct scope * root_scope (const struct scope * child) {
+const struct scope *
+root_scope (const struct scope * child)
+{
     const struct scope * root = child;
     while (root->level) root++;
     return root;
 }
 
-/* Purpose: This function finds in which scope is a line
- * Return:  the address of the scope that contains the line (the one that is a
- *          child)
+/**
+ * \brief This function finds in which scope is a line
+ * \return the address of the scope that contains the line (the one that is a child)
  *
- * line: a pointer to the line for which we need to know the containing scope
- * scopes: the list of the scopes
+ * \param line a pointer to the line for which we need to know the containing scope
+ * \param scopes the list of the scopes
  */
-const struct scope * scope_of_line (const struct line * line, const struct scope * scopes) {
+const struct scope *
+scope_of_line
+(const struct line * line,
+ const struct scope * scopes)
+{
     /* This for loop is exited when a scope that contains the line is found */
     const struct scope * s;
     for (s = scopes;
@@ -135,15 +153,18 @@ const struct scope * scope_of_line (const struct line * line, const struct scope
     return s;
 }
 
-/* Purpose: This function finds in which scopes are all the lines
- * Return:  void
- * Modified input: lines
+/**
+ * \brief This function finds in which scopes are all the lines
+ * \return void
  *
- * lines: a pointer to the list of line for which we need to know the
- *        containing scopes
- * scopes: the list of the scopes
+ * \param lines a pointer to the list of line for which we need to know the containing scopes
+ * \param scopes the list of the scopes
  */
-void scope_of_lines (struct line * lines, const struct scope * scopes) {
+void
+scope_of_lines
+(struct line * lines,
+ const struct scope * scopes)
+{
     for (struct line * l = lines; l->number; l++) {
         l->scope = scope_of_line(l, scopes);
     }

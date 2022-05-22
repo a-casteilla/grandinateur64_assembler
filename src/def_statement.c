@@ -1,13 +1,24 @@
+/**
+ * \file def_statement.c
+ * \brief Functions related to the "DEF" directive
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 19th april 2022
+ *
+ */
+
 #include "mnemonic.h"
 #include "def_statement.h"
 
-/* Purpose: count the number of def directives. This way, the program knows if
- *          all statements can be defined.
- * Return:  the number of def directives
+/**
+ * \brief Counts the number of def directives in the file.
+ * \return The number of def directives
  *
- * lines: the lines of the input file, where def directives have to be counted.
+ * \param lines the lines of the input file, where def directives have to be counted.
  */
-unsigned int count_def(const struct line * lines) {
+unsigned int
+count_def(const struct line * lines)
+{
     unsigned int nb_def = 0;
     for (const struct line * l = lines; l->number; l++) {
         if (mnemo[l->mnemo_nb].family == def_directive) {

@@ -1,19 +1,30 @@
+/**
+ * \file compute_size.c
+ * \brief Function made to know the size of the output data of an input line.
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 19th april 2022
+ *
+ */
+
 #include <string.h>
 #include <sys/stat.h>
 #include "compute_size.h"
 #include "conv_string.h"
 #include "mnemonic.h"
 
-/* Purpose: This function compute the size in byte of a line of the input once
- *          assembled.
- * Return:  error code (0 when everything is fine)
- * Modified input: current_line
+/**
+ * \brief This function compute the size in byte of a line of the input once assembled.
+ * \return error code (0 when everything is fine)
  *
- * current_line: a pointer to the last fetched line (the line where we have to
- *               compute the size)
+ * \param current_line A pointer to the last fetched line (the line where we have to compute the size)
+ *
+ * This function compute the size in byte of a line of the input once assembled.
+ * Note: a warning will still return 0.
  */
-/* Note: a warning will still return 0. */
-int compute_size (struct line * current_line) {
+int
+compute_size (struct line * current_line)
+{
     int size = 0;
     switch (mnemo[current_line->mnemo_nb].family) {
         case dd_directive :    /* Data double-word */

@@ -1,18 +1,32 @@
+/**
+ * \file sym.c
+ * \brief Functions made to process symbols inside an input file
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #include <sys/types.h>
 #include <string.h>
 #include "pointer.h"
 #include "scopes.h"
 #include "sym.h"
 
-/* Purpose: concatenate symbol tables
- * Return: the src table concatenated to the end of the dest table
+/**
+ * \brief concatenate symbol tables
+ * \return the src table concatenated to the end of the dest table
  *
- * dest: the destination table
- * src: the source symbol table
+ * \param dest the destination table
+ * \param src the source symbol table
  *
- * Note: dest may be moved
+ * Note: dest may be moved via realloc
  */
-struct symbol * symcat (struct symbol * dest, const struct symbol * src) {
+struct symbol *
+symcat
+(struct symbol * dest,
+ const struct symbol * src)
+{
 
     size_t len_src, len_dest, len_out;
 
@@ -30,12 +44,15 @@ struct symbol * symcat (struct symbol * dest, const struct symbol * src) {
     return dest;
 }
 
-/* Purpose: get the length of a symbol table excluding the terminating symbol
- * Return:  the length of the table in number of elements
+/**
+ * \brief get the length of a symbol table excluding the terminating symbol
+ * \return the length of the table in number of elements
  *
- * sym: the input symbol table
+ * \param sym the input symbol table
  */
-size_t symlen (const struct symbol * sym) {
+size_t
+symlen (const struct symbol * sym)
+{
     size_t sym_count = 0;
     for (const struct symbol * s = sym; s->name!=NULL; s++) {
         sym_count++;
@@ -43,18 +60,22 @@ size_t symlen (const struct symbol * sym) {
     return sym_count;
 }
 
-/* Purpose: convert a symbol back to its numerical value
- * Return:  boolean (true if a value has been found in the current scope)
- * Modified input: out
+/**
+ * \brief convert a symbol back to its numerical value
+ * \return boolean (true if a value has been found in the current scope)
  *
- * out: a pointer to the output number
- * in: a string that contains the symbol's name
- * scope: a pointer to the scope where the conversion is
- * sym: the symbol table
+ * \param out a pointer to the output number
+ * \param in a string that contains the symbol's name
+ * \param scope a pointer to the scope where the conversion is
+ * \param sym the symbol table
  */
-bool symtonum (uint64_t * out, const char * in, const struct scope * scope,
-        const struct symbol * sym) {
-
+bool
+symtonum
+(uint64_t * out,
+ const char * in,
+ const struct scope * scope,
+ const struct symbol * sym)
+{
     ssize_t last_match = -1; /* -1 means no match */
     ssize_t len_of_sym = symlen(sym);
 

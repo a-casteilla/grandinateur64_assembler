@@ -1,17 +1,18 @@
+/**
+ * \file find_mnemo.h
+ * \brief API for the function made to match the mnemonics against their numerical representation
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 9th may 2022
+ *
+ */
+
 #ifndef FIND_MNEMO_H
 
 #define FIND_MNEMO_H
 
 #include "common.h"
 
-/* Purpose: This function associates the mnemonic (or directive) of a line with
- *          its mnemonic number
- * Return:  error code (0 when everything is fine)
- * Modified input: current_line
- *
- * current_line: a pointer to the last fetched line (the line where we have to
- *               find the mnemo)
- */
 int find_mnemo (struct line * current_line) ;
 
 #endif

@@ -1,44 +1,72 @@
+/**
+ * \file mnemonic.h
+ * \brief All definition related to mnemonic translation
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #ifndef MNEMONIC_H
 
 #define MNEMONIC_H
 
 #include <stdint.h>
 
-/* list the families of instructions */
-enum {
-    mem_family,
-    alu_family,
-    brc_family,
-    sta_family,
-    sys_family,
-    dd_directive,
-    dw_directive,
-    dh_directive,
-    db_directive,
-    ascii_directive,
-    asciz_directive,
-    align_directive,
-    ad_directive,
-    aw_directive,
-    ah_directive,
-    pc_directive,
-    bin_directive,
-    def_directive,
-    no_mnemonic,
-    open_scope_directive,
-    close_scope_directive,
-    import_directive,
-    export_directive,
-    npc_directive
+/**
+ * \enum family
+ * \brief List of the different families of instructions
+ *
+ * The families of instruction are defined by the syntax of the instruction and
+ * the effect on the memory of the instruction (the size and influence on the
+ * pc)
+ */
+enum family {
+    mem_family,            /*!< memory instructions (load and store)*/
+    alu_family,            /*!< arithmetic and logic instructions (add, subtract, and, or, etc.)*/
+    brc_family,            /*!< branch instructions (bal, blk, and conditionnal branches)*/
+    sta_family,            /*!< status instructions (tsr, trs, tcr, trc, rti) */
+    sys_family,            /*!< the sys instruction */
+    dd_directive,          /*!< the data double-word directive */
+    dw_directive,          /*!< the data word directive */
+    dh_directive,          /*!< the data half-word directive */
+    db_directive,          /*!< the data byte directive */
+    ascii_directive,       /*!< the ascii directive */
+    asciz_directive,       /*!< the ascii zero directive */
+    align_directive,       /*!< the align directive */
+    ad_directive,          /*!< the align double-word directive */
+    aw_directive,          /*!< the align word directive */
+    ah_directive,          /*!< the align half-word directive */
+    pc_directive,          /*!< the pc directive */
+    bin_directive,         /*!< the insert binary directive */
+    def_directive,         /*!< the define constant directive */
+    no_mnemonic,           /*!< the line doesn't contain something meaningful */
+    open_scope_directive,  /*!< the '{' to open a scope */
+    close_scope_directive, /*!< the '}' to close a scope */
+    import_directive,      /*!< the import directive */
+    export_directive,      /*!< the export directive */
+    npc_directive          /*!< the next pc directive */
 };
 
+/**
+ * \def SUFFIX_BIT
+ * \brief the bit corresponding to an instruction with the -S suffix 
+ */
+#define SUFFIX_BIT         0x00100000
+
+/**
+ * \struct mnemo
+ * \brief The mnemonic translation table
+ *
+ * This table contains each mnemonic associated with its opcode and with its
+ * family
+ */
 static const struct {
     uint32_t word;
     char mnemo[8];
     int family;
 } mnemo[] = {
-    { 0, "", no_mnemonic }, /* when there's no mnemonic on the line */
-    /* List of the mnemonics associated with the corresponding opcode */
+    { 0, "", no_mnemonic },            /*!< No instruction */
     { 0x0f000000, "LDW", mem_family },
     { 0x0e800000, "LWS", mem_family },
     { 0x0e000000, "LWU", mem_family },
@@ -72,37 +100,37 @@ static const struct {
     { 0x03e00000, "RLC", alu_family },
     { 0x03c00000, "RRC", alu_family },
 
-    { 0x00600000, "ADDD", alu_family }, /* unused in disassembly */
+    { 0x00600000, "ADDD", alu_family }, /*!< unused in disassembly */
     { 0x00400000, "ADDW", alu_family },
     { 0x00200000, "ADDH", alu_family },
     { 0x00000000, "ADDB", alu_family },
 
-    { 0x00e00000, "SUBD", alu_family }, /* unused in disassembly */
+    { 0x00e00000, "SUBD", alu_family }, /*!< unused in disassembly */
     { 0x00c00000, "SUBW", alu_family },
     { 0x00a00000, "SUBH", alu_family },
     { 0x00800000, "SUBB", alu_family },
 
-    { 0x01600000, "ASLD", alu_family }, /* unused in disassembly */
+    { 0x01600000, "ASLD", alu_family }, /*!< unused in disassembly */
     { 0x01400000, "ASLW", alu_family },
     { 0x01200000, "ASLH", alu_family },
     { 0x01000000, "ASLB", alu_family },
 
-    { 0x01e00000, "ASRD", alu_family }, /* unused in disassembly */
+    { 0x01e00000, "ASRD", alu_family }, /*!< unused in disassembly */
     { 0x01c00000, "ASRW", alu_family },
     { 0x01a00000, "ASRH", alu_family },
     { 0x01800000, "ASRB", alu_family },
 
-    { 0x02600000, "LSRD", alu_family }, /* unused in disassembly */
+    { 0x02600000, "LSRD", alu_family }, /*!< unused in disassembly */
     { 0x02400000, "LSRW", alu_family },
     { 0x02200000, "LSRH", alu_family },
     { 0x02000000, "LSRB", alu_family },
 
-    { 0x03600000, "ROLD", alu_family }, /* unused in disassembly */
+    { 0x03600000, "ROLD", alu_family }, /*!< unused in disassembly */
     { 0x03400000, "ROLW", alu_family },
     { 0x03200000, "ROLH", alu_family },
     { 0x03000000, "ROLB", alu_family },
 
-    { 0x02e00000, "RORD", alu_family }, /* unused in disassembly */
+    { 0x02e00000, "RORD", alu_family }, /*!< unused in disassembly */
     { 0x02c00000, "RORW", alu_family },
     { 0x02a00000, "RORH", alu_family },
     { 0x02800000, "RORB", alu_family },
@@ -126,8 +154,8 @@ static const struct {
     { 0x66000000, "BLE", brc_family },
     { 0x96000000, "BGE", brc_family },
     { 0x86000000, "BLT", brc_family },
-    { 0x36000000, "BHQ", brc_family }, /* unused in disassembly, @ */
-    { 0x26000000, "BLO", brc_family }, /* unused in disassembly, @ */
+    { 0x36000000, "BHQ", brc_family }, /*!< unused in disassembly */
+    { 0x26000000, "BLO", brc_family }, /*!< unused in disassembly */
 
     { 0x06200000, "BLK", brc_family },
 
@@ -138,9 +166,8 @@ static const struct {
     { 0x07c00000, "RTI", sys_family },
     { 0x07e00000, "SYS", sys_family },
 
-    { 0x04000000, "ILG", sys_family }, /* Official ILG instruction */
+    { 0x04000000, "ILG", sys_family }, /*!< Official ILG instruction, but any invalid opcode is illegal */
 
-#define SUFFIX_BIT         0x00100000 /* used to select the suffix -S bit */
     /* List of the suffixed mnemonics */
     { 0x0f000000 | SUFFIX_BIT, "LDWS", mem_family },
     { 0x0e800000 | SUFFIX_BIT, "LWSS", mem_family },
@@ -175,37 +202,37 @@ static const struct {
     { 0x03e00000 | SUFFIX_BIT, "RLCS", alu_family },
     { 0x03c00000 | SUFFIX_BIT, "RRCS", alu_family },
 
-    { 0x00600000 | SUFFIX_BIT, "ADDDS", alu_family }, /* unused in disassembly */
+    { 0x00600000 | SUFFIX_BIT, "ADDDS", alu_family }, /*!< unused in disassembly */
     { 0x00400000 | SUFFIX_BIT, "ADDWS", alu_family },
     { 0x00200000 | SUFFIX_BIT, "ADDHS", alu_family },
     { 0x00000000 | SUFFIX_BIT, "ADDBS", alu_family },
 
-    { 0x00e00000 | SUFFIX_BIT, "SUBDS", alu_family }, /* unused in disassembly */
+    { 0x00e00000 | SUFFIX_BIT, "SUBDS", alu_family }, /*!< unused in disassembly */
     { 0x00c00000 | SUFFIX_BIT, "SUBWS", alu_family },
     { 0x00a00000 | SUFFIX_BIT, "SUBHS", alu_family },
     { 0x00800000 | SUFFIX_BIT, "SUBBS", alu_family },
 
-    { 0x01600000 | SUFFIX_BIT, "ASLDS", alu_family }, /* unused in disassembly */
+    { 0x01600000 | SUFFIX_BIT, "ASLDS", alu_family }, /*!< unused in disassembly */
     { 0x01400000 | SUFFIX_BIT, "ASLWS", alu_family },
     { 0x01200000 | SUFFIX_BIT, "ASLHS", alu_family },
     { 0x01000000 | SUFFIX_BIT, "ASLBS", alu_family },
 
-    { 0x01e00000 | SUFFIX_BIT, "ASRDS", alu_family }, /* unused in disassembly */
+    { 0x01e00000 | SUFFIX_BIT, "ASRDS", alu_family }, /*!< unused in disassembly */
     { 0x01c00000 | SUFFIX_BIT, "ASRWS", alu_family },
     { 0x01a00000 | SUFFIX_BIT, "ASRHS", alu_family },
     { 0x01800000 | SUFFIX_BIT, "ASRBS", alu_family },
 
-    { 0x02600000 | SUFFIX_BIT, "LSRDS", alu_family }, /* unused in disassembly */
+    { 0x02600000 | SUFFIX_BIT, "LSRDS", alu_family }, /*!< unused in disassembly */
     { 0x02400000 | SUFFIX_BIT, "LSRWS", alu_family },
     { 0x02200000 | SUFFIX_BIT, "LSRHS", alu_family },
     { 0x02000000 | SUFFIX_BIT, "LSRBS", alu_family },
 
-    { 0x03600000 | SUFFIX_BIT, "ROLDS", alu_family }, /* unused in disassembly */
+    { 0x03600000 | SUFFIX_BIT, "ROLDS", alu_family }, /*!< unused in disassembly */
     { 0x03400000 | SUFFIX_BIT, "ROLWS", alu_family },
     { 0x03200000 | SUFFIX_BIT, "ROLHS", alu_family },
     { 0x03000000 | SUFFIX_BIT, "ROLBS", alu_family },
 
-    { 0x02e00000 | SUFFIX_BIT, "RORDS", alu_family }, /* unused in disassembly */
+    { 0x02e00000 | SUFFIX_BIT, "RORDS", alu_family }, /*!< unused in disassembly */
     { 0x02c00000 | SUFFIX_BIT, "RORWS", alu_family },
     { 0x02a00000 | SUFFIX_BIT, "RORHS", alu_family },
     { 0x02800000 | SUFFIX_BIT, "RORBS", alu_family },
@@ -214,35 +241,40 @@ static const struct {
     { 0x05a00000 | SUFFIX_BIT, "SUMHS", alu_family },
     { 0x05800000 | SUFFIX_BIT, "SUMBS", alu_family },
     
-    /* Assembler directives */
-    { 0, "DD",     dd_directive },          /* Data double-word */
-    { 0, "DW",     dw_directive },          /* Data word */
-    { 0, "DH",     dh_directive },          /* Data half-word */
-    { 0, "DB",     db_directive },          /* Data byte */
-    { 0, "ASCII",  ascii_directive },       /* ascii string */
-    { 0, "ASCIZ",  asciz_directive },       /* ascii string */
-    { 0, "ALIGN",  align_directive },       /* align */
-    { 0, "AD",     ad_directive },          /* align on double-word */
-    { 0, "AW",     aw_directive },          /* align on word */
-    { 0, "AH",     ah_directive },          /* align on half-word */
-    { 0, "PC",     pc_directive },          /* set the PC */
-    { 0, "BIN",    bin_directive },         /* insertion of binary file */
-    { 0, "DEF",    def_directive },         /* constant definition */
-    { 0, "{",      open_scope_directive },  /* open a scope for local labels */
-    { 0, "}",      close_scope_directive }, /* open a scope for local labels */
-    { 0, "IMPORT", import_directive },      /* open a scope for local labels */
-    { 0, "EXPORT", export_directive },      /* open a scope for local labels */
-    { 0, "NPC",    npc_directive }          /* attach the code to the next PC */
+    /* */
+    { 0, "DD",     dd_directive },          /*!< Assembler directives: Data double-word */
+    { 0, "DW",     dw_directive },          /*!< Assembler directives: Data word */
+    { 0, "DH",     dh_directive },          /*!< Assembler directives: Data half-word */
+    { 0, "DB",     db_directive },          /*!< Assembler directives: Data byte */
+    { 0, "ASCII",  ascii_directive },       /*!< Assembler directives: ascii string */
+    { 0, "ASCIZ",  asciz_directive },       /*!< Assembler directives: ascii string */
+    { 0, "ALIGN",  align_directive },       /*!< Assembler directives: align */
+    { 0, "AD",     ad_directive },          /*!< Assembler directives: align on double-word */
+    { 0, "AW",     aw_directive },          /*!< Assembler directives: align on word */
+    { 0, "AH",     ah_directive },          /*!< Assembler directives: align on half-word */
+    { 0, "PC",     pc_directive },          /*!< Assembler directives: set the PC */
+    { 0, "BIN",    bin_directive },         /*!< Assembler directives: insertion of binary file */
+    { 0, "DEF",    def_directive },         /*!< Assembler directives: constant definition */
+    { 0, "{",      open_scope_directive },  /*!< Assembler directives: open a scope for local labels */
+    { 0, "}",      close_scope_directive }, /*!< Assembler directives: open a scope for local labels */
+    { 0, "IMPORT", import_directive },      /*!< Assembler directives: open a scope for local labels */
+    { 0, "EXPORT", export_directive },      /*!< Assembler directives: open a scope for local labels */
+    { 0, "NPC",    npc_directive }          /*!< Assembler directives: attach the code to the next PC */
 };
 
+/**
+ * \struct prefix
+ * \brief The prefix translation table
+ *
+ * This table contains each prefix associated with its opcode. The point after
+ * the prefix is implicit
+ */
 static const struct {
     uint32_t word;
     char prefix[4];
 } prefix[] = {
-    /* List of all conditionnal prefixes */
-    /* The point after the prefix is implicit here */
-    { 0x00000000, "AL" }, /* unused in disassembly */
-    { 0x10000000, "BR" }, /* for breakpoints */
+    { 0x00000000, "AL" }, /*!< unused in disassembly */
+    { 0x10000000, "BR" }, /*!< used for breakpoints but makes the instruction illegal */
     { 0x50000000, "EQ" },
     { 0x40000000, "NE" },
     { 0xf0000000, "MI" },
@@ -257,8 +289,8 @@ static const struct {
     { 0x60000000, "LE" },
     { 0x90000000, "GE" },
     { 0x80000000, "LT" },
-    { 0x30000000, "HQ" }, /* unused in disassembly */
-    { 0x20000000, "LO" }, /* unused in disassembly */
+    { 0x30000000, "HQ" }, /*!< unused in disassembly */
+    { 0x20000000, "LO" }, /*!< unused in disassembly */
 
 };
 
@@ -332,7 +364,7 @@ enum {
     LR
 };
 
-/* All values below are masks */
+/*! All values below are masks */
 #define CONDITION_MASK     0xf0000000 /* used to select conditionnal prefixes */
 #define SUFFIX_BIT         0x00100000 /* used to select the suffix -S bit */
 #define MEMORY_BIT         0x08000000 /* used to determine if the instruction is

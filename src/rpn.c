@@ -1,10 +1,18 @@
+/**
+ * \file rpn.c
+ * \brief Functions made to process RPN expressions
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #include <string.h>
 #include <stdbool.h>
 #include "conv_string.h"
 #include "rpn.h"
 #include "sym.h"
 
-/* Go to each function if you want to see there purpose. */
 static void rpnadd (uint64_t ** sp) ;
 static void rpnsub (uint64_t ** sp) ;
 static void rpnmul (uint64_t ** sp) ;
@@ -21,19 +29,23 @@ static void rpndivsign (uint64_t ** sp) ;
 static void rpnrshsign (uint64_t ** sp) ;
 static void rpnmodsign (uint64_t ** sp) ;
 
-/* Purpose: perform a calculation, written with a post-fixed format.
- * Return:  error code (0 = no error, syntax error, unknown symbol,
- *          stack overflow, stack underflow, stack non-empty, no operation done)
- * modified input: out
+/**
+ * \brief perform a calculation, written with a post-fixed format.
+ * \return error code
  *
- * exp: the input expression
- * scope: the scope were the symbols are valid
- * symbols: the table of symbols in input
- * out: a pointer to the uint64_t in the output
+ * \param exp the input expression
+ * \param scope the scope were the symbols are valid
+ * \param symbols the table of symbols in input
+ * \param out a pointer to the uint64_t in the output
  */
 /* No const for exp, because it is passed as an argument to strtok */
-enum rpn_error rpneval (char * exp, const struct scope * scope,
-        const struct symbol * symbols, uint64_t * out) {
+enum rpn_error
+rpneval
+(char * exp,
+ const struct scope * scope,
+ const struct symbol * symbols,
+ uint64_t * out)
+{
 
     /* Initialise a stack with a fixed number of elements (253 are enough) */
     /* Note that index 0 and index 254 and 255 are sentinels for respectively
@@ -185,150 +197,195 @@ enum rpn_error rpneval (char * exp, const struct scope * scope,
     return error_nb;
 }
 
-/* Purpose: adds two numbers on the stack
- * Return: void
+/**
+ * \brief adds two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnadd (uint64_t ** sp) {
+static void
+rpnadd (uint64_t ** sp)
+{
     *((*sp)+1) += **sp;
     (*sp)++;
 }
 
-/* Purpose: subtracts two numbers on the stack
- * Return: void
+/**
+ * \brief subtracts two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnsub (uint64_t ** sp) {
+static void
+rpnsub (uint64_t ** sp)
+{
     *((*sp)+1) -= **sp;
     (*sp)++;
 }
 
-/* Purpose: multiplies two numbers on the stack
- * Return: void
+/**
+ * \brief multiplies two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnmul (uint64_t ** sp) {
+static void
+rpnmul (uint64_t ** sp)
+{
     *((*sp)+1) *= **sp;
     (*sp)++;
 }
 
-/* Purpose: divides two numbers on the stack
- * Return: void
+/**
+ * \brief divides two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpndiv (uint64_t ** sp) {
+static void
+rpndiv (uint64_t ** sp)
+{
     *((*sp)+1) /= **sp;
     (*sp)++;
 }
 
-/* Purpose: left shifts two numbers on the stack
- * Return: void
+/**
+ * \brief left shifts two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnlsh (uint64_t ** sp) {
+static void
+rpnlsh (uint64_t ** sp)
+{
     *((*sp)+1) <<= **sp;
     (*sp)++;
 }
 
-/* Purpose: right shifts two numbers on the stack
- * Return: void
+/**
+ * \brief right shifts two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnrsh (uint64_t ** sp) {
+static void
+rpnrsh (uint64_t ** sp)
+{
     *((*sp)+1) >>= **sp;
     (*sp)++;
 }
 
-/* Purpose: does the modulo of two numbers on the stack
- * Return: void
+/**
+ * \brief does the modulo of two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnmod (uint64_t ** sp) {
+static void
+rpnmod (uint64_t ** sp)
+{
     *((*sp)+1) %= **sp;
     (*sp)++;
 }
 
-/* Purpose: ands two numbers on the stack
- * Return: void
+/**
+ * \brief ands two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnand (uint64_t ** sp) {
+static void
+rpnand (uint64_t ** sp)
+{
     *((*sp)+1) &= **sp;
     (*sp)++;
 }
 
-/* Purpose: ors two numbers on the stack
- * Return: void
+/**
+ * \brief ors two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnor (uint64_t ** sp) {
+static void
+rpnor (uint64_t ** sp)
+{
     *((*sp)+1) |= **sp;
     (*sp)++;
 }
 
-/* Purpose: does the exclusive-or of two numbers on the stack
- * Return: void
+/**
+ * \brief does the exclusive-or of two numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnxor (uint64_t ** sp) {
+static void
+rpnxor (uint64_t ** sp)
+{
     *((*sp)+1) ^= **sp;
     (*sp)++;
 }
 
-/* Purpose: find the first complement of a number on the stack
- * Return: void
+/**
+ * \brief find the first complement of a number on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpninv (uint64_t ** sp) {
+static void
+rpninv (uint64_t ** sp)
+{
     **sp = ~(**sp);
 }
 
-/* Purpose: negates one number on the stack
- * Return: void
+/**
+ * \brief negates one number on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnneg (uint64_t ** sp) {
+static void
+rpnneg (uint64_t ** sp)
+{
     **sp = -(**sp);
 }
 
-/* Purpose: divides two signed numbers on the stack
- * Return: void
+/**
+ * \brief divides two signed numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpndivsign (uint64_t ** sp) {
+static void
+rpndivsign (uint64_t ** sp)
+{
     *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) / (int64_t)(**sp));
     (*sp)++;
 }
 
-/* Purpose: right shifts two signed numbers on the stack
- * Return: void
+/**
+ * \brief right shifts two signed numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnrshsign (uint64_t ** sp) {
+static void
+rpnrshsign (uint64_t ** sp)
+{
     *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) >> (int64_t)(**sp));
     (*sp)++;
 }
 
-/* Purpose: does the modulo of two signed numbers on the stack
- * Return: void
+/**
+ * \brief does the modulo of two signed numbers on the stack
+ * \return void
  *
- * sp: pointer to the stack
+ * \param sp pointer to the stack
  */
-static void rpnmodsign (uint64_t ** sp) {
+static void
+rpnmodsign (uint64_t ** sp)
+{
     *((*sp)+1) = (uint64_t)((int64_t)(*((*sp)+1)) % (int64_t)(**sp));
     (*sp)++;
 }

@@ -1,17 +1,27 @@
+/**
+ * \file compute_addresses.c
+ * \brief Function made to compute the address of each line
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 19th april 2022
+ *
+ */
+
 #include <stdlib.h>
 #include "align.h"
 #include "conv_string.h"
 #include "compute_addresses.h"
 #include "mnemonic.h"
 
-/* Purpose: This function compute the address of each line
- * Return:  error code (0 when everything is fine)
- * Modified input: lines
+/**
+ * \brief This function compute the address of each line
+ * \return error code (0 when everything is fine)
  *
- * lines: a pointer to the array of lines of the input. The pointer itself
- *        points to the first line of the input.
+ * \param lines A pointer to the array of lines of the input.
  */
-enum ca_error compute_addresses (struct line * lines) {
+enum ca_error
+compute_addresses (struct line * lines)
+{
     /* First of all, find the first PC directive
      * If there are none, throws an error */
     /* return value of the program */

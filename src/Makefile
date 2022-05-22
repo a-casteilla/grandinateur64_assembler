@@ -33,6 +33,9 @@ parse_line.o: parse_line.c
 scopes.o: scopes.c 
 	$(CC) $(CFLAGS) $(DBCFLAGS) -c $^ -o $@
 
+documentation:
+	doxygen .doc.setup
+
 clean:
 	rm -f align.o \
 		check_overlapping_areas.o \
@@ -45,3 +48,4 @@ clean:
 		import_symbols.o \
 		parse_line.o \
 		scopes.o
+	rm -rf html latex

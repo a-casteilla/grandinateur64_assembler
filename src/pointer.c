@@ -1,18 +1,32 @@
+/**
+ * \file pointer.c
+ * \brief Functions made to manipulate "strings" of pointers NULL terminated
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 22th may 2022
+ *
+ */
+
 #include <stdbool.h>
 #include <stddef.h>
 #include "pointer.h"
 
 /* Didn't find something like that in the glibc btw */
 /* Well, actually just for strings */
-/* Purpose: Tell if a pointer is in a list of pointer
- * Return:  The position of the pointer in the list as a pointer
- *          NULL if nothing was found
+/**
+ * \brief Tell if a pointer is in a list of pointer
+ * \return The position of the pointer in the list as a pointer NULL if nothing was found
  *
- * test: the pointer to test if it is in the list.
- * list: the list of pointer
- * pointercount: the size of the list
+ * \param test the pointer to test if it is in the list.
+ * \param list the list of pointer
+ * \param pointercount the size of the list
  */
-void * mempointer (void * list, const void * test, size_t pointercount) {
+void *
+mempointer
+(void * list,
+ const void * test,
+ size_t pointercount)
+{
 
     size_t i;           /* Size of the array of pointers */
     bool match = false; /* Becomes true, when the corresponding pointer is
@@ -31,12 +45,15 @@ void * mempointer (void * list, const void * test, size_t pointercount) {
     return match ? (const void **)list + i : NULL;
 }
 
-/* Purpose: Tells the size of a string of pointers NULL terminated
- * Return:  The number of pointer in the string excluding the terminator
+/**
+ * \brief Tells the size of a string of pointers NULL terminated
+ * \return The number of pointer in the string excluding the terminator
  *
- * list: The string of pointers
+ * \param list The string of pointers
  */
-size_t pointerlen (void * list) {
+size_t
+pointerlen (void * list)
+{
     size_t len = 0;
     
     for (const void ** pos = list; *pos != NULL; pos++) {

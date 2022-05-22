@@ -1,15 +1,25 @@
+/**
+ * \file conv_string.c
+ * \brief Functions made to convert strings escape sequences and numeric value
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 19th april 2022
+ *
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include "conv_string.h"
 
-/* Purpose: convert a string to a number. 
- * Return: true if an error happend.
- * Modified input: out
+/**
+ * \brief convert a string to a number. 
+ * \return true if an error happend.
  *
- * input: a string
- * out: the value once converted
- */
-/* Additionnal notes:
+ * \param input a string
+ * \param out the value once converted
+ * 
+ * 
+ * Additionnal notes:
  * I have added this function because strtoull lacks some features in term of
  * base recognition. I want to have a '$' as a valid prefix for a hex value and
  * "%" to be a valid binary prefix.
@@ -17,7 +27,11 @@
  * handles them correctly. (It's explained in the man page section 3 of
  * strtoull)
  */
-bool convert_str_num (const char * input, uint64_t * out) {
+bool
+convert_str_num
+(const char * input,
+ uint64_t * out)
+{
     switch (*input) {
         case '0':
             if (strspn(input+1, "01234567")
@@ -75,14 +89,19 @@ bool convert_str_num (const char * input, uint64_t * out) {
     return false;
 }
 
-/* Purpose: substitute the escape sequences to the raw characters and delete
- *          the quotes
- * Return:  void
- * Modified input: string_to_convert
+/**
+ * \brief substitute the escape sequences to the raw characters and delete the quotes
+ * \return void
  *
- * string_to_convert: a pointer to the string to convert
+ * \param string_to_convert a pointer to the string to convert
+ *
+ * This function converts a string to its final form. The escape sequences are
+ * substituted to their binary form. The following escape sequences are
+ * recognized: \n, \a, \b, \e, \f, \r, \", \\, \v, \t
  */
-void convert_literal (char ** string_to_convert) {
+void
+convert_literal (char ** string_to_convert)
+{
     /* Firstly, reach the beginning of the string */
     if (**string_to_convert != '"')
         return; /* Exits the function because it's not a string */

@@ -1,16 +1,33 @@
+/**
+ * \file import_symbols.c
+ * \brief function made to import symbols
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 14th may 2022
+ *
+ */
+
 #include <string.h>
 #include "import_symbols.h"
 #include "scopes.h"
 
-/* Purpose: This function imports symbols from a file
- * Return:  a pointer to the imported symbols, or NULL if an error occured
+/**
+ * \brief This function imports symbols from a file
+ * \return a pointer to the imported symbols, or NULL if an error occured
  * 
- * filename: the name of the file to import
- * offset: the offset added to the labels
- * scope: the scope where the directive is declared
+ * \param filename the name of the file to import
+ * \param offset the offset added to the labels
+ * \param scope the scope where the directive is declared
+ *
+ * The symbols could be imported from a file. Labels and constants are
+ * separated. The offset is added to the labels.
  */
-struct symbol * import_symbols (const char * filename, uint64_t offset,
-        const struct scope * scope) {
+struct symbol *
+import_symbols
+(const char * filename,
+ uint64_t offset,
+ const struct scope * scope)
+{
 
     /* Find the root scope because all symbols in the files belongs to the root
      * scope */

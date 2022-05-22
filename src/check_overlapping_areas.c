@@ -1,39 +1,62 @@
+/**
+ * \file check_overlapping_areas.c
+ * \brief Functions made to detect overlapping addresses in the output
+ * \author Aurélien Casteilla
+ * \version 0.1
+ * \date 19th april 2022
+ *
+ */
+
 #include <stdlib.h>
 #include "check_overlapping_areas.h"
 
-/* Area of code : used to detect intersecting regions */
+/**
+ * \struct area
+ * \brief Area of code : used to detect intersecting regions
+ *
+ * The area structure contains a block of code that is contiguous in the input
+ * file and also contiguous in the address of the output code.
+ * There isn't a terminating area : the number of areas has to be kept
+ *
+ */
 struct area {
-    /* There isn't a terminating area : the number of area has to be kept */
-    const struct line * first_line; /* first line in the area */
-    const struct line * last_line;  /* last one */
-    uint64_t first_address;   /* first address in the area */
-    uint64_t last_address;    /* last one */
+    const struct line * first_line; /*!< first line in the area */
+    const struct line * last_line;  /*!< last line in the area */
+    uint64_t first_address;   /*!< first address in the area */
+    uint64_t last_address;    /*!< last address in the area */
 };
 
-/* Purpose: this function is used by the function from the standart library qsort
- * Return:  An integer which indicate if the address of the first area is
- *          greater than the last address of the second area.
+/**
+ * \brief This function is used by the function from the standart library qsort
+ * \return An integer which indicates the greatest input.
  *
- * area1: a pointer to the first area to compare
- * area2: a pointer to the sercond area to compare
+ * \param area1 A pointer to the first area to compare
+ * \param area2 A pointer to the sercond area to compare
  */
-static int compare_first_address_of_area (const void * area1, const void * area2) {
+static int
+compare_first_address_of_area
+(const void * area1,
+ const void * area2)
+{
     return (int)(((struct area *)area1)->first_address
             - ((struct area *)area2)->last_address);
 }
 
-/* Purpose: this function verifies that there aren't two areas of code with
- *          overlapping addresses.
- *          For example this function will detect if there is an area that
- *          goes from $1234 to $1300 and another that goes from $1280 and
- *          $135c. Here, the common area is from $1280 and $1300.
- * Return:  the number of overlapping areas detected (0 means everything is
- *          fine)
+/**
+ * \brief Checks for overlapping areas in the input code
+ * \return  the number of overlapping areas detected (0 means everything is fine)
  *
- * lines: a pointer to the array of lines of the input. The pointer itself
- *        points to the first line of the input.
+ * \param lines A pointer to the array of lines of the input.
+ *
+ * This function verifies that there aren't two areas of code with overlapping
+ * addresses. For example this function will detect if there is an area that
+ * goes from $1234 to $1300 and another that goes from $1280 and $135c. Here,
+ * the common area is between $1280 and $1300.
+ *
  */
-int check_overlapping_areas (const struct line * lines) {
+unsigned int
+check_overlapping_areas (const struct line * lines)
+{
     size_t alloc_space_areas = BUFSIZ;
     size_t alloc_space_overareas = BUFSIZ;
 
