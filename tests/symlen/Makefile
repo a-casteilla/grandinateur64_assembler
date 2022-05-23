@@ -21,14 +21,14 @@ test: $O test.c
 default: run
 
 run: test
-	./test input.sym > out.txt
-	./test input_zero.sym > out_zero.txt
-	vimdiff out.txt expected_output.txt
-	vimdiff out_zero.txt expected_output_zero.txt
-	gcov $C || echo "gcov is not installed on this computer"
-	mkdir gcovr || rm -f gcovr/*
-	python -m gcovr --output gcovr/gcovr.html --html-details \
-		|| echo "gcovr is not installed on this computer"
+	@./test input.sym > out.txt
+	@./test input_zero.sym > out_zero.txt
+	@vimdiff out.txt expected_output.txt
+	@vimdiff out_zero.txt expected_output_zero.txt
+	@gcov $C || echo "gcov is not installed on this computer" >&2
+	@mkdir gcovr || rm -f gcovr/*
+	@python -m gcovr --output gcovr/gcovr.html --html-details \
+		|| echo "gcovr is not installed on this computer" >&2
 
 clean:
 	rm -rf test out*.txt $C $H *.o *.gcda *.gcno *.gcov gcovr/
