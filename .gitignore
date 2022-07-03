@@ -1,2 +1,11 @@
 src/html/*
 src/latex/*
+*.gcda
+*.gcno
+*.o
+tests/*/test
+tests/*/out.txt
+tests/*/gcovr/*
+tests/*/*.c
+tests/*/*.h
+!tests/*/test.c
