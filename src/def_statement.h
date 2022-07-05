@@ -14,5 +14,6 @@
 #include "common.h"
 
 unsigned int count_def(const struct line * lines) ;
+struct symbol * eval_def_once (struct line * lines, struct symbol * symbols) ;
 
 #endif
