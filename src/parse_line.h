@@ -18,14 +18,14 @@
  * \brief Macro to made to remove spaces and tabs at the beginning of a line
  */
 #define remove_preceeding_whitespaces(str) \
-    while(*(str) == ' ' || *(str) == '\t') (str)++ ;
+  while(*(str) == ' ' || *(str) == '\t') (str)++ ;
 
 /**
  * \def remove_trailing_whitespaces(str)
  * \brief Macro to made to remove spaces and tabs at the end of a line
  */
 #define remove_trailing_whitespaces(str) \
-    for (char * j = (str) + strlen(str) - 1; *j == ' ' || *j == '\t'; j--) *j = 0;
+  for (char * j = (str) + strlen(str) - 1; *j == ' ' || *j == '\t'; j--) *j = 0;
 
 int parse_line (struct line * current_line) ;
 

@@ -20,15 +20,14 @@
  * \param boundary Is supposed to be a power of two. If not, this function has an undefined behavior
  */
 uint64_t
-align
-(uint64_t address,
- uint64_t boundary)
+align (uint64_t address,
+       uint64_t boundary)
 {
-    if ((address & (boundary - 1)) != 0) {
-        return ((address + boundary) & ~(boundary-1));
-    } else {
-        return address;
-    }
+  if ((address & (boundary - 1)) != 0) {
+    return ((address + boundary) & ~(boundary-1));
+  } else {
+    return address;
+  }
 }
 
 /**
@@ -40,11 +39,10 @@ align
  * \param boundary Is supposed to be a power of two. If not, this function has an undefined behavior
  */
 uint64_t
-align_backward
-(uint64_t address,
- uint64_t boundary)
+align_backward (uint64_t address,
+                uint64_t boundary)
 {
-    return (address & (boundary-1));
+  return (address & (boundary-1));
 }
 
 /**
@@ -56,11 +54,11 @@ align_backward
 bool
 is_a_power_of_two (uint64_t nb)
 {
-    int number_of_one = 0;
-    for (uint64_t mask = 0x1; mask; mask <<= 1) {
-        if (mask & nb) {
-            number_of_one++;
-        }
+  int number_of_one = 0;
+  for (uint64_t mask = 0x1; mask; mask <<= 1) {
+    if (mask & nb) {
+      number_of_one++;
     }
-    return (number_of_one == 1);
+  }
+  return (number_of_one == 1);
 }

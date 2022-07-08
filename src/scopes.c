@@ -19,72 +19,72 @@
 struct scope *
 find_scopes (const struct line * lines)
 {
-    struct scope * scopes;
-    size_t alloc_space_scopes = BUFSIZ;
-    /* I won't resize the stack : 256 levels are more than enough */
-    /* That's why I do a static allocation */
-    struct scope scope_stack_base[256];
-    struct scope * scope_stack_top = scope_stack_base + 256;
-    struct scope * scope_stack_pointer = scope_stack_base + 256;
-    struct scope temp_scope;
-    const struct line * l;
-    unsigned int scopes_nb = 0;
-    unsigned int level = 1;
+  struct scope * scopes;
+  size_t alloc_space_scopes = BUFSIZ;
+  /* I won't resize the stack : 256 levels are more than enough */
+  /* That's why I do a static allocation */
+  struct scope scope_stack_base[256];
+  struct scope * scope_stack_top = scope_stack_base + 256;
+  struct scope * scope_stack_pointer = scope_stack_base + 256;
+  struct scope temp_scope;
+  const struct line * l;
+  unsigned int scopes_nb = 0;
+  unsigned int level = 1;
 
-    scopes = malloc(alloc_space_scopes);
+  scopes = malloc(alloc_space_scopes);
 
-    for (l = lines; l->number; l++) {
-        switch (mnemo[l->mnemo_nb].family) {
-            case open_scope_directive:
-                /* create and push the scope */
-                temp_scope.first_line = l;
-                temp_scope.last_line = l;
-                temp_scope.level = level;
-                *(--scope_stack_pointer) = temp_scope;
-                /* check for a stack overflow */
-                /* I won't resize the stack : 256 levels are more than enough */
-                if (scope_stack_pointer <= scope_stack_base) {
-                    display_error("Too many nested scopes (256 maximum)", l);
-                    safe_free(scopes);
-                    return NULL;
-                }
-                level++;
-                break;
-            case close_scope_directive:
-                if (alloc_space_scopes <= (scopes_nb + 1) * sizeof(struct scope)) {
-                    alloc_space_scopes += BUFSIZ;
-                    scopes = realloc(scopes, alloc_space_scopes);
-                }
-                if (scope_stack_pointer >= scope_stack_top) {
-                    display_error("Closing an inexistant scope", l);
-                    safe_free(scopes);
-                    return NULL;
-                }
-                /* Close the scope */
-                scope_stack_pointer->last_line = l;
-                /* pull the scope from the stack and put it in the list */
-                *(scopes + (scopes_nb++)) = *(scope_stack_pointer++);
-                level--;
-                break;
-            default:
-                break;
+  for (l = lines; l->number; l++) {
+    switch (mnemo[l->mnemo_nb].family) {
+      case open_scope_directive:
+        /* create and push the scope */
+        temp_scope.first_line = l;
+        temp_scope.last_line = l;
+        temp_scope.level = level;
+        *(--scope_stack_pointer) = temp_scope;
+        /* check for a stack overflow */
+        /* I won't resize the stack : 256 levels are more than enough */
+        if (scope_stack_pointer <= scope_stack_base) {
+          display_error("Too many nested scopes (256 maximum)", l);
+          safe_free(scopes);
+          return NULL;
         }
+        level++;
+        break;
+      case close_scope_directive:
+        if (alloc_space_scopes <= (scopes_nb + 1) * sizeof(struct scope)) {
+          alloc_space_scopes += BUFSIZ;
+          scopes = realloc(scopes, alloc_space_scopes);
+        }
+        if (scope_stack_pointer >= scope_stack_top) {
+          display_error("Closing an inexistant scope", l);
+          safe_free(scopes);
+          return NULL;
+        }
+        /* Close the scope */
+        scope_stack_pointer->last_line = l;
+        /* pull the scope from the stack and put it in the list */
+        *(scopes + (scopes_nb++)) = *(scope_stack_pointer++);
+        level--;
+        break;
+      default:
+        break;
     }
+  }
 
-    /* Throw an error if the stack is non-void */
-    if (scope_stack_pointer != scope_stack_top) {
-        fprintf(stderr, "Opened scope not closed (detected at the end of the file)\n\n");
-        safe_free(scopes);
-        return NULL;
-    }
+  /* Throw an error if the stack is non-void */
+  if (scope_stack_pointer != scope_stack_top) {
+    fprintf(stderr, "Opened scope not closed (detected at the end of the file)\n\n");
+    safe_free(scopes);
+    return NULL;
+  }
 
-    /* Add the scope that cover the entire file */
-    temp_scope.first_line = lines;
-    temp_scope.last_line = l;
-    temp_scope.level = 0;
-    *(scopes + scopes_nb) = temp_scope;
+  /* Add the scope that cover the entire file */
+  temp_scope.first_line = lines;
+  temp_scope.last_line = l;
+  temp_scope.level = 0;
+  *(scopes + scopes_nb) = temp_scope;
 
-    return scopes;
+  return scopes;
 }
 
 /**
@@ -109,13 +109,13 @@ find_scopes (const struct line * lines)
 const struct scope *
 parent_scope (const struct scope * child)
 {
-    const struct scope * parent = child;
-    if (child->level) {
-        while (parent->level != child->level - 1) {
-            parent++;
-        }
+  const struct scope * parent = child;
+  if (child->level) {
+    while (parent->level != child->level - 1) {
+      parent++;
     }
-    return parent;
+  }
+  return parent;
 }
 
 /**
@@ -127,9 +127,9 @@ parent_scope (const struct scope * child)
 const struct scope *
 root_scope (const struct scope * child)
 {
-    const struct scope * root = child;
-    while (root->level) root++;
-    return root;
+  const struct scope * root = child;
+  while (root->level) root++;
+  return root;
 }
 
 /**
@@ -140,17 +140,16 @@ root_scope (const struct scope * child)
  * \param scopes the list of the scopes
  */
 const struct scope *
-scope_of_line
-(const struct line * line,
- const struct scope * scopes)
+scope_of_line (const struct line *  line,
+               const struct scope * scopes)
 {
-    /* This for loop is exited when a scope that contains the line is found */
-    const struct scope * s;
-    for (s = scopes;
-            !(s->first_line <= line && s->last_line >= line);
-            /* true when line not in scope */
-            s++) {}
-    return s;
+  /* This for loop is exited when a scope that contains the line is found */
+  const struct scope * s;
+  for (s = scopes;
+      !(s->first_line <= line && s->last_line >= line);
+      /* true when line not in scope */
+      s++) {}
+  return s;
 }
 
 /**
@@ -161,12 +160,11 @@ scope_of_line
  * \param scopes the list of the scopes
  */
 void
-scope_of_lines
-(struct line * lines,
- const struct scope * scopes)
+scope_of_lines (struct line *        lines,
+                const struct scope * scopes)
 {
-    for (struct line * l = lines; l->number; l++) {
-        l->scope = scope_of_line(l, scopes);
-    }
+  for (struct line * l = lines; l->number; l++) {
+    l->scope = scope_of_line(l, scopes);
+  }
 }
 

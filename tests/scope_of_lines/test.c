@@ -13,38 +13,40 @@
  *     compute_addresses
  *     find_scopes
  */
-int main () {
-    unsigned int number = 1;
-    struct line * lines = malloc(10*BUFSIZ);
-    struct line * current_line = lines;
-    struct scope * scopes = NULL;
-    while (!feof(stdin)) {
-        current_line->text = malloc(BUFSIZ);
-        current_line->number = number;
-        fgets(current_line->text, BUFSIZ, stdin);
-        if (!feof(stdin)) {
-            parse_line(current_line);
-            find_mnemo(current_line);
-            compute_size(current_line);
-        } else {
-            current_line->number = 0;
-        }
-        current_line++;
-        number++;
+int
+main ()
+{
+  unsigned int number = 1;
+  struct line * lines = malloc(10*BUFSIZ);
+  struct line * current_line = lines;
+  struct scope * scopes = NULL;
+  while (!feof(stdin)) {
+    current_line->text = malloc(BUFSIZ);
+    current_line->number = number;
+    fgets(current_line->text, BUFSIZ, stdin);
+    if (!feof(stdin)) {
+      parse_line(current_line);
+      find_mnemo(current_line);
+      compute_size(current_line);
+    } else {
+      current_line->number = 0;
     }
-    compute_addresses(lines);
-    scopes = find_scopes(lines);
-    
-    if (scopes) {
-        scope_of_lines(lines, scopes);
-        for (struct line * l = lines; l->number; l++) {
-            printf("Line no.%d\n", l->number);
-            printf("%s", l->text);
-            printf("Is within scope with a level of %u\n", (l->scope)->level);
-            printf("That starts at line no.%u\n", ((l->scope)->first_line)->number);
-            printf("and ends at line no.%u\n\n", ((l->scope)->last_line)->number);
-        }
-    }
+    current_line++;
+    number++;
+  }
+  compute_addresses(lines);
+  scopes = find_scopes(lines);
 
-    exit(EXIT_SUCCESS);
+  if (scopes) {
+    scope_of_lines(lines, scopes);
+    for (struct line * l = lines; l->number; l++) {
+      printf("Line no.%d\n", l->number);
+      printf("%s", l->text);
+      printf("Is within scope with a level of %u\n", (l->scope)->level);
+      printf("That starts at line no.%u\n", ((l->scope)->first_line)->number);
+      printf("and ends at line no.%u\n\n", ((l->scope)->last_line)->number);
+    }
+  }
+
+  exit(EXIT_SUCCESS);
 }

@@ -22,27 +22,26 @@
  * \param pointercount the size of the list
  */
 void *
-mempointer
-(void * list,
- const void * test,
- size_t pointercount)
+mempointer (void *       list,
+            const void * test,
+            size_t       pointercount)
 {
 
-    size_t i;           /* Size of the array of pointers */
-    bool match = false; /* Becomes true, when the corresponding pointer is
-                           found */
+  size_t i;           /* Size of the array of pointers */
+  bool match = false; /* Becomes true, when the corresponding pointer is
+                         found */
 
-    /* Loops until a match or the end of the list */
-    for (i = 0; (i < pointercount) && (!match); i++) {
-        if (*((const void **)list + i) == test) {
-            match = true;
-        }
+  /* Loops until a match or the end of the list */
+  for (i = 0; (i < pointercount) && (!match); i++) {
+    if (*((const void **)list + i) == test) {
+      match = true;
     }
-    i--;
+  }
+  i--;
 
-    /* Returns the position of the match, or NULL */
-    /* Use the ternary operator, to keep only one return */
-    return match ? (const void **)list + i : NULL;
+  /* Returns the position of the match, or NULL */
+  /* Use the ternary operator, to keep only one return */
+  return match ? (const void **)list + i : NULL;
 }
 
 /**
@@ -54,11 +53,11 @@ mempointer
 size_t
 pointerlen (void * list)
 {
-    size_t len = 0;
-    
-    for (const void ** pos = list; *pos != NULL; pos++) {
-        len++;
-    }
+  size_t len = 0;
 
-    return len;
+  for (const void ** pos = list; *pos != NULL; pos++) {
+    len++;
+  }
+
+  return len;
 }

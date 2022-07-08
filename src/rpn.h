@@ -18,13 +18,13 @@
  * \brief error codes returned by the rpneval function
  */
 enum rpn_error {
-    rpn_error_no_error = 0,      /*!< Everything's fine */
-    rpn_error_syntax_error,      /*!< If a syntax error happend */
-    rpn_error_unknown_symbol,    /*!< If a symbol can't be computed */
-    rpn_error_stack_overflow,    /*!< If too many items were pushed */
-    rpn_error_stack_underflow,   /*!< If an operation can't be done because there isn't enough items */
-    rpn_error_warning_non_empty, /*!< If the stack isn't empty after the last pull to get the result */
-    rpn_error_warning_no_op      /*!< If no operation were done */
+  rpn_error_no_error = 0,      /*!< Everything's fine */
+  rpn_error_syntax_error,      /*!< If a syntax error happend */
+  rpn_error_unknown_symbol,    /*!< If a symbol can't be computed */
+  rpn_error_stack_overflow,    /*!< If too many items were pushed */
+  rpn_error_stack_underflow,   /*!< If an operation can't be done because there isn't enough items */
+  rpn_error_warning_non_empty, /*!< If the stack isn't empty after the last pull to get the result */
+  rpn_error_warning_no_op      /*!< If no operation were done */
 };
 
 enum rpn_error rpneval (char * exp, const struct scope * scope,
