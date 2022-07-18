@@ -1,0 +1,140 @@
+Symbol "l1" has the value $00000000000011f4
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "label" has the value $0000000000001208
+Is defined in scope with a level of 1
+That starts at line no.11
+and ends at line no.77
+
+Symbol "l3" has the value $0000000000001250
+Is defined in scope with a level of 2
+That starts at line no.31
+and ends at line no.66
+
+Symbol "label_global" has the value $0000000000001264
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "chouette" has the value $0000000000007fb8
+Is defined in scope with a level of 2
+That starts at line no.31
+and ends at line no.66
+
+Symbol "label4" has the value $0000000000007fbc
+Is defined in scope with a level of 1
+That starts at line no.11
+and ends at line no.77
+
+Symbol "truc" has the value $0000000000007fc0
+Is defined in scope with a level of 3
+That starts at line no.56
+and ends at line no.62
+
+Symbol "machin" has the value $0000000000007fc4
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "bidule" has the value $0000000000007fc8
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "label5" has the value $0000000000007fec
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "label6" has the value $0000000000007ff4
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_0" has the value $0000000000000000
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_1" has the value $000000000000000a
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_2" has the value $0000000000000014
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_3" has the value $000000000000001e
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_4" has the value $0000000000000028
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_5" has the value $0000000000000032
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_6" has the value $000000000000003c
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_7" has the value $0000000000000046
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_8" has the value $0000000000000050
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "const_9" has the value $000000000000005a
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "constante_chouette" has the value $ffffffffffea8f54
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "CONSTANTE_LABEL" has the value $0000000000001208
+Is defined in scope with a level of 1
+That starts at line no.11
+and ends at line no.77
+
+Symbol "CONstANTE_TrEs_nULle" has the value $0000000000000000
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "constante_moins_nulle" has the value $0000000000111143
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "foo" has the value $000000000000004a
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "undef" has the value $000000000000004a
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+
+Symbol "unded" has the value $0000000000111153
+Is defined in scope with a level of 0
+That starts at line no.1
+and ends at line no.0
+

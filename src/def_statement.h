@@ -15,5 +15,7 @@
 
 unsigned int count_def(const struct line * lines) ;
 struct symbol * eval_def_once (struct line * lines, struct symbol * symbols) ;
+struct symbol * eval_all_def (struct line * lines,
+    struct symbol * known_symbols);
 
 #endif

@@ -1,0 +1,33 @@
+Too few arguments for the DEF directive (name and value required) at line 140 :
+    def incorrect1 
+
+Too many arguments for the DEF directive (name and value required) at line 141 :
+    def incorrect3, foo, bar
+
+Unclosed rpn expression at line 142 :
+    def rpn_non_closed, rpn(const_0 const_1 +
+
+Warning: no operation done at line 143 :
+    def rpn_w1, rpn(l1)
+
+Warning: non-empty stack at line 144 :
+    def rpn_w2, rpn(const_1 const_2)
+
+Warning: non-empty stack at line 145 :
+    def rpn_w3, rpn(const_1 const_0 + const_2)
+
+Stack underflow at line 146 :
+    def rpn_e1, rpn(const_1 const_0 + const_2 + +)
+
+Stack overflow at line 147 :
+    def rpn_e2, rpn(23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23 23)
+
+Syntax error at line 148 :
+    def rpn_e3, rpn(+$12)
+
+Bad number format at line 149 :
+    def bad_for, %987654321
+
+Too few arguments for the DEF directive (name and value required) at line 150 :
+    def
+

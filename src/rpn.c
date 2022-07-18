@@ -38,9 +38,8 @@ static void rpnmodsign (uint64_t ** sp) ;
  * \param symbols the table of symbols in input
  * \param out a pointer to the uint64_t in the output
  */
-/* No const for exp, because it is passed as an argument to strtok */
 enum rpn_error
-rpneval (char *                exp,
+rpneval (const char *          exp,
          const struct scope *  scope,
          const struct symbol * symbols,
          uint64_t *            out)
@@ -60,8 +59,10 @@ rpneval (char *                exp,
   void (* operation) (uint64_t **) = NULL;
 
   char * stack_cmd;
+  char * exp_buf = malloc(strlen(exp));
+  strcpy(exp_buf, exp);
 
-  stack_cmd = strtok(exp, " ");
+  stack_cmd = strtok(exp_buf, " ");
 
   do {
     /* Verify if the token is an operator */

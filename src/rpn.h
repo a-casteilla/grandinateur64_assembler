@@ -27,7 +27,7 @@ enum rpn_error {
   rpn_error_warning_no_op      /*!< If no operation were done */
 };
 
-enum rpn_error rpneval (char * exp, const struct scope * scope,
+enum rpn_error rpneval (const char * exp, const struct scope * scope,
         const struct symbol * symbols, uint64_t * out) ;
 
 #endif

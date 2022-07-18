@@ -1,0 +1,9 @@
+Warning: no operation done at line 140 :
+    DEF undeg, rpn(constante_moins_nulle)
+
+Can't define constant at line 141 :
+    def bar, bar
+
+Can't define constant at line 142 :
+    def BAR, rpn(bar 1 -)
+

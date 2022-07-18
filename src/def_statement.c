@@ -113,7 +113,7 @@ eval_def_once (struct line *   lines,
           } else {
             (symbols+nb_of_symbols)->is_label = false;
             nb_of_symbols++;
-            l->mnemo_nb = no_mnemonic;
+            l->mnemo_nb = 0;
           }
           /* Then, verifies if the constant starts with "rpn(" */
         } else if (strncasecmp("rpn(", *((l->args)+1), 4) == 0) {
@@ -133,14 +133,15 @@ eval_def_once (struct line *   lines,
                 /* nothing to do */
                 (symbols+nb_of_symbols)->is_label = false;
                 nb_of_symbols++;
-                l->mnemo_nb = no_mnemonic;
+                l->mnemo_nb = 0;
                 break;
               case rpn_error_syntax_error:
                 display_error("Syntax error", l);
                 break;
               case rpn_error_unknown_symbol:
-                /* nothing to do */
-                /* Will matter for the last pass */
+                /* revert the changes to the arguments */
+                *chrepl = ')';
+                *((l->args)+1) -= 4;
                 break;
               case rpn_error_stack_overflow:
                 display_error("Stack overflow", l);
@@ -152,14 +153,14 @@ eval_def_once (struct line *   lines,
                 display_error("Warning: non-empty stack", l);
                 (symbols+nb_of_symbols)->is_label = false;
                 nb_of_symbols++;
-                l->mnemo_nb = no_mnemonic;
+                l->mnemo_nb = 0;
                 /* nothing to do */
                 break;
               case rpn_error_warning_no_op:
                 display_error("Warning: no operation done", l);
                 (symbols+nb_of_symbols)->is_label = false;
                 nb_of_symbols++;
-                l->mnemo_nb = no_mnemonic;
+                l->mnemo_nb = 0;
                 break;
               default: /* Should not be executed */
                 display_error("Unknown error", l);
@@ -171,7 +172,7 @@ eval_def_once (struct line *   lines,
                 *((l->args)+1), l->scope, known_symbols)) {
             (symbols+nb_of_symbols)->is_label = false;
             nb_of_symbols++;
-            l->mnemo_nb = no_mnemonic;
+            l->mnemo_nb = 0;
           }
         }
       }
@@ -199,4 +200,68 @@ eval_def_once (struct line *   lines,
   }
 
   return symbols;
+}
+
+/**
+ * \brief Evaluates all the DEF directives
+ * \return the table of all the symbols
+ *
+ * \param lines the lines of the input file
+ * \param symbols the symbols that are already known
+ *
+ * All DEF directives that can be directly evaluated are evaluated with this
+ * function. On the next run, the new directives are evaluated. Note that a
+ * NULL pointer is returned if an error occured, and a pointer to a terminating
+ * symbol is returned if no DEF directive were evaluated.
+ */
+struct symbol *
+eval_all_def (struct line *   lines,
+              struct symbol * known_symbols)
+{
+  struct symbol * eval_symbols   = NULL;
+  bool            error_happend  = false;
+  bool            last_def_reach = false;
+  unsigned int    nb_of_def      = count_def(lines);
+
+  if (known_symbols == NULL) {
+    return NULL;
+  }
+
+
+  if (nb_of_def != 0) {
+    /* The loop is exited if eval_symbols is pointing to a terminating symbol
+     * at the last iteration or if an error happend. In any case, the loop
+     * won't be executed more than the number of DEF statements */
+    for (unsigned int i = 0;
+        (i < nb_of_def) && !error_happend && !last_def_reach;
+        i++) {
+      eval_symbols = eval_def_once(lines, known_symbols);
+      if (eval_symbols != NULL) {
+        if (eval_symbols->name == NULL) {
+          last_def_reach = true;
+        } else {
+          known_symbols = symcat(known_symbols, eval_symbols);
+        }
+        safe_free(eval_symbols);
+      } else {
+        error_happend = true;
+      }
+    }
+
+    if (count_def(lines) != 0) {
+      if (!error_happend) {
+        error_happend = true;
+        for (struct line * l = lines; l->number != 0; l++) {
+          if (mnemo[l->mnemo_nb].family == def_directive) {
+            display_error("Can't define constant", l);
+          }
+        }
+      }
+    }
+
+    if (error_happend) {
+      safe_free(known_symbols);
+    }
+  }
+  return known_symbols;
 }
