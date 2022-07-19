@@ -4,7 +4,7 @@ src/latex/*
 *.gcno
 *.o
 tests/*/test
-tests/*/out.txt
+tests/*/out*.txt
 tests/*/gcovr/*
 tests/*/*.c
 tests/*/*.h
